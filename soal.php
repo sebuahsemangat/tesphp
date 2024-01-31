@@ -42,11 +42,13 @@ else
         $data_ujian=mysqli_fetch_assoc($qry_ujian);
         echo "<h2>" . $data_ujian['nama_ujian'] . "</h2>";
     ?>
+    <p><a href="home.php">Kembali</a></p>
     <table>
         <tr>
             <th>No</th>
             <th>Judul Soal</th>
             <th>Durasi Waktu</th>
+            <th>Pengerjaan</th>
             <th></th>
         </tr>
     <?php
@@ -61,7 +63,37 @@ else
             <td><?= $no;?></td>
             <td><?= $data_soal['judul'];?></td>
             <td><?= $data_soal['waktu'];?></td>
-            <td><?= "<a href='do-test.php?id_ujian=$data_ujian[id_ujian]&id_soal=$data_soal[id_soal]'>Kerjakan</a>";?></td>
+            <td>
+                <?php
+                //cek apakah soal sudah dikerjakan
+                $cek_jawaban=mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM jawaban
+                WHERE id_siswa='$data_siswa[id_siswa]' AND id_soal='$data_soal[id_soal]'"));
+                
+                //cek_jawaban menghasilkan angka 1
+                if($cek_jawaban==1){
+                    echo "Sudah dikerjakan";
+                }
+                else
+                //jika cek_jawaban menghasilkan angka 0
+                {
+                    echo "Belum dikerjakan";
+                }
+                ?>
+            </td>
+            <td>
+                <?php
+                if($cek_jawaban==1){
+                    echo "<a href='#'>Lihat Jawaban</a>";
+                }
+                else
+                //jika cek_jawaban menghasilkan angka 0
+                {
+                    echo "<a href='do-test.php?id_ujian=$data_ujian[id_ujian]&id_soal=$data_soal[id_soal]'>Kerjakan</a>";
+                }
+                
+                ?>
+            
+            </td>
         </tr>
     <?php
     //akhir looping soal
