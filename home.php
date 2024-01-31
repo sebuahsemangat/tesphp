@@ -24,5 +24,18 @@ else
 </head>
 <body>
     <h2>Selamat Datang <?= $data_siswa["nama"];?></h2>
+    <h4>List Ujian</h4>
+    <ol>
+    <?php
+    //ambil data ujian berdasarkan kelas siswa dan statusnya aktif
+    $qry_ujian = mysqli_query($koneksi, "SELECT * FROM ujian WHERE id_kelas='$data_siswa[id_kelas]' AND status='aktif'");
+    // pecah menjadi array kemudian looping
+    while($data_ujian=mysqli_fetch_assoc($qry_ujian))
+    {
+        echo "<li><a href='ujian.php?id_ujian=" . $data_ujian['id_ujian'] . "'>" . $data_ujian['nama_ujian'] . "</a></li>";
+    }    
+    ?>
+    </ol>
+<p><a href="logout.php">Logout</a></p>
 </body>
 </html>
