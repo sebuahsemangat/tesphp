@@ -32,7 +32,7 @@ else
     // pecah menjadi array kemudian looping
     while($data_ujian=mysqli_fetch_assoc($qry_ujian))
     {
-        echo "<li><a href='ujian.php?id_ujian=" . $data_ujian['id_ujian'] . "'>" . $data_ujian['nama_ujian'] . "</a></li>";
+        echo "<li><a href='soal.php?id_ujian=" . $data_ujian['id_ujian'] . "'>" . $data_ujian['nama_ujian'] . "</a></li>";
     }    
     ?>
     </ol>
