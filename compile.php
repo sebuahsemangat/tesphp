@@ -33,27 +33,31 @@ include "ld.php";
             //membaca semua jawaban berdasarkan id soal
             $qryJawaban = mysqli_query($koneksi, "SELECT * FROM jawaban WHERE id_soal = '$idSoal'");
 
+            //Variabel untuk menampung nilai tertinggi
+            $maxScore = PHP_INT_MIN;
             //cek kemiripan antara jawaban siswa dengan seluruh jawaban di database
             while($dataJawaban = mysqli_fetch_assoc($qryJawaban))
             {
               //cek kemiripan untuk setiap jawaban
               $similarity = round(similarity($jawabanBersih, $dataJawaban['jawaban_bersih']));
-
+              
+              if($similarity > $maxScore) {
+                $maxScore = $similarity;
+              }
+              
+            }
+              
               // percabangan untuk warna latar kemiripan
-              if ($similarity >= 80 && $similarity <= 100) {
+              if ($maxScore >= 80 && $maxScore <= 100) {
                 $bg = 'btn-success'; //warna hijau jika kemiripan >= 80%
-              } else if ($similarity >= 70 && $similarity < 80) {
+              } else if ($maxScore >= 70 && $maxScore < 80) {
                 $bg = 'btn-warning'; //warna kuning jika kemiripan >= 70%
               }
               else {
                 $bg = 'btn-danger'; //warna merah jika kemiripan < 70%
               }
-              
               //tampilkan kemiripan
-              echo "Kemiripan dengan jawaban adalah: "."<span class='btn $bg'>".$similarity."%</span><br>";
-            }
-              
-              
+              echo "Kemiripan dengan jawaban adalah: "."<span class='btn $bg'>".$maxScore."%</span><br>";
             ?> 
         </div>
     </div>
