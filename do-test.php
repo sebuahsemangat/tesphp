@@ -94,22 +94,25 @@ include ("koneksi.php");
 
   <main>
     <p class="fs-4">Deskripsi Soal</p>
-    <p class="fs-3 col-md-12"><?php
-            $sql = "SELECT * FROM soal where status='aktif' ORDER BY RAND() LIMIT 1";
-            $result = mysqli_query($konek, $sql);
-            if ($result) {
+    <p class="fs-3 col-md-12">
+      <?php
+            $id_soal = addslashes($_GET['id_soal']); //id soal
+            $sql = "SELECT * FROM soal where status='aktif' AND id_soal = '$id_soal' LIMIT 1";
+            $result = mysqli_query($koneksi, $sql);
+            $hitungsoal = mysqli_num_rows($result);
+            if($hitungsoal == 1) //hanya jika jumlah soal adalah 1
+            {
+                    
                 // Mendapatkan data dari hasil query
                 $data = mysqli_fetch_assoc($result);
             
                 // Menampilkan data
                 echo $data["soal"];
-            } else {
-                // Menampilkan pesan error jika query gagal dijalankan
-                echo "Error: " . mysqli_error($konek);
             }
-            
-            // Menutup koneksi
-            mysqli_close($konek);
+            else
+            {
+              echo "Data Soal tidak ditemukan";
+            }
             ?>
     </p>
     <div class="row">
@@ -127,29 +130,6 @@ include ("koneksi.php");
             <iframe name="compile" scrolling="no" src="" frameborder="0" width="100%" onload="resizeIframe(this)"></iframe>
         </div>
     </div>
-
-    <!-- <div class="row g-5">
-      <div class="col-md-6">
-        <h2>Starter projects</h2>
-        <p>Ready to beyond the starter template? Check out these open source projects that you can quickly duplicate to a new GitHub repository.</p>
-        <ul class="icon-list ps-0">
-          <li class="d-flex align-items-start mb-1"><a href="https://github.com/twbs/bootstrap-npm-starter" rel="noopener" target="_blank">Bootstrap npm starter</a></li>
-          <li class="text-muted d-flex align-items-start mb-1">Bootstrap Parcel starter (coming soon!)</li>
-        </ul>
-      </div>
-
-      <div class="col-md-6">
-        <h2>Guides</h2>
-        <p>Read more detailed instructions and documentation on using or contributing to Bootstrap.</p>
-        <ul class="icon-list ps-0">
-          <li class="d-flex align-items-start mb-1"><a href="../getting-started/introduction/">Bootstrap quick start guide</a></li>
-          <li class="d-flex align-items-start mb-1"><a href="../getting-started/webpack/">Bootstrap Webpack guide</a></li>
-          <li class="d-flex align-items-start mb-1"><a href="../getting-started/parcel/">Bootstrap Parcel guide</a></li>
-          <li class="d-flex align-items-start mb-1"><a href="../getting-started/vite/">Bootstrap Vite guide</a></li>
-          <li class="d-flex align-items-start mb-1"><a href="../getting-started/contribute/">Contributing to Bootstrap</a></li>
-        </ul>
-      </div>
-    </div> -->
   </main>
   <footer class="pt-5 my-5 text-muted border-top">
     Web Tes Praktikum PHP | Dikembangkan oleh Apep Wahyudin
