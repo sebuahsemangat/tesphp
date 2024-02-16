@@ -66,7 +66,7 @@ else
             <td>
                 <?php
                 //cek apakah soal sudah dikerjakan
-                $cek_jawaban=mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM jawaban
+                $cek_jawaban=mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM hasil
                 WHERE id_siswa='$data_siswa[id_siswa]' AND id_soal='$data_soal[id_soal]'"));
                 
                 //cek_jawaban menghasilkan angka 1
