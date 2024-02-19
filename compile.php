@@ -59,8 +59,15 @@ include "ld.php";
               }
               //tampilkan kemiripan
               echo "Kemiripan dengan jawaban adalah: "."<span class='btn $bg'>".$maxScore."%</span><br>";
-              echo "<br>" . $_SESSION["siswa"];
+              
             ?> 
+
+            <form action="simpan_nilai.php" method="post"> 
+              <input type="hidden" name="id_soal" value="<?= $idSoal;?>">
+              <input type="hidden" name="nilai" value="<?= $maxScore;?>">
+              <textarea style="display:none;" name="jawaban" id="" cols="30" rows="10"><?= $code;?></textarea>
+              <input type="submit" value="Kirim Jawaban" class="btn btn-warning btn-md mt-2">
+            </form>
         </div>
     </div>
     <?php
