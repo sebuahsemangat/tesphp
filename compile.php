@@ -8,6 +8,7 @@
 </style>
 <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
 <?php
+session_start();
 include "koneksi.php";
 include "ld.php";
     if (!isset($_POST['code']) || $_POST['code'] =="")
@@ -58,6 +59,7 @@ include "ld.php";
               }
               //tampilkan kemiripan
               echo "Kemiripan dengan jawaban adalah: "."<span class='btn $bg'>".$maxScore."%</span><br>";
+              echo "<br>" . $_SESSION["siswa"];
             ?> 
         </div>
     </div>

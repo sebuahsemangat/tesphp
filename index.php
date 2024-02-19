@@ -59,7 +59,7 @@ include "koneksi.php";
             if ($count == 1)
             {
                 //buatkan session bernama siswa dengan nilai id_siswa
-                $_SESSION["siswa"] = $data["id_siswa"]; //0 adalah index diambil dari field id_siswa di table siswa
+                $_SESSION["siswa"] = $data["id_siswa"]; 
                 
                 //Redirect ke halaman home.php
                 header("location: home.php");
