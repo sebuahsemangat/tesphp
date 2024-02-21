@@ -37,7 +37,7 @@ else
         //ambil id_ujian
         $id_ujian = addslashes($_GET['id_ujian']);
         //ambil judul ujian
-        $qry_ujian=mysqli_query($koneksi, "SELECT id_ujian, nama_ujian FROM ujian where id_ujian='$id_siswa' AND status ='aktif'");
+        $qry_ujian=mysqli_query($koneksi, "SELECT id_ujian, nama_ujian FROM ujian where id_ujian='$id_ujian' AND status ='aktif'");
         //pecah array
         $data_ujian=mysqli_fetch_assoc($qry_ujian);
         echo "<h2>" . $data_ujian['nama_ujian'] . "</h2>";
