@@ -58,7 +58,7 @@ include "ld.php";
                 $bg = 'btn-danger'; //warna merah jika kemiripan < 70%
               }
               //tampilkan kemiripan
-              echo "Kemiripan dengan jawaban adalah: "."<span class='btn $bg'>".$maxScore."%</span><br>";
+              echo "Nilai jawaban: "."<span class='btn $bg'>".$maxScore."</span><br>";
               
             ?> 
 
