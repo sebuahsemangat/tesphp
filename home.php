@@ -82,34 +82,26 @@ else
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-12 p-50">
-            <h2>Selamat Datang <?= $data_siswa["nama"];?></h2>
-            <h4>List Ujian</h4>
-                <table id="myTable" class="table table-striped table-bordered" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>Nama Ujian</th>
-                            <th>Jumlah Soal</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-    <?php
-    //ambil data ujian berdasarkan kelas siswa dan statusnya aktif
-    $qry_ujian = mysqli_query($koneksi, "SELECT * FROM ujian WHERE id_kelas='$data_siswa[id_kelas]' AND status='aktif'");
-    // pecah menjadi array kemudian looping
-    while($data_ujian=mysqli_fetch_assoc($qry_ujian))
-    {
-        ?>
-                        <tr>
-                            <td><?= $data_ujian['nama_ujian'];?></td>
-                            <td>30</td>
-                            <td><?= "<a href='soal.php?id_ujian=" . $data_ujian['id_ujian'] . "'>Kerjakan</a>"?></td>
-                        </tr>
-    <?php
-        }    
-    ?>                        
-                    </tbody>
-                </table>
+            <?php
+                if(isset($_GET['page']) && $_GET['page'] != ''){
+                    $page = addslashes($_GET['page']);
+                    switch ($page){
+                        default:
+                            include "ujian.php";
+                            break;
+                        case "soal":
+                            include "soal.php";
+                            break;
+                        case "kerjakan":
+                            include "do-test.php";
+                            break;
+                    }
+                } else {
+                    // Jika kunci 'page' tidak diatur atau kosong, sertakan file "ujian.php" secara default
+                    include "ujian.php";
+                }
+                ?>
+
             </div>
         </div>
     </div>
