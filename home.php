@@ -4,6 +4,7 @@ include "koneksi.php";
 if (!isset($_SESSION['siswa']))
 {
     header("location: index.php");
+    exit();
 }
 else
 {
