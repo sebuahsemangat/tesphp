@@ -1,5 +1,5 @@
 <h2>Selamat Datang <?= $data_siswa["nama"];?></h2>
-            <h4>List Ujian</h4>
+            
                 <table id="myTable" class="table table-striped table-bordered" style="width:100%">
                     <thead>
                         <tr>

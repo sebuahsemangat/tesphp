@@ -57,7 +57,7 @@
                 else
                 //jika cek_jawaban menghasilkan angka 0
                 {
-                    echo "<a href='do-test.php?id_ujian=$data_ujian[id_ujian]&id_soal=$data_soal[id_soal]'>Kerjakan</a>";
+                    echo "<a href='home.php?page=kerjakan&id_ujian=$data_ujian[id_ujian]&id_soal=$data_soal[id_soal]'>Kerjakan</a>";
                 }
                 
                 ?>
