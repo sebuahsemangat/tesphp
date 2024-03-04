@@ -49,7 +49,6 @@ else
             box-shadow: 5px 5px 5px #DDD;
         }
         .footer {
-            position: fixed;
             bottom: 0;
             width: 100%;
             background-color: #f8f9fa; /* Warna latar belakang footer */
