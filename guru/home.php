@@ -42,6 +42,7 @@
     </style>
     
     <link rel="stylesheet" href="../assets/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.0/css/dataTables.dataTables.min.css">
 </head>
 <body>
     <!-- Navbar -->
@@ -74,7 +75,7 @@
         <div class="row">
             <div class="col-md-12 p-50">
                 <h2>Halaman Guru</h2>
-                
+                <hr>
             </div>
         </div>
     </div>
@@ -83,9 +84,14 @@
 <div class="footer">
         <p>Website Ujian Pemrograman PHP | Dikembangkan oleh Apep Wahyudin</p>
 </div>
+<!-- Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.0/js/dataTables.min.js"></script>
+    <!-- Inisialisasi DataTables -->
+    <script>
+        let table = new DataTable('#myTable');
+    </script>
 </body>
 </html>
