@@ -51,6 +51,12 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Home</a>
                 </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Data Siswa</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Data Ujian</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Apep Guru</a>
                 </li>
@@ -60,6 +66,18 @@
             </ul>
         </div>
     </nav>
- 
+    <div class="container mt-5 mb-5">
+        <div class="row">
+            <div class="col-md-12 p-50">
+                <h2>Halaman Guru</h2>
+                
+            </div>
+        </div>
+    </div>
+    
+<!-- Footer -->
+<div class="footer">
+        <p>Website Ujian Pemrograman PHP | Dikembangkan oleh Apep Wahyudin</p>
+</div>
 </body>
 </html>
