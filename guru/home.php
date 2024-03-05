@@ -1,3 +1,7 @@
+<?php
+session_start();
+include "../koneksi.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -76,6 +80,25 @@
             <div class="col-md-12 p-50">
                 <h2>Halaman Guru</h2>
                 <hr>
+                <?php
+                if(isset($_GET['page']) && $_GET['page'] != ''){
+                    $page = addslashes($_GET['page']);
+                    switch ($page){
+                        default:
+                            include "ujian.php";
+                            break;
+                        case "soal":
+                            include "soal.php";
+                            break;
+                        case "kerjakan":
+                            include "do-test.php";
+                            break;
+                    }
+                } else {
+                    // Jika kunci 'page' tidak diatur atau kosong, sertakan file "ujian.php" secara default
+                    include "ujian.php";
+                }
+                ?>
             </div>
         </div>
     </div>
