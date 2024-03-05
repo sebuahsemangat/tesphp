@@ -1,12 +1,45 @@
 <style>
-    .hasil {
-        width:90%;
-        border: solid 1px grey;
-        padding: 10px;
-        background-color: #abfcff;
+    /* CSS untuk animasi loading */
+    .loader {
+      border: 16px solid #f3f3f3; /* Light grey */
+      border-top: 16px solid #3498db; /* Blue */
+      border-radius: 50%;
+      width: 120px;
+      height: 120px;
+      animation: spin 2s linear infinite;
+      margin: auto;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* CSS untuk konten halaman */
+    .content {
+      display: none; /* Sembunyikan konten ketika loading */
     }
 </style>
 <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
+<script>
+    // JavaScript untuk menampilkan konten setelah selesai loading
+    document.addEventListener("DOMContentLoaded", function() {
+      // Sembunyikan animasi loading
+      document.getElementById("loader").style.display = "none";
+      // Tampilkan konten halaman
+      document.getElementById("content").style.display = "block";
+    });
+  </script>
+
+<!-- Animasi loading -->
+<div id="loader" class="loader"></div>
+
+<div id="content" class="content">
 <?php
 session_start();
 include "koneksi.php";
@@ -73,3 +106,5 @@ include "ld.php";
     <?php
     }
     ?>
+
+</div>
