@@ -61,10 +61,10 @@ include "../koneksi.php";
                     <a class="nav-link" href="#">Home</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Data Siswa</a>
+                    <a class="nav-link" href="home.php?page=siswa">Data Siswa</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Data Ujian</a>
+                    <a class="nav-link" href="home.php?page=ujian">Data Ujian</a>
                 </li>
                 <li class="nav-item name">
                     <a class="nav-link" href="#">Apep Guru</a>
@@ -87,8 +87,8 @@ include "../koneksi.php";
                         default:
                             include "ujian.php";
                             break;
-                        case "soal":
-                            include "soal.php";
+                        case "siswa":
+                            include "siswa.php";
                             break;
                         case "kerjakan":
                             include "do-test.php";
