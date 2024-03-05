@@ -90,8 +90,8 @@ include "../koneksi.php";
                         case "siswa":
                             include "siswa.php";
                             break;
-                        case "kerjakan":
-                            include "do-test.php";
+                        case "soal":
+                            include "soal.php";
                             break;
                     }
                 } else {

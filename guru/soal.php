@@ -5,7 +5,7 @@
         $qry_ujian=mysqli_query($koneksi, "SELECT id_ujian, nama_ujian FROM ujian where id_ujian='$id_ujian' AND status ='aktif'");
         //pecah array
         $data_ujian=mysqli_fetch_assoc($qry_ujian);
-        echo "<h2>" . $data_ujian['nama_ujian'] . "</h2>";
+        echo "<h4>" . $data_ujian['nama_ujian'] . "</h4>";
     ?>
     <p><a href="home.php">Kembali</a></p>
     <h4>List Soal</h4>
@@ -33,37 +33,8 @@
             <td><?= $no;?></td>
             <td><?= $data_soal['judul'];?></td>
             <td><?= $data_soal['waktu'];?></td>
-            <td>
-                <?php
-                //cek apakah soal sudah dikerjakan
-                $cek_jawaban=mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM hasil
-                WHERE id_siswa='$data_siswa[id_siswa]' AND id_soal='$data_soal[id_soal]'"));
-                
-                //cek_jawaban menghasilkan angka 1
-                if($cek_jawaban==1){
-                    echo "Sudah dikerjakan";
-                }
-                else
-                //jika cek_jawaban menghasilkan angka 0
-                {
-                    echo "Belum dikerjakan";
-                }
-                ?>
-            </td>
-            <td>
-                <?php
-                if($cek_jawaban==1){
-                    echo "<a href='#'>Lihat Jawaban</a>";
-                }
-                else
-                //jika cek_jawaban menghasilkan angka 0
-                {
-                    echo "<a href='home.php?page=kerjakan&id_ujian=$data_ujian[id_ujian]&id_soal=$data_soal[id_soal]'>Kerjakan</a>";
-                }
-                
-                ?>
-            
-            </td>
+            <td></td>
+            <td></td>
         </tr>
     <?php
     //akhir looping soal
