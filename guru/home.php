@@ -23,6 +23,10 @@
             background-color: #dc3545; /* Warna merah untuk menu logout */
             border-radius: 5px;
         }
+        .name {
+            background-color: green; /* Warna merah untuk menu logout */
+            border-radius: 5px;
+        }
         .row {
             border : solid 1px #CCC;
             border-radius : 10px;
@@ -57,7 +61,7 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Data Ujian</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item name">
                     <a class="nav-link" href="#">Apep Guru</a>
                 </li>
                 <li class="nav-item logout">
@@ -79,5 +83,9 @@
 <div class="footer">
         <p>Website Ujian Pemrograman PHP | Dikembangkan oleh Apep Wahyudin</p>
 </div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.0/js/dataTables.min.js"></script>
 </body>
 </html>
