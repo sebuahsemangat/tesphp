@@ -1,27 +1,34 @@
 <?php
-if (!isset($_POST['submit'])) {
-    echo "";
-} else {
-    // Jika tombol submit telah ditekan, kode di bawah ini akan dieksekusi.
-    // Data yang diambil dari form akan disimpan dalam variabel.
-    $nama_ujian = addslashes($_POST['nama_ujian']);
-    $status = "aktif";
-    $id_kelas = 1;
+// Memeriksa apakah data dikirim melalui metode POST
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Memastikan bahwa nama ujian tidak kosong dan menghindari serangan SQL Injection dengan menggunakan parameterized query
+    if (!empty($_POST['nama_ujian'])) {
+        
+        // Menyiapkan pernyataan SQL menggunakan parameterized query untuk mencegah SQL Injection
+        $query = mysqli_prepare($koneksi, "INSERT INTO ujian (nama_ujian, status, id_kelas) VALUES (?, ?, ?)");
 
-    // Melakukan query untuk memasukkan data ujian ke dalam database menggunakan mysqli_query.
-    // Data yang dimasukkan adalah nama_ujian, status, dan id_kelas.
-    $query = mysqli_query($koneksi, "INSERT INTO ujian (nama_ujian, status, id_kelas) VALUES ('$nama_ujian','$status','$id_kelas')");
+        // Mengikat parameter ke pernyataan SQL
+        mysqli_stmt_bind_param($query, "ssi", $nama_ujian, $status, $id_kelas);
 
-    // Memeriksa apakah query berhasil dieksekusi atau tidak.
-    if ($query) {
-        // Jika query berhasil dieksekusi, tampilkan pesan sukses.
-        echo "<div class='alert alert-success' role='alert'>Ujian berhasil diinput</div>";
+        // Menginisialisasi variabel
+        $nama_ujian = $_POST['nama_ujian'];
+        $status = "aktif";
+        $id_kelas = 1;
+
+        // Mengeksekusi pernyataan SQL
+        if (mysqli_stmt_execute($query)) {
+            echo "<div class='alert alert-success' role='alert'>Ujian berhasil diinput</div>";
+        } else {
+            echo "Ujian gagal diinput";
+        }
+
+        // Menutup pernyataan dan koneksi database
+        mysqli_stmt_close($query);
+        mysqli_close($koneksi);
     } else {
-        // Jika query gagal dieksekusi, tampilkan pesan error.
-        echo "Ujian gagal diinput";
+        echo "Nama ujian tidak boleh kosong";
     }
 }
-
 ?>
 
 <form action="" method="post">
