@@ -14,9 +14,8 @@
         <tr>
             <th>No</th>
             <th>Judul Soal</th>
-            <th>Durasi Waktu</th>
-            <th>Pengerjaan</th>
-            <th></th>
+            <th>Jumlah Jawaban</th>
+            <th>Aksi</th>
         </tr>
     </thead>
     <tbody>
@@ -26,15 +25,21 @@
     //pecah menjadi array dan looping
     $no = 0;
     while($data_soal=mysqli_fetch_assoc($qry_soal)){
+        $query_jawaban = mysqli_query($koneksi, "SELECT jawaban from jawaban WHERE id_soal='$data_soal[id_soal]'");
+        $hitung_jawaban = mysqli_num_rows($query_jawaban);
         $no++;
     ?>
     
         <tr>
             <td><?= $no;?></td>
             <td><?= $data_soal['judul'];?></td>
-            <td><?= $data_soal['waktu'];?></td>
-            <td></td>
-            <td></td>
+            <td><?= $hitung_jawaban;?></td>
+            <td>
+                <a href="">Detail</a> |
+                <a href="home.php?page=inputsoal&id_soal=<?=$data_soal['id_soal'];?>">Tambah Jawaban</a> |
+                <a href="">Edit</a> |
+                <a href="">Hapus</a>
+            </td>
         </tr>
     <?php
     //akhir looping soal
