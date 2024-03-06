@@ -36,7 +36,7 @@
             <td><?= $hitung_jawaban;?></td>
             <td>
                 <a href="">Detail</a> |
-                <a href="home.php?page=inputsoal&id_soal=<?=$data_soal['id_soal'];?>">Tambah Jawaban</a> |
+                <a href="home.php?page=input_jawaban&id_soal=<?=$data_soal['id_soal'];?>">Tambah Jawaban</a> |
                 <a href="">Edit</a> |
                 <a href="">Hapus</a>
             </td>

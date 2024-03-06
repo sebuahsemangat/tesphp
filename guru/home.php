@@ -44,7 +44,18 @@ include "../koneksi.php";
             padding: 10px 0;
         }
     </style>
-    
+    <link rel="stylesheet" href="../codemirror/lib/codemirror.css">
+    <link rel="stylesheet" href="../codemirror/theme/monokai.css">
+    <script src="../codemirror/lib/codemirror.js"></script>
+    <script src="../codemirror/addon/edit/matchbrackets.js"></script>
+    <script src="../codemirror/addon/edit/closebrackets.js"></script>
+    <script src="../codemirror/mode/htmlmixed/htmlmixed.js"></script>
+    <script src="../codemirror/mode/xml/xml.js"></script>
+    <script src="../codemirror/mode/javascript/javascript.js"></script>
+    <script src="../codemirror/mode/css/css.js"></script>
+    <script src="../codemirror/mode/clike/clike.js"></script>
+    <script src="../codemirror/mode/php/php.js"></script>
+    <style>.CodeMirror {border: solid 1px black;}</style>
     <link rel="stylesheet" href="../assets/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.0/css/dataTables.dataTables.min.css">
 </head>
@@ -93,6 +104,9 @@ include "../koneksi.php";
                         case "soal":
                             include "soal.php";
                             break;
+                        case "input_jawaban":
+                                include "input_jawaban.php";
+                                break;
                     }
                 } else {
                     // Jika kunci 'page' tidak diatur atau kosong, sertakan file "ujian.php" secara default
@@ -115,6 +129,17 @@ include "../koneksi.php";
     <!-- Inisialisasi DataTables -->
     <script>
         let table = new DataTable('#myTable');
+    </script>
+
+    <!-- Code Mirror -->
+    <script>
+        var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+            lineNumbers: true,
+            matchBrackets: true,
+            mode: "application/x-httpd-php",
+            indentUnit: 4,
+            
+        });
     </script>
 </body>
 </html>
