@@ -4,6 +4,7 @@ include "../koneksi.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,35 +12,48 @@ include "../koneksi.php";
     <style>
         /* CSS tambahan sesuai kebutuhan */
         .navbar {
-            background-color: #007bff; /* Warna biru PHP */
+            background-color: #007bff;
+            /* Warna biru PHP */
         }
-        .navbar-nav, .navbar-brand  {
+
+        .navbar-nav,
+        .navbar-brand {
             padding-left: 20px;
             padding-right: 20px;
         }
+
         .navbar-nav .nav-item {
             margin-right: 10px;
         }
+
         .navbar-nav .nav-link {
-            color: #fff; /* Warna tulisan putih */
+            color: #fff;
+            /* Warna tulisan putih */
         }
+
         .logout {
-            background-color: #dc3545; /* Warna merah untuk menu logout */
+            background-color: #dc3545;
+            /* Warna merah untuk menu logout */
             border-radius: 5px;
         }
+
         .name {
-            background-color: green; /* Warna merah untuk menu logout */
+            background-color: green;
+            /* Warna merah untuk menu logout */
             border-radius: 5px;
         }
+
         .row {
-            border : solid 1px #CCC;
-            border-radius : 10px;
+            border: solid 1px #CCC;
+            border-radius: 10px;
             box-shadow: 5px 5px 5px #DDD;
         }
+
         .footer {
             bottom: 0;
             width: 100%;
-            background-color: #f8f9fa; /* Warna latar belakang footer */
+            background-color: #f8f9fa;
+            /* Warna latar belakang footer */
             text-align: center;
             padding: 10px 0;
         }
@@ -55,10 +69,15 @@ include "../koneksi.php";
     <script src="../codemirror/mode/css/css.js"></script>
     <script src="../codemirror/mode/clike/clike.js"></script>
     <script src="../codemirror/mode/php/php.js"></script>
-    <style>.CodeMirror {border: solid 1px black;}</style>
+    <style>
+        .CodeMirror {
+            border: solid 1px black;
+        }
+    </style>
     <link rel="stylesheet" href="../assets/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.0/css/dataTables.dataTables.min.css">
 </head>
+
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
@@ -92,9 +111,9 @@ include "../koneksi.php";
                 <h2>Halaman Guru</h2>
                 <hr>
                 <?php
-                if(isset($_GET['page']) && $_GET['page'] != ''){
+                if (isset($_GET['page']) && $_GET['page'] != '') {
                     $page = addslashes($_GET['page']);
-                    switch ($page){
+                    switch ($page) {
                         default:
                             include "ujian.php";
                             break;
@@ -105,8 +124,11 @@ include "../koneksi.php";
                             include "soal.php";
                             break;
                         case "input_jawaban":
-                                include "input_jawaban.php";
-                                break;
+                            include "input_jawaban.php";
+                            break;
+                        case "input_ujian":
+                            include "input_ujian.php";
+                            break;
                     }
                 } else {
                     // Jika kunci 'page' tidak diatur atau kosong, sertakan file "ujian.php" secara default
@@ -116,13 +138,13 @@ include "../koneksi.php";
             </div>
         </div>
     </div>
-    
-<!-- Footer -->
-<div class="footer">
+
+    <!-- Footer -->
+    <div class="footer">
         <p>Website Ujian Pemrograman PHP | Dikembangkan oleh Apep Wahyudin</p>
-</div>
-<!-- Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.0/js/dataTables.min.js"></script>
@@ -138,8 +160,9 @@ include "../koneksi.php";
             matchBrackets: true,
             mode: "application/x-httpd-php",
             indentUnit: 4,
-            
+
         });
     </script>
 </body>
+
 </html>
