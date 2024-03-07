@@ -97,7 +97,7 @@ include "../koneksi.php";
                     <a class="nav-link" href="home.php?page=ujian">Data Ujian</a>
                 </li>
                 <li class="nav-item name">
-                    <a class="nav-link" href="#">Apep Guru</a>
+                    <a class="nav-link" href="#"><?= $_SESSION["username"];?></a>
                 </li>
                 <li class="nav-item logout">
                     <a class="nav-link" href="logout.php">Logout</a>
