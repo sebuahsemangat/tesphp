@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 22, 2024 at 01:30 AM
+-- Generation Time: Mar 07, 2024 at 11:25 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -24,6 +24,26 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `guru`
+--
+
+CREATE TABLE `guru` (
+  `id_guru` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `nama` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `guru`
+--
+
+INSERT INTO `guru` (`id_guru`, `username`, `password`, `nama`) VALUES
+(1, 'apep', '3449cf29b6c2f4bb7892d5c7694ea81f', 'Apep Wahyudin');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `hasil`
 --
 
@@ -40,7 +60,7 @@ CREATE TABLE `hasil` (
 --
 
 INSERT INTO `hasil` (`id`, `id_soal`, `id_siswa`, `jawaban`, `nilai`) VALUES
-(4, 1, 1, '<?php\r\necho \"Hello World\";\r\n?>', 100);
+(6, 6, 3, '<?php\r\n$angka1 = 10;\r\n$angka2 =               20;\r\necho $angka1 + $angka2;\r\n?>', 100);
 
 -- --------------------------------------------------------
 
@@ -62,7 +82,10 @@ CREATE TABLE `jawaban` (
 INSERT INTO `jawaban` (`id_jawaban`, `id_soal`, `jawaban`, `jawaban_bersih`) VALUES
 (1, 1, '<?php\r\necho \"Hello World\";\r\n?>', 'echo\"HelloWorld\";'),
 (2, 1, '<?= \"Hello World\"; ?>', '\"HelloWorld\";'),
-(3, 1, '<?php\r\nprint \"Hello World\";\r\n?>', 'print\"HelloWorld\";');
+(3, 1, '<?php\r\nprint \"Hello World\";\r\n?>', 'print\"HelloWorld\";'),
+(5, 1, '<?php\r\n$hello = \"Hello\";\r\n$world = \"World\";\r\necho $hello. \" \" . $world;\r\n?>', '$hello=\"Hello\";$world=\"World\";echo$hello.\"\".$world;'),
+(9, 6, '<?php\r\n$angka1 = 10;\r\n$angka2 = 20;\r\necho $angka1 + $angka2;\r\n?>', '$angka1=10;$angka2=20;echo$angka1+$angka2;'),
+(10, 6, '<?php\r\n$angka1 = 10;\r\n$angka2 = 20;\r\necho $angka2 + $angka1;\r\n?>', '$angka1=10;$angka2=20;echo$angka2+$angka1;');
 
 -- --------------------------------------------------------
 
@@ -234,7 +257,9 @@ CREATE TABLE `soal` (
 
 INSERT INTO `soal` (`id_soal`, `judul`, `soal`, `waktu`, `status`, `id_ujian`) VALUES
 (1, 'Echo', 'Tampilkan teks \"Hello World\" di layar!', 0, 'aktif', 1),
-(2, 'Positif/Negatif', 'Buat sebuah variabel dengan nama $angka. Isi angka tesebut dengan tanggal hari ini. Masukkan variabel di atas ke dalam fungsi if dengan ketentuan:\n<br>\n<ul>\n<li>Jika $angka kurang dari 0 maka akan muncul teks \"Ini angka negatif\"\n</li>\n<li>Jika $angka lebih dari 0 maka akan muncul teks \"Ini angka positif\"\n</li>\n<li>Jika $angka sams dengan 0 maka akan muncul teks \"Ini angka nol\"\n</li>\n</ul>', 0, 'aktif', 2);
+(2, 'Positif/Negatif', 'Buat sebuah variabel dengan nama $angka. Isi angka tesebut dengan tanggal hari ini. Masukkan variabel di atas ke dalam fungsi if dengan ketentuan:\n<br>\n<ul>\n<li>Jika $angka kurang dari 0 maka akan muncul teks \"Ini angka negatif\"\n</li>\n<li>Jika $angka lebih dari 0 maka akan muncul teks \"Ini angka positif\"\n</li>\n<li>Jika $angka sams dengan 0 maka akan muncul teks \"Ini angka nol\"\n</li>\n</ul>', 0, 'aktif', 2),
+(4, 'Looping', 'Buat looping dari 1 sampai 10 menggunakan fungsi for', 1, 'aktif', 1),
+(6, 'Penjumlahan', '<p>Terdapat 2 buah variabel yaitu:<br>$angka1 = 10<br>$angka2 = 20<br><br>Buat kode php untuk menampilkan hasil Penjumlahan dua variabel tersebut!</p>', 0, 'aktif', 2);
 
 -- --------------------------------------------------------
 
@@ -255,11 +280,19 @@ CREATE TABLE `ujian` (
 
 INSERT INTO `ujian` (`id_ujian`, `nama_ujian`, `status`, `id_kelas`) VALUES
 (1, 'Ujian Materi Array', 'aktif', 1),
-(2, 'Ujian Materi Operator', 'aktif', 1);
+(2, 'Ujian Materi Operator', 'aktif', 1),
+(4, 'Ujian Tengah Semester', 'aktif', 1),
+(6, 'Ujian Praktikum Akhir', 'aktif', 1);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `guru`
+--
+ALTER TABLE `guru`
+  ADD PRIMARY KEY (`id_guru`);
 
 --
 -- Indexes for table `hasil`
@@ -304,16 +337,22 @@ ALTER TABLE `ujian`
 --
 
 --
+-- AUTO_INCREMENT for table `guru`
+--
+ALTER TABLE `guru`
+  MODIFY `id_guru` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `hasil`
 --
 ALTER TABLE `hasil`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `jawaban`
 --
 ALTER TABLE `jawaban`
-  MODIFY `id_jawaban` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_jawaban` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `kelas`
@@ -331,13 +370,13 @@ ALTER TABLE `siswa`
 -- AUTO_INCREMENT for table `soal`
 --
 ALTER TABLE `soal`
-  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `ujian`
 --
 ALTER TABLE `ujian`
-  MODIFY `id_ujian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_ujian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

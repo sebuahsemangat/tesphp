@@ -16,7 +16,7 @@ if ($insert)
 $parent_url = $_SERVER['HTTP_REFERER'];
 
 // Menentukan lokasi home.php
-$home_url = 'soal.php?id_ujian=' . $id_ujian;
+$home_url = 'home.php?page=soal&id_ujian=' . $id_ujian;
 
 // Script JavaScript untuk mengubah lokasi parent frame
 echo "<script>window.parent.location.href = '$home_url';</script>";
