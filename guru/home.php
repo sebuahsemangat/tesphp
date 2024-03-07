@@ -3,7 +3,7 @@ session_start();
 if (!isset($_SESSION['username'])) {
     header("Location: index.php"); // Redirect ke halaman index jika belum login
     exit;
-  }
+}
 include "../koneksi.php";
 ?>
 <!DOCTYPE html>
@@ -80,6 +80,7 @@ include "../koneksi.php";
     </style>
     <link rel="stylesheet" href="../assets/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.0/css/dataTables.dataTables.min.css">
+
 </head>
 
 <body>
@@ -101,7 +102,7 @@ include "../koneksi.php";
                     <a class="nav-link" href="home.php?page=ujian">Data Ujian</a>
                 </li>
                 <li class="nav-item name">
-                    <a class="nav-link" href="#"><?= $_SESSION["username"];?></a>
+                    <a class="nav-link" href="#"><?= $_SESSION["username"]; ?></a>
                 </li>
                 <li class="nav-item logout">
                     <a class="nav-link" href="logout.php">Logout</a>
@@ -132,6 +133,9 @@ include "../koneksi.php";
                             break;
                         case "input_ujian":
                             include "input_ujian.php";
+                            break;
+                        case "input_soal":
+                            include "input_soal.php";
                             break;
                     }
                 } else {
@@ -166,6 +170,21 @@ include "../koneksi.php";
             indentUnit: 4,
 
         });
+    </script>
+
+    <script src="ckeditor.js"></script>
+
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'), {
+                // toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+            })
+            .then(editor => {
+                window.editor = editor;
+            })
+            .catch(err => {
+                console.error(err.stack);
+            });
     </script>
 </body>
 

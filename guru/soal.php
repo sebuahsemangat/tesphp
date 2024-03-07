@@ -7,7 +7,7 @@
         $data_ujian=mysqli_fetch_assoc($qry_ujian);
         echo "<h4>" . $data_ujian['nama_ujian'] . "</h4>";
     ?>
-    <p><a href="home.php">Kembali</a></p>
+    <p><a href="home.php">Kembali</a> | <a href="home.php?page=input_soal&id_ujian=<?= $id_ujian;?>">Tambah Soal</a></p>
     <h4>List Soal</h4>
     <table id="myTable" class="table table-striped table-bordered" style="width:100%">
     <thead>
