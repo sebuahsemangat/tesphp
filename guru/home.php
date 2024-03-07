@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: index.php"); // Redirect ke halaman index jika belum login
+    exit;
+  }
 include "../koneksi.php";
 ?>
 <!DOCTYPE html>

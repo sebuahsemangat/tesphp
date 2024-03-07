@@ -1,7 +1,7 @@
 <?php
 session_start();
-if (!isset($_SESSION['username'])) {
-  header("Location: index.php"); // Redirect ke halaman home jika sudah login
+if (isset($_SESSION['username'])) {
+  header("Location: home.php"); // Redirect ke halaman home jika sudah login
   exit;
 }
 include "../koneksi.php";
