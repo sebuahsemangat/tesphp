@@ -137,6 +137,9 @@ include "../koneksi.php";
                         case "input_soal":
                             include "input_soal.php";
                             break;
+                        case "lihat_nilai":
+                            include "lihat_nilai.php";
+                            break;
                     }
                 } else {
                     // Jika kunci 'page' tidak diatur atau kosong, sertakan file "ujian.php" secara default

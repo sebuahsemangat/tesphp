@@ -37,6 +37,7 @@
             <td>
                 <a href="">Detail</a> |
                 <a href="home.php?page=input_jawaban&id_soal=<?=$data_soal['id_soal'];?>">Tambah Jawaban</a> |
+                <a href="home.php?page=lihat_nilai&id_soal=<?=$data_soal['id_soal'];?>">Lihat Nilai</a> |
                 <a href="">Edit</a> |
                 <a href="">Hapus</a>
             </td>
