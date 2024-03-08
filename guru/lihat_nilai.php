@@ -11,8 +11,8 @@
         </tr>
     </thead>
     <tbody>
-    <?php
-        include ("../koneksi.php");
+        <?php
+        include("../koneksi.php");
         $id_soal = $_GET["id_soal"];
 
         // SQL query untuk mendapatkan data
@@ -27,22 +27,22 @@
         if ($result->num_rows > 0) {
             $no = 0;
             while ($row = $result->fetch_assoc()) {
-                $no ++;
+                $no++;
         ?>
-            <tr>
-                <td><?= $no;?></td>
-                <td><?= $row["nama_siswa"];?></td>
-                <td><?= $row["nama_kelas"];?></td>
-                <td><?= $row["nilai"];?></td>
-                <td>
-                    
-                </td>
-            </tr>
+                <tr>
+                    <td><?= $no; ?></td>
+                    <td><?= $row["nama_siswa"]; ?></td>
+                    <td><?= $row["nama_kelas"]; ?></td>
+                    <td><?= $row["nilai"]; ?></td>
+                    <td>
+
+                    </td>
+                </tr>
         <?php
+            }
+        } else {
+            echo "";
         }
-    } else {
-        echo "";
-    }
         ?>
     </tbody>
 </table>
