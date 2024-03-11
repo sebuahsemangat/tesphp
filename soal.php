@@ -15,6 +15,7 @@
             <th>No</th>
             <th>Judul Soal</th>
             <th>Durasi Waktu</th>
+            <th>Nilai</th>
             <th>Pengerjaan</th>
             <th></th>
         </tr>
@@ -26,6 +27,10 @@
     //pecah menjadi array dan looping
     $no = 0;
     while($data_soal=mysqli_fetch_assoc($qry_soal)){
+        $qry_nilai = mysqli_query($koneksi,"SELECT * FROM hasil WHERE id_soal = '$data_soal[id_soal]'
+        AND id_siswa = '$_SESSION[siswa]'");
+        $data_nilai = mysqli_fetch_assoc($qry_nilai);
+        $jmlh_nilai = mysqli_num_rows($qry_nilai);
         $no++;
     ?>
     
@@ -33,6 +38,18 @@
             <td><?= $no;?></td>
             <td><?= $data_soal['judul'];?></td>
             <td><?= $data_soal['waktu'];?></td>
+            <td>
+                <?php 
+                if($jmlh_nilai == 0)
+                {
+                    echo 'Belum Dinilai';
+                }
+                else {
+                    echo $data_nilai['nilai'];
+                }
+
+                ?>
+            </td>
             <td>
                 <?php
                 //cek apakah soal sudah dikerjakan
