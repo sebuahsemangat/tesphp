@@ -15,7 +15,7 @@
     FROM ujian
     LEFT JOIN ujian_kelas ON ujian.id_ujian = ujian_kelas.id_ujian
     LEFT JOIN soal ON ujian.id_ujian = soal.id_ujian
-    WHERE ujian_kelas.id_kelas = '$data_siswa[id_kelas]' GROUP BY ujian.id_ujian, ujian.nama_ujian
+    WHERE ujian_kelas.id_kelas = '$data_siswa[id_kelas]' and ujian.status = 'aktif' GROUP BY ujian.id_ujian, ujian.nama_ujian
           ORDER BY ujian.id_ujian DESC");
         // pecah menjadi array kemudian looping
         while ($data_ujian = mysqli_fetch_assoc($qry_ujian)) {
