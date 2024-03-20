@@ -1,5 +1,4 @@
-<p><a href="#">Kembali</a> | <a href="home.php?page=input_soal&id_ujian=<?= $id_ujian; ?>">Tambah Soal</a></p>
-<h4>List Soal</h4>
+<p><a href="#">Kembali</a>
 <table id="myTable" class="table table-striped table-bordered" style="width:100%">
     <thead>
         <tr>

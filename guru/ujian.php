@@ -27,7 +27,7 @@
                             <td>
                                 <?= "<a href='home.php?page=soal&id_ujian=" . $data_ujian['id_ujian'] . "'>Edit</a>" ?>
                                 <?= "<a href='home.php?page=soal&id_ujian=" . $data_ujian['id_ujian'] . "'>Lihat Soal</a>" ?>
-                                <?= "<a href='home.php?page=soal&id_ujian=" . $data_ujian['id_ujian'] . "'>Hapus</a>" ?>
+                                <a href="hapus_ujian.php?id_ujian=<?=$data_ujian['id_ujian'];?>" onclick="return confirm('Data ujian akan dihapus! Lanjutkan?')">Hapus</a>
                             </td>
                         </tr>
                     <?php
