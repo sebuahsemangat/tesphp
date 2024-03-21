@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 07, 2024 at 11:25 AM
+-- Generation Time: Mar 21, 2024 at 05:06 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -39,7 +39,8 @@ CREATE TABLE `guru` (
 --
 
 INSERT INTO `guru` (`id_guru`, `username`, `password`, `nama`) VALUES
-(1, 'apep', '3449cf29b6c2f4bb7892d5c7694ea81f', 'Apep Wahyudin');
+(1, 'apep', '3449cf29b6c2f4bb7892d5c7694ea81f', 'Apep Wahyudin'),
+(2, 'anisa', '40cc8f68f52757aff1ad39a006bfbf11', 'Anisa Ruhul Azizah');
 
 -- --------------------------------------------------------
 
@@ -60,7 +61,8 @@ CREATE TABLE `hasil` (
 --
 
 INSERT INTO `hasil` (`id`, `id_soal`, `id_siswa`, `jawaban`, `nilai`) VALUES
-(6, 6, 3, '<?php\r\n$angka1 = 10;\r\n$angka2 =               20;\r\necho $angka1 + $angka2;\r\n?>', 100);
+(6, 6, 3, '<?php\r\n$angka1 = 10;\r\n$angka2 =               20;\r\necho $angka1 + $angka2;\r\n?>', 100),
+(7, 6, 1, '<?php\r\necho \"hahaha\";\r\n?>', 19);
 
 -- --------------------------------------------------------
 
@@ -96,17 +98,18 @@ INSERT INTO `jawaban` (`id_jawaban`, `id_soal`, `jawaban`, `jawaban_bersih`) VAL
 CREATE TABLE `kelas` (
   `id_kelas` int(11) NOT NULL,
   `nama_kelas` varchar(10) NOT NULL,
-  `status` enum('aktif','nonaktif') NOT NULL
+  `status` enum('aktif','nonaktif') NOT NULL,
+  `id_guru` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `kelas`
 --
 
-INSERT INTO `kelas` (`id_kelas`, `nama_kelas`, `status`) VALUES
-(1, 'X-R1', 'aktif'),
-(2, 'X-R2', 'aktif'),
-(3, 'X-R3', 'aktif');
+INSERT INTO `kelas` (`id_kelas`, `nama_kelas`, `status`, `id_guru`) VALUES
+(1, 'X-R1', 'aktif', 1),
+(2, 'X-R2', 'aktif', 2),
+(3, 'X-R3', 'aktif', 1);
 
 -- --------------------------------------------------------
 
@@ -270,19 +273,43 @@ INSERT INTO `soal` (`id_soal`, `judul`, `soal`, `waktu`, `status`, `id_ujian`) V
 CREATE TABLE `ujian` (
   `id_ujian` int(11) NOT NULL,
   `nama_ujian` varchar(50) NOT NULL,
-  `status` varchar(10) NOT NULL,
-  `id_kelas` int(11) NOT NULL
+  `status` varchar(15) NOT NULL,
+  `id_guru` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `ujian`
 --
 
-INSERT INTO `ujian` (`id_ujian`, `nama_ujian`, `status`, `id_kelas`) VALUES
-(1, 'Ujian Materi Array', 'aktif', 1),
+INSERT INTO `ujian` (`id_ujian`, `nama_ujian`, `status`, `id_guru`) VALUES
+(1, 'Ujian Materi Array', 'tidak aktif', 1),
 (2, 'Ujian Materi Operator', 'aktif', 1),
 (4, 'Ujian Tengah Semester', 'aktif', 1),
-(6, 'Ujian Praktikum Akhir', 'aktif', 1);
+(6, 'Ujian Praktikum Akhir', 'aktif', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ujian_kelas`
+--
+
+CREATE TABLE `ujian_kelas` (
+  `id_ujian_kelas` int(11) NOT NULL,
+  `id_ujian` int(11) NOT NULL,
+  `id_kelas` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ujian_kelas`
+--
+
+INSERT INTO `ujian_kelas` (`id_ujian_kelas`, `id_ujian`, `id_kelas`) VALUES
+(1, 1, 1),
+(2, 2, 1),
+(3, 4, 2),
+(4, 6, 2),
+(5, 4, 1),
+(6, 6, 1);
 
 --
 -- Indexes for dumped tables
@@ -333,6 +360,12 @@ ALTER TABLE `ujian`
   ADD PRIMARY KEY (`id_ujian`);
 
 --
+-- Indexes for table `ujian_kelas`
+--
+ALTER TABLE `ujian_kelas`
+  ADD PRIMARY KEY (`id_ujian_kelas`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -340,13 +373,13 @@ ALTER TABLE `ujian`
 -- AUTO_INCREMENT for table `guru`
 --
 ALTER TABLE `guru`
-  MODIFY `id_guru` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_guru` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `hasil`
 --
 ALTER TABLE `hasil`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `jawaban`
@@ -376,7 +409,13 @@ ALTER TABLE `soal`
 -- AUTO_INCREMENT for table `ujian`
 --
 ALTER TABLE `ujian`
-  MODIFY `id_ujian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_ujian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `ujian_kelas`
+--
+ALTER TABLE `ujian_kelas`
+  MODIFY `id_ujian_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
