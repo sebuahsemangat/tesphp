@@ -9,8 +9,9 @@
                 </thead>
                 <tbody>
                     <?php
+                    $id_guru = $_SESSION['id_guru']; //id guru berdasarkan session
                     //ambil data ujian berdasarkan kelas siswa dan statusnya aktif
-                    $qry_ujian = mysqli_query($koneksi, "SELECT * FROM ujian WHERE status='aktif'");
+                    $qry_ujian = mysqli_query($koneksi, "SELECT * FROM ujian WHERE id_guru = '$id_guru'");
                     // pecah menjadi array kemudian looping
                     while ($data_ujian = mysqli_fetch_assoc($qry_ujian)) {
                     ?>
