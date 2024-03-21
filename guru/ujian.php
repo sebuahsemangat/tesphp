@@ -3,6 +3,8 @@
                 <thead>
                     <tr>
                         <th>Nama Ujian</th>
+                        <th>Daftar Kelas</th>
+                        <th>Status</th>
                         <th>Jumlah Soal</th>
                         <th>Action</th>
                     </tr>
@@ -19,6 +21,27 @@
                             <td><?= $data_ujian['nama_ujian']; ?></td>
                             <td>
                                 <?php
+                                $query_kelas = mysqli_query($koneksi, "SELECT ujian_kelas.id_ujian_kelas, kelas.nama_kelas
+                                    FROM ujian_kelas
+                                    INNER JOIN kelas ON ujian_kelas.id_kelas = kelas.id_kelas
+                                    WHERE ujian_kelas.id_ujian = '$data_ujian[id_ujian]'
+                                    ORDER BY ujian_kelas.id_kelas ASC");
+                                while ($data_kelas = mysqli_fetch_assoc($query_kelas)) {
+                                    echo "<span class='btn btn-primary mx-1'>{$data_kelas['nama_kelas']}</span>";
+                                }
+                                ?>
+                            </td>
+                            <td>
+                                <?php
+                                if ($data_ujian['status'] == 'aktif') {
+                                    $class = 'btn-success';
+                                } else {
+                                    $class = 'btn-warning';
+                                }
+                                echo "<span class='btn {$class}'>" . ucwords($data_ujian['status']) . "</span>"; ?>
+                            </td>
+                            <td>
+                                <?php
                                 $qry_Soal = mysqli_query($koneksi, "SELECT soal FROM soal WHERE id_ujian='$data_ujian[id_ujian]'");
                                 $jmlh_soal = mysqli_num_rows($qry_Soal);
                                 echo $jmlh_soal;
@@ -28,7 +51,7 @@
                             <td>
                                 <?= "<a href='home.php?page=soal&id_ujian=" . $data_ujian['id_ujian'] . "'>Edit</a>" ?>
                                 <?= "<a href='home.php?page=soal&id_ujian=" . $data_ujian['id_ujian'] . "'>Lihat Soal</a>" ?>
-                                <a href="hapus_ujian.php?id_ujian=<?=$data_ujian['id_ujian'];?>" onclick="return confirm('Data ujian akan dihapus! Lanjutkan?')">Hapus</a>
+                                <a href="hapus_ujian.php?id_ujian=<?= $data_ujian['id_ujian']; ?>" onclick="return confirm('Data ujian akan dihapus! Lanjutkan?')">Hapus</a>
                             </td>
                         </tr>
                     <?php
