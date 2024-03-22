@@ -156,7 +156,7 @@ if (!isset($_SESSION['siswa'])) {
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" href="home.php">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#"><?= $data_siswa["nama"]; ?></a>
