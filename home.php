@@ -1,7 +1,7 @@
 <?php
 session_start();
 include "koneksi.php";
-if (!isset($_SESSION['siswa'])) {
+if (!isset ($_SESSION['siswa'])) {
     header("location: index.php");
     exit();
 } else {
@@ -54,6 +54,7 @@ if (!isset($_SESSION['siswa'])) {
             border: solid 1px #CCC;
             border-radius: 10px;
             box-shadow: 5px 5px 5px #DDD;
+            padding-bottom: 10px;
         }
 
         .footer {
@@ -66,8 +67,10 @@ if (!isset($_SESSION['siswa'])) {
         }
     </style>
     <?php
-    if (isset($_GET['page']) && $_GET['page'] != '' && $_GET['page'] == 'kerjakan') {
-    ?>
+    if(isset ($_GET['page']) && $_GET['page'] != '' ){
+        
+    if ($_GET['page'] == 'kerjakan' || $_GET['page']=='lihat_jawaban') {
+        ?>
         <style>
             .bd-placeholder-img {
                 font-size: 1.125rem;
@@ -141,8 +144,9 @@ if (!isset($_SESSION['siswa'])) {
                 border: solid 1px black;
             }
         </style>
-    <?php
+        <?php
     }
+}
     ?>
 </head>
 
@@ -150,7 +154,8 @@ if (!isset($_SESSION['siswa'])) {
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <a class="navbar-brand" href="#">Logo</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
@@ -159,7 +164,9 @@ if (!isset($_SESSION['siswa'])) {
                     <a class="nav-link" href="home.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><?= $data_siswa["nama"]; ?></a>
+                    <a class="nav-link" href="#">
+                        <?= $data_siswa["nama"]; ?>
+                    </a>
                 </li>
                 <li class="nav-item logout">
                     <a class="nav-link" href="logout.php">Logout</a>
@@ -172,7 +179,7 @@ if (!isset($_SESSION['siswa'])) {
         <div class="row">
             <div class="col-md-12 p-50">
                 <?php
-                if (isset($_GET['page']) && $_GET['page'] != '') {
+                if (isset ($_GET['page']) && $_GET['page'] != '') {
                     $page = addslashes($_GET['page']);
                     switch ($page) {
                         default:
@@ -183,6 +190,9 @@ if (!isset($_SESSION['siswa'])) {
                             break;
                         case "kerjakan":
                             include "do-test.php";
+                            break;
+                        case "lihat_jawaban":
+                            include "lihat_jawaban.php";
                             break;
                     }
                 } else {
@@ -218,7 +228,7 @@ if (!isset($_SESSION['siswa'])) {
             indentUnit: 4,
 
         });
-        editor.on("beforeChange", function(_, change) {
+        editor.on("beforeChange", function (_, change) {
             if (change.origin == "paste") change.cancel()
         });
     </script>
