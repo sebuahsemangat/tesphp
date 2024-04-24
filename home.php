@@ -156,7 +156,7 @@ if (!isset($_SESSION['siswa'])) {
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" href="home.php">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#"><?= $data_siswa["nama"]; ?></a>
@@ -228,7 +228,30 @@ if (!isset($_SESSION['siswa'])) {
         }
     </script>
     <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+    <?php
+            if (isset($_GET['page']) && $_GET['page'] != '' && $_GET['page'] == 'kerjakan') {
+            ?>
+    <script>
+        // Fungsi untuk melakukan redirect saat tab baru dibuka atau jendela baru dibuka, atau saat jendela diminimalkan
+        function redirectToLogout() {
+            window.location.href = 'logout.php';
+        }
 
+        // Mendaftarkan event listener untuk saat tab baru dibuka atau jendela baru dibuka, atau saat jendela diminimalkan
+        document.addEventListener('visibilitychange', function() {
+            if (document.visibilityState === 'hidden') {
+                redirectToLogout();
+            }
+        });
+
+        // Mendaftarkan event listener untuk saat jendela ditutup
+        window.addEventListener('beforeunload', function() {
+            redirectToLogout();
+        });
+    </script>
+    <?php
+            }
+            ?>
 </body>
 
 </html>

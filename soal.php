@@ -14,7 +14,7 @@
         <tr>
             <th>No</th>
             <th>Judul Soal</th>
-            <th>Durasi Waktu</th>
+            <!--<th>Durasi Waktu</th>-->
             <th>Nilai</th>
             <th>Pengerjaan</th>
             <th></th>
@@ -37,7 +37,7 @@
         <tr>
             <td><?= $no;?></td>
             <td><?= $data_soal['judul'];?></td>
-            <td><?= $data_soal['waktu'];?></td>
+            <!--<td></td>-->
             <td>
                 <?php 
                 if($jmlh_nilai == 0)
