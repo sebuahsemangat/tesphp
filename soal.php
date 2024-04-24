@@ -70,7 +70,7 @@
             <td>
                 <?php
                 if($cek_jawaban==1){
-                    echo "<a href='#'>Lihat Jawaban</a>";
+                    echo "<a href='home.php?page=lihat_jawaban&id_ujian=$data_ujian[id_ujian]&id_soal=$data_soal[id_soal]'>Lihat Jawaban</a>";
                 }
                 else
                 //jika cek_jawaban menghasilkan angka 0
