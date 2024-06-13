@@ -50,12 +50,12 @@ if (!isset ($_SESSION['siswa'])) {
             border-radius: 5px;
         }
 
-        .row {
+        /* .row {
             border: solid 1px #CCC;
             border-radius: 10px;
             box-shadow: 5px 5px 5px #DDD;
             padding-bottom: 10px;
-        }
+        } */
 
         .footer {
             bottom: 0;
@@ -233,12 +233,31 @@ if (!isset ($_SESSION['siswa'])) {
         });
     </script>
     <script>
-        function resizeIframe(obj) {
-            obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+        var editor = CodeMirror.fromTextArea(document.getElementById("code2"), {
+            lineNumbers: true,
+            matchBrackets: true,
+            mode: "application/x-httpd-php",
+            indentUnit: 4,
+
+        });
+        editor.on("beforeChange", function (_, change) {
+            if (change.origin == "paste") change.cancel()
+        });
+    </script>
+    <script>
+        function resizeIframe() {
+            var iframe = document.getElementById('resultFrame');
+            iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
         }
+
+        var iframe = document.getElementById('resultFrame');
+        iframe.onload = resizeIframe;
+
+        // Tambahan: Resize iframe ketika ukuran jendela berubah
+        window.onresize = resizeIframe;
     </script>
     <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
-    <?php
+   <!-- <?php
             if (isset($_GET['page']) && $_GET['page'] != '' && $_GET['page'] == 'kerjakan') {
             ?>
     <script>
@@ -262,6 +281,7 @@ if (!isset ($_SESSION['siswa'])) {
     <?php
             }
             ?>
+            -->
 </body>
 
 </html>
