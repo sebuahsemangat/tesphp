@@ -30,8 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Menyiapkan statement untuk menyimpan jawaban
-        $stmt_jawaban = $koneksi->prepare("INSERT INTO hasil (id_soal, id_siswa, jawaban, test_result) VALUES (?, ?, ?, ?)");
-        $stmt_jawaban->bind_param("iiss", $id_soal, $id_siswa, $hasil, $test_result);
+        $stmt_jawaban = $koneksi->prepare("INSERT INTO hasil (id_soal, id_ujian, id_siswa, jawaban, test_result) VALUES (?, ?, ?, ?, ?)");
+        $stmt_jawaban->bind_param("iiiss", $id_soal, $id_ujian, $id_siswa, $hasil, $test_result);
 
         if ($stmt_jawaban->execute()) {
             // Menentukan lokasi home.php
