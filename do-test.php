@@ -60,59 +60,51 @@ function " . $soal['function_name'] . "(" . $soal['parameter'] . "){
     </form>
   </div>
   <div class="col">
-    <strong>Test Results</strong>
-    <!--<table class="table">
+    <strong>Sample Tests</strong>
+    <table class="table">
       <tr>
         <th scope="col">Input</th>
         <th scope="col">Output</th>
       </tr>
       <?php
-      // $sql_testcase = "SELECT id_testcase, input, output 
-      //                        FROM testcase 
-      //                        WHERE id_soal = ?";
+      $sql_testcase = "SELECT id_testcase, input, output 
+                             FROM testcase 
+                             WHERE id_soal = ?";
 
-      // // Menyiapkan statement
-      // $stmt_testcase = $koneksi->prepare($sql_testcase);
-      // if ($stmt_testcase) {
-      //   // Bind parameter dan eksekusi statement
-      //   $stmt_testcase->bind_param("i", $id_soal);
-      //   $stmt_testcase->execute();
-      //   $result_testcase = $stmt_testcase->get_result();
+      // Menyiapkan statement
+      $stmt_testcase = $koneksi->prepare($sql_testcase);
+      if ($stmt_testcase) {
+        // Bind parameter dan eksekusi statement
+        $stmt_testcase->bind_param("i", $id_soal);
+        $stmt_testcase->execute();
+        $result_testcase = $stmt_testcase->get_result();
 
-      //   // Menampilkan data testcase
-      //   if ($result_testcase->num_rows > 0) {
-      //     while ($testcase = $result_testcase->fetch_assoc()) {
-      //       echo "<tr>
-      //                       <td>{$testcase['input']}</td>
-      //                       <td>{$testcase['output']}</td>
-      //                       </tr>";
-      //     }
-      //   } else {
-      //     echo "<p>Tidak ada testcase untuk soal ini.</p>";
-      //     exit();
-      //   }
-      // } else {
-      //   echo "<p>Gagal menyiapkan query testcase.</p>";
-      //   exit();
-      // }
-      // // Menutup koneksi
-      // $koneksi->close();
+        // Menampilkan data testcase
+        if ($result_testcase->num_rows > 0) {
+          while ($testcase = $result_testcase->fetch_assoc()) {
+            echo "<tr>
+                            <td>{$testcase['input']}</td>
+                            <td>{$testcase['output']}</td>
+                            </tr>";
+          }
+        } else {
+          echo "<p>Tidak ada testcase untuk soal ini.</p>";
+          exit();
+        }
+      } else {
+        echo "<p>Gagal menyiapkan query testcase.</p>";
+        exit();
+      }
+      // Menutup koneksi
+      $koneksi->close();
       ?>
 
-    </table>-->
+    </table>
 
-    <!--Textarea untuk menampilkan kode test-->
-
-    <iframe src="" name="execute" frameborder="0" width="100%" id="resultFrame" height="auto"></iframe>
   </div>
-
+  
 </div>
 <div class="row">
-  <strong>Sample Tests</strong>
-  <form action="">
-    <textarea name="" id="code2">
-<?php echo htmlspecialchars("<?php
-" .
-  $soal["test_code"]); ?></textarea>
-  </form>
+  <strong>Test Results</strong>
+  <iframe src="" name="execute" frameborder="0" width="100%" id="resultFrame" height="auto"></iframe>
 </div>
