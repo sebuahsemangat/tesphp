@@ -73,10 +73,10 @@ include "' . $filecode . '";
     //eksekusi file test_code
     $execute_testcode = shell_exec("php " . $test_path);
         if(trim($execute_testcode) == $data_testcase["output"] ){
-            echo "Test berhasil! Input: ". $data_testcase["input"]. " Output diharapkan: ". $data_testcase["output"]."<br>";
+            echo "<div class='border border-success rounded mb-2 p-1'>Test berhasil! Input: ". $data_testcase["input"]. " Output diharapkan: ". $data_testcase["output"]."</div>";
         }
         else {
-            echo "Test GAGAL! Input: ". $data_testcase["input"]. " Output diharapkan: ". $data_testcase["output"]."<br>";
+            echo "<div class='border border-danger rounded mb-2 p-1'>Test GAGAL! Input: ". $data_testcase["input"]. " Output diharapkan: ". $data_testcase["output"]."</div>";
         }
     
     }

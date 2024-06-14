@@ -1,5 +1,6 @@
 <?php
 function jumlah_array($array){
-  return array_sum($array);
+  $jumlah = array_sum($array);
+    return $jumlah;
 }
       

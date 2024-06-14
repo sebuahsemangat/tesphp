@@ -1,7 +1,7 @@
 <?php
 session_start();
 include "koneksi.php";
-if (!isset ($_SESSION['siswa'])) {
+if (!isset($_SESSION['siswa'])) {
     header("location: index.php");
     exit();
 } else {
@@ -67,86 +67,86 @@ if (!isset ($_SESSION['siswa'])) {
         }
     </style>
     <?php
-    if(isset ($_GET['page']) && $_GET['page'] != '' ){
-        
-    if ($_GET['page'] == 'kerjakan' || $_GET['page']=='lihat_jawaban') {
-        ?>
-        <style>
-            .bd-placeholder-img {
-                font-size: 1.125rem;
-                text-anchor: middle;
-                -webkit-user-select: none;
-                -moz-user-select: none;
-                user-select: none;
-            }
+    if (isset($_GET['page']) && $_GET['page'] != '') {
 
-            @media (min-width: 768px) {
-                .bd-placeholder-img-lg {
-                    font-size: 3.5rem;
+        if ($_GET['page'] == 'kerjakan' || $_GET['page'] == 'lihat_jawaban') {
+            ?>
+            <style>
+                .bd-placeholder-img {
+                    font-size: 1.125rem;
+                    text-anchor: middle;
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    user-select: none;
                 }
-            }
 
-            .b-example-divider {
-                height: 3rem;
-                background-color: rgba(0, 0, 0, .1);
-                border: solid rgba(0, 0, 0, .15);
-                border-width: 1px 0;
-                box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-            }
+                @media (min-width: 768px) {
+                    .bd-placeholder-img-lg {
+                        font-size: 3.5rem;
+                    }
+                }
 
-            .b-example-vr {
-                flex-shrink: 0;
-                width: 1.5rem;
-                height: 100vh;
-            }
+                .b-example-divider {
+                    height: 3rem;
+                    background-color: rgba(0, 0, 0, .1);
+                    border: solid rgba(0, 0, 0, .15);
+                    border-width: 1px 0;
+                    box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+                }
 
-            .bi {
-                vertical-align: -.125em;
-                fill: currentColor;
-            }
+                .b-example-vr {
+                    flex-shrink: 0;
+                    width: 1.5rem;
+                    height: 100vh;
+                }
 
-            .nav-scroller {
-                position: relative;
-                z-index: 2;
-                height: 2.75rem;
-                overflow-y: hidden;
-            }
+                .bi {
+                    vertical-align: -.125em;
+                    fill: currentColor;
+                }
 
-            .nav-scroller .nav {
-                display: flex;
-                flex-wrap: nowrap;
-                padding-bottom: 1rem;
-                margin-top: -1px;
-                overflow-x: auto;
-                text-align: center;
-                white-space: nowrap;
-                -webkit-overflow-scrolling: touch;
-            }
-        </style>
+                .nav-scroller {
+                    position: relative;
+                    z-index: 2;
+                    height: 2.75rem;
+                    overflow-y: hidden;
+                }
+
+                .nav-scroller .nav {
+                    display: flex;
+                    flex-wrap: nowrap;
+                    padding-bottom: 1rem;
+                    margin-top: -1px;
+                    overflow-x: auto;
+                    text-align: center;
+                    white-space: nowrap;
+                    -webkit-overflow-scrolling: touch;
+                }
+            </style>
 
 
-        <!-- Custom styles for this template -->
-        <link href="assets/starter-template.css" rel="stylesheet">
+            <!-- Custom styles for this template -->
+            <link href="assets/starter-template.css" rel="stylesheet">
 
-        <link rel="stylesheet" href="codemirror/lib/codemirror.css">
-        <link rel="stylesheet" href="codemirror/theme/monokai.css">
-        <script src="codemirror/lib/codemirror.js"></script>
-        <script src="codemirror/addon/edit/matchbrackets.js"></script>
-        <script src="codemirror/addon/edit/closebrackets.js"></script>
-        <script src="codemirror/mode/htmlmixed/htmlmixed.js"></script>
-        <script src="codemirror/mode/xml/xml.js"></script>
-        <script src="codemirror/mode/javascript/javascript.js"></script>
-        <script src="codemirror/mode/css/css.js"></script>
-        <script src="codemirror/mode/clike/clike.js"></script>
-        <script src="codemirror/mode/php/php.js"></script>
-        <style>
-            .CodeMirror {
-                border: solid 1px black;
-            }
-        </style>
-        <?php
+            <link rel="stylesheet" href="codemirror/lib/codemirror.css">
+            <link rel="stylesheet" href="codemirror/theme/monokai.css">
+            <script src="codemirror/lib/codemirror.js"></script>
+            <script src="codemirror/addon/edit/matchbrackets.js"></script>
+            <script src="codemirror/addon/edit/closebrackets.js"></script>
+            <script src="codemirror/mode/htmlmixed/htmlmixed.js"></script>
+            <script src="codemirror/mode/xml/xml.js"></script>
+            <script src="codemirror/mode/javascript/javascript.js"></script>
+            <script src="codemirror/mode/css/css.js"></script>
+            <script src="codemirror/mode/clike/clike.js"></script>
+            <script src="codemirror/mode/php/php.js"></script>
+            <style>
+                .CodeMirror {
+                    border: solid 1px black;
+                }
+            </style>
+            <?php
+        }
     }
-}
     ?>
 </head>
 
@@ -179,7 +179,7 @@ if (!isset ($_SESSION['siswa'])) {
         <div class="row">
             <div class="col-md-12 p-50">
                 <?php
-                if (isset ($_GET['page']) && $_GET['page'] != '') {
+                if (isset($_GET['page']) && $_GET['page'] != '') {
                     $page = addslashes($_GET['page']);
                     switch ($page) {
                         default:
@@ -245,21 +245,14 @@ if (!isset ($_SESSION['siswa'])) {
         });
     </script>
     <script>
-        function resizeIframe() {
-            var iframe = document.getElementById('resultFrame');
-            iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
+        function resizeIframe(obj) {
+            obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
         }
-
-        var iframe = document.getElementById('resultFrame');
-        iframe.onload = resizeIframe;
-
-        // Tambahan: Resize iframe ketika ukuran jendela berubah
-        window.onresize = resizeIframe;
     </script>
     <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
-   <!-- <?php
-            if (isset($_GET['page']) && $_GET['page'] != '' && $_GET['page'] == 'kerjakan') {
-            ?>
+    <!-- <?php
+    if (isset($_GET['page']) && $_GET['page'] != '' && $_GET['page'] == 'kerjakan') {
+        ?>
     <script>
         // Fungsi untuk melakukan redirect saat tab baru dibuka atau jendela baru dibuka, atau saat jendela diminimalkan
         function redirectToLogout() {
@@ -279,8 +272,8 @@ if (!isset ($_SESSION['siswa'])) {
         });
     </script>
     <?php
-            }
-            ?>
+    }
+    ?>
             -->
 </body>
 

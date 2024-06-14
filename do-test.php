@@ -105,6 +105,8 @@ function " . $soal['function_name'] . "(" . $soal['parameter'] . "){
   
 </div>
 <div class="row">
-  <strong>Test Results</strong>
-  <iframe src="" name="execute" frameborder="0" width="100%" id="resultFrame" height="auto"></iframe>
+  <div class="col">
+    <strong>Test Results</strong>
+    <iframe src="" name="execute" width="100%" frameborder="1" scrolling="no" onload="resizeIframe(this)"></iframe>
+  </div>
 </div>
