@@ -5,7 +5,7 @@ $id_soal = filter_input(INPUT_GET, 'id_soal', FILTER_SANITIZE_NUMBER_INT);
 // Memeriksa apakah id_soal ada
 if ($id_soal) {
   // Query untuk mengambil data dari tabel soal
-  $sql_soal = "SELECT id_soal, judul, soal, status, parameter, function_name, test_code 
+  $sql_soal = "SELECT id_soal, judul, soal, status, id_ujian, parameter, function_name, test_code 
                  FROM soal 
                  WHERE status = 'aktif' AND id_soal = ?";
 
