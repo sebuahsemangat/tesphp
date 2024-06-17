@@ -228,9 +228,9 @@ if (!isset($_SESSION['siswa'])) {
             indentUnit: 4,
 
         });
-        editor.on("beforeChange", function (_, change) {
-            if (change.origin == "paste") change.cancel()
-        });
+        // editor.on("beforeChange", function (_, change) {
+        //     if (change.origin == "paste") change.cancel()
+        // });
     </script>
     <script>
         var editor = CodeMirror.fromTextArea(document.getElementById("code2"), {

@@ -74,12 +74,25 @@ include "' . $filecode . '";
 
         //eksekusi file test_code
         $execute_testcode = shell_exec("php " . $test_path);
+        
+        //antisipasi untuk output berupa boolean
+        if($execute_testcode == "1" && $data_testcase["output"] == "true"){
+            $execute_testcode = "true";
+        }
+        else if ($execute_testcode == "" && $data_testcase["output"] == "false"){
+            $execute_testcode = "false";
+        }
+        else {
+            //jika output bukan boolean
+            $execute_testcode == $execute_testcode;
+        }
+
         if (trim($execute_testcode) == $data_testcase["output"]) {
             //menambah jawaban benar
             $testcase_benar += 1;
-            echo "<div class='border border-success rounded mb-2 p-1'>Test berhasil! Input: " . $data_testcase["input"] . " Output diharapkan: " . $data_testcase["output"] . "</div>";
+            echo "<div class='border border-success mb-2 p-1'>Test berhasil! Input: " . $data_testcase["input"] . " Output: " . $execute_testcode . " Output diharapkan: " . $data_testcase["output"] . "</div>";
         } else {
-            echo "<div class='border border-danger rounded mb-2 p-1'>Test GAGAL! Input: " . $data_testcase["input"] . " Output diharapkan: " . $data_testcase["output"] . "</div>";
+            echo "<div class='border border-danger mb-2 p-1'>Test GAGAL! Input: " . $data_testcase["input"] . " Output: " . $execute_testcode . " Output diharapkan: " . $data_testcase["output"] . "</div>";
         }
 
     }
