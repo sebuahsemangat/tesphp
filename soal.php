@@ -14,8 +14,6 @@
         <tr>
             <th>No</th>
             <th>Judul Soal</th>
-            <!--<th>Durasi Waktu</th>-->
-            <th>Nilai</th>
             <th>Pengerjaan</th>
             <th></th>
         </tr>
@@ -37,19 +35,6 @@
         <tr>
             <td><?= $no;?></td>
             <td><?= $data_soal['judul'];?></td>
-            <!--<td></td>-->
-            <td>
-                <?php 
-                if($jmlh_nilai == 0)
-                {
-                    echo 'Belum Dinilai';
-                }
-                else {
-                    echo $data_nilai['nilai'];
-                }
-
-                ?>
-            </td>
             <td>
                 <?php
                 //cek apakah soal sudah dikerjakan
