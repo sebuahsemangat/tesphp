@@ -137,8 +137,8 @@ include "../koneksi.php";
                         case "input_soal":
                             include "input_soal.php";
                             break;
-                        case "lihat_nilai":
-                            include "lihat_nilai.php";
+                        case "nilai":
+                            include "nilai.php";
                             break;
                     }
                 } else {

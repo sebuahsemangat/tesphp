@@ -21,13 +21,15 @@
                 <td><?= $data_ujian['nama_ujian']; ?></td>
                 <td>
                     <?php
-                    $query_kelas = mysqli_query($koneksi, "SELECT ujian_kelas.id_ujian_kelas, kelas.nama_kelas
+                    $query_kelas = mysqli_query($koneksi, "SELECT ujian_kelas.id_ujian_kelas, kelas.nama_kelas, kelas.id_kelas
                                     FROM ujian_kelas
                                     INNER JOIN kelas ON ujian_kelas.id_kelas = kelas.id_kelas
                                     WHERE ujian_kelas.id_ujian = '$data_ujian[id_ujian]'
                                     ORDER BY ujian_kelas.id_kelas ASC");
                     while ($data_kelas = mysqli_fetch_assoc($query_kelas)) {
-                        echo "<span class='btn btn-primary mx-1'>{$data_kelas['nama_kelas']}</span>";
+                        ?>
+                        <a class="btn btn-primary mx-1" href="home.php?page=nilai&id_ujian=<?= $data_ujian["id_ujian"];?>&id_kelas=<?= $data_kelas["id_kelas"];?>"><?= $data_kelas["nama_kelas"];?></a>
+                        <?php
                     }
                     ?>
                 </td>
