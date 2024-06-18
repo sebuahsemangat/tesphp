@@ -14,7 +14,7 @@
             <tr>
                 <th>No</th>
                 <th>Judul Soal</th>
-                <th>Jumlah Jawaban</th>
+                <th>Jumlah Test Case</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -25,19 +25,17 @@
             //pecah menjadi array dan looping
             $no = 0;
             while ($data_soal = mysqli_fetch_assoc($qry_soal)) {
-                $query_jawaban = mysqli_query($koneksi, "SELECT jawaban from jawaban WHERE id_soal='$data_soal[id_soal]'");
-                $hitung_jawaban = mysqli_num_rows($query_jawaban);
+                $query_testcase = mysqli_query($koneksi, "SELECT id_testcase from testcase WHERE id_soal='$data_soal[id_soal]'");
+                $hitung_testcase = mysqli_num_rows($query_testcase);
                 $no++;
             ?>
 
                 <tr>
                     <td><?= $no; ?></td>
                     <td><?= $data_soal['judul']; ?></td>
-                    <td><?= $hitung_jawaban; ?></td>
+                    <td><?= $hitung_testcase; ?></td>
                     <td>
                         <a href="">Detail</a> |
-                        <a href="home.php?page=input_jawaban&id_soal=<?= $data_soal['id_soal']; ?>">Tambah Jawaban</a> |
-                        <a href="home.php?page=lihat_nilai&id_soal=<?= $data_soal['id_soal']; ?>">Lihat Nilai</a> |
                         <a href="">Edit</a> |
                         <a href="">Hapus</a>
                     </td>
