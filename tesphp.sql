@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 14, 2024 at 04:52 AM
+-- Generation Time: Jun 19, 2024 at 03:21 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -62,8 +62,10 @@ CREATE TABLE `hasil` (
 --
 
 INSERT INTO `hasil` (`id`, `id_soal`, `id_ujian`, `id_siswa`, `jawaban`, `test_result`) VALUES
-(10, 11, 13, 1, '&lt;?php\r\nfunction segitiga($alas, $tinggi){\r\n  $luas = $alas * $tinggi /2;\r\n    return $luas;\r\n}\r\n      ', 'lulus'),
-(11, 12, 13, 1, '&lt;?php\r\nfunction jumlah_array($array){\r\n  return array_sum($array);\r\n}\r\n      ', 'lulus');
+(13, 12, 13, 1, '&lt;?php\r\nfunction jumlah_array($array){\r\n  return array_sum($array);\r\n}\r\n      ', 'lulus'),
+(14, 13, 13, 1, '&lt;?php\r\nfunction palindrome($teks){\r\n  $cek = strrev($teks);\r\n    if($cek === $teks) {\r\n        return true;\r\n    }\r\n    else {\r\n        return false;\r\n    }\r\n}\r\n      ', 'lulus'),
+(16, 14, 13, 1, '&lt;?php\r\nfunction array_sorting($array){\r\nsort($array);\r\n\r\n$arrlength = count($array);\r\nfor($x = 0; $x &lt; $arrlength; $x++) {\r\n  echo $array[$x];\r\n}\r\n}\r\n      ', 'lulus'),
+(17, 15, 13, 1, '&lt;?php\r\nfunction array_avg($nilai){\r\n  $total = array_sum($nilai);\r\n  $jumlah = count($nilai);\r\n    return round($total/$jumlah,0);\r\n}\r\n      ', 'lulus');
 
 -- --------------------------------------------------------
 
@@ -263,7 +265,10 @@ CREATE TABLE `soal` (
 
 INSERT INTO `soal` (`id_soal`, `judul`, `soal`, `waktu`, `status`, `id_ujian`, `parameter`, `function_name`, `test_code`) VALUES
 (11, 'Menghitung Luas Segitiga', 'Buatlah sebuah fungsi untuk menghitung luas segitiga', 1, 'aktif', 13, '$alas, $tinggi', 'segitiga', 'function test_segitiga() {\n    $test_cases = [\n        [\'alas\' => 10, \'tinggi\' => 5, \'expected\' => 25.0],\n        [\'alas\' => 0, \'tinggi\' => 5, \'expected\' => 0.0],\n        [\'alas\' => 10, \'tinggi\' => 0, \'expected\' => 0.0],\n        [\'alas\' => 3, \'tinggi\' => 4, \'expected\' => 6.0],\n        [\'alas\' => 7.5, \'tinggi\' => 8.5, \'expected\' => 31.875],\n        [\'alas\' => -10, \'tinggi\' => 5, \'expected\' => -25.0],\n        [\'alas\' => 10, \'tinggi\' => -5, \'expected\' => -25.0],\n    ];\n\n    foreach ($test_cases as $case) {\n        $result = segitiga($case[\'alas\'], $case[\'tinggi\']);\n        if ((float)$result === (float)$case[\'expected\']) {\n            echo \"Test passed!<br>\";\n        } else {\n            echo \"Test FAILED<br>\";\n        }\n    }\n}\n\n// Menjalankan pengujian\ntest_segitiga();'),
-(12, 'Menjumlahkan Array', '<p>Diberikan sebuah array numerik. Hitung jumlah nilai semua array ketika ditambahkan!</p>', 0, 'aktif', 13, '$array', 'jumlah_array', '');
+(12, 'Menjumlahkan Array', '<p>Diberikan sebuah array numerik. Hitung jumlah nilai semua array ketika ditambahkan!</p>', 0, 'aktif', 13, '$array', 'jumlah_array', ''),
+(13, 'Palindrome Check', 'Palindrome adalah sebuah teks yang jika urutannya dibalik, maka hasilnya sama seperti teks aslinya. Buat sebuah fungsi untuk mengecek apakah sebuah teks adalah sebuah palindrome atau bukan. Return true jika palindrome dan return false jika bukan palindrome.', 0, 'aktif', 13, '$teks', 'palindrome', ''),
+(14, 'Array Sorting', 'Buat sebuah fungsi untuk menyusun array dari terkecil ke terbesar', 0, 'aktif', 13, '$array', 'array_sorting', ''),
+(15, 'Menghitung Rata-rata Nilai', '<p>Diberikan data nilai dalam bentuk array numerik. Hitung rata-rata nilai dari data nilai yang diberikan. Bulatkan rata-rata nilai <strong>tanpa angka di belakang koma</strong>.</p>', 0, 'aktif', 13, '$nilai', 'array_avg', '');
 
 -- --------------------------------------------------------
 
@@ -287,7 +292,12 @@ INSERT INTO `testcase` (`id_testcase`, `input`, `output`, `id_soal`) VALUES
 (2, '20,10', '100', 11),
 (3, '[1,2,3,4,5]', '15', 12),
 (4, '[10,5,20]', '35', 12),
-(5, '[0,0,0,0]', '0', 12);
+(5, '[0,0,0,0]', '0', 12),
+(6, '\"katak\"', 'true', 13),
+(7, '\"aku\"', 'false', 13),
+(8, '[4,5,2,8]', '2458', 14),
+(9, '[80,85,91,93]', '87', 15),
+(10, '[67,78,86,94]', '81', 15);
 
 -- --------------------------------------------------------
 
@@ -404,7 +414,7 @@ ALTER TABLE `guru`
 -- AUTO_INCREMENT for table `hasil`
 --
 ALTER TABLE `hasil`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `jawaban`
@@ -428,13 +438,13 @@ ALTER TABLE `siswa`
 -- AUTO_INCREMENT for table `soal`
 --
 ALTER TABLE `soal`
-  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `testcase`
 --
 ALTER TABLE `testcase`
-  MODIFY `id_testcase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_testcase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `ujian`
