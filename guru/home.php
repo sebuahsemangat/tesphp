@@ -97,7 +97,7 @@ include "../koneksi.php";
                     <a class="nav-link" href="home.php">Home</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="home.php?page=siswa">Data Siswa</a>
+                    <a class="nav-link" href="home.php?page=kelas">Data Kelas</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="home.php?page=ujian">Data Ujian</a>
@@ -125,6 +125,9 @@ include "../koneksi.php";
                             break;
                         case "siswa":
                             include "siswa.php";
+                            break;
+                        case "kelas":
+                            include "kelas.php";
                             break;
                         case "soal":
                             include "soal.php";
