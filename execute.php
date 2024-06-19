@@ -2,7 +2,7 @@
 <?php
 session_start();
 include "koneksi.php";
-$id_soal = $_POST["id_soal"];
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Mengambil parameter dari URL dan membersihkannya
     $id_soal = filter_input(INPUT_POST, 'id_soal', FILTER_SANITIZE_NUMBER_INT);
@@ -37,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "<p>Parameter id_soal tidak valid.</p>";
         exit();
     }
+
     // Ambil kode dari textarea
     $user_code = str_replace("?>", "", $_POST['code']);
 
@@ -55,46 +56,73 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Membuat file dan menulis isi kode ke dalamnya
     file_put_contents($code_path, $user_code);
 
-
-    //Mencari data dari tabel testcase
+    // Mencari data dari tabel testcase
     $select_testcase = mysqli_query($koneksi, "SELECT * FROM testcase where id_soal='$id_soal'");
     $jumlah_testcase = mysqli_num_rows($select_testcase);
     $testcase_benar = 0;
-    while ($data_testcase = mysqli_fetch_assoc($select_testcase)) {
 
-        //nama file untuk testcode format (testcode_idsiswa_idsoal_idtestcase)
+    while ($data_testcase = mysqli_fetch_assoc($select_testcase)) {
+        // Nama file untuk testcode format (testcode_idsiswa_idsoal_idtestcase)
         $test_file = "/testcode_" . $_SESSION['siswa'] . "_" . $id_soal . "_" . $data_testcase["id_testcase"] . ".php";
         $test_path = $folder . $test_file;
 
-        //membuat file test_code dan menulis isi kode di dalamnya
+        // Membuat file test_code dan menulis isi kode di dalamnya
         $test_code = '<?php
 include "' . $filecode . '";
 ' . 'echo ' . $soal["function_name"] . '(' . $data_testcase["input"] . ');';
         file_put_contents($test_path, $test_code);
 
-        //eksekusi file test_code
-        $execute_testcode = shell_exec("php " . $test_path);
-        
-        //antisipasi untuk output berupa boolean
-        if($execute_testcode == "1" && $data_testcase["output"] == "true"){
-            $execute_testcode = "true";
-        }
-        else if ($execute_testcode == "" && $data_testcase["output"] == "false"){
-            $execute_testcode = "false";
-        }
-        else {
-            //jika output bukan boolean
-            $execute_testcode == $execute_testcode;
-        }
+        // Menyiapkan perintah untuk menjalankan script dengan batasan waktu
+        $command = "php " . escapeshellarg($test_path);
+        $descriptorspec = [
+            0 => ["pipe", "r"], // stdin
+            1 => ["pipe", "w"], // stdout
+            2 => ["pipe", "w"]  // stderr
+        ];
 
-        if (trim($execute_testcode) == $data_testcase["output"]) {
-            //menambah jawaban benar
-            $testcase_benar += 1;
-            echo "<div class='border border-success mb-2 p-1'>Test berhasil! Input: " . $data_testcase["input"] . " Output: " . $execute_testcode . " Output diharapkan: " . $data_testcase["output"] . "</div>";
+        // Membuka proses
+        $process = proc_open($command, $descriptorspec, $pipes);
+        if (is_resource($process)) {
+            // Menutup stdin
+            fclose($pipes[0]);
+
+            // Menetapkan batas waktu untuk mengeksekusi skrip
+            $timeout = 3; // dalam detik
+            $start_time = time();
+            $output = '';
+            while (!feof($pipes[1])) {
+                $output .= fgets($pipes[1], 4096);
+                if ((time() - $start_time) > $timeout) {
+                    // Jika melebihi batas waktu, hentikan proses
+                    proc_terminate($process);
+                    $output = "Timeout";
+                    break;
+                }
+            }
+            fclose($pipes[1]);
+            fclose($pipes[2]);
+
+            // Mendapatkan status keluar
+            $return_value = proc_close($process);
         } else {
-            echo "<div class='border border-danger mb-2 p-1'>Test GAGAL! Input: " . $data_testcase["input"] . " Output: " . $execute_testcode . " Output diharapkan: " . $data_testcase["output"] . "</div>";
+            $output = "Error executing test code.";
         }
 
+        // Antisipasi untuk output berupa boolean
+        if ($output == "1" && $data_testcase["output"] == "true") {
+            $output = "true";
+        } else if ($output == "" && $data_testcase["output"] == "false") {
+            $output = "false";
+        }
+
+        // Mengecek hasil output
+        if (trim($output) == $data_testcase["output"]) {
+            // Menambah jawaban benar
+            $testcase_benar += 1;
+            echo "<div class='border border-success mb-2 p-1'>Test berhasil! Input: " . $data_testcase["input"] . " Output: " . $output . " Output diharapkan: " . $data_testcase["output"] . "</div>";
+        } else {
+            echo "<div class='border border-danger mb-2 p-1'>Test Gaga! Input: " . $data_testcase["input"] . " Output: " . $output . " Output diharapkan: " . $data_testcase["output"] . "</div>";
+        }
     }
     ?>
 
@@ -114,5 +142,5 @@ include "' . $filecode . '";
         <input type="submit" class="btn btn-lg btn-success mt-3" value="Kirim Jawaban">
     </form>
     <?php
-
 }
+?>
