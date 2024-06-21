@@ -1,4 +1,6 @@
 <?php
+include "koneksi.php"; // Pastikan koneksi.php di-include
+
 // Mengambil parameter dari URL dan membersihkannya
 $id_soal = filter_input(INPUT_GET, 'id_soal', FILTER_SANITIZE_NUMBER_INT);
 
@@ -32,21 +34,19 @@ if ($id_soal) {
   echo "<p>Parameter id_soal tidak valid.</p>";
   exit();
 }
-
-
 ?>
 
 <a href="#">Kembali</a>
-<h4><?php echo $soal['judul']; ?></h4>
+<h4><?php echo htmlspecialchars($soal['judul']); ?></h4>
 
 <div class="mb-3 p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">
-  <p><?php echo $soal['soal']; ?></p>
+  <p><?php echo htmlspecialchars($soal['soal']); ?></p>
 </div>
 <div class="row align-items-start">
   <div class="col-md-7">
     <strong>Kode Anda</strong>
-    <form method="post" action="execute.php" target="execute" class="mb-2">
-      <input type="hidden" name="id_soal" id="" value="<?php echo $soal['id_soal'] ?>">
+    <form method="post" action="execute.php" target="execute" class="mb-2" onsubmit="disableButton(this)">
+      <input type="hidden" name="id_soal" id="" value="<?php echo htmlspecialchars($soal['id_soal']); ?>">
       <textarea id="code" name="code" class="CodeMirror"><?php
                                                           echo htmlspecialchars("
 <?php
@@ -56,7 +56,7 @@ function " . $soal['function_name'] . "(" . $soal['parameter'] . "){
 ?>");
                                                           ?>
       </textarea>
-      <button class="btn btn-primary btn-md mt-2" type="submit" name="submit">Run Code</button>
+      <button class="btn btn-primary btn-md mt-2" type="submit" name="submit" id="runCodeButton">Run Code</button>
     </form>
   </div>
   <div class="col">
@@ -83,8 +83,8 @@ function " . $soal['function_name'] . "(" . $soal['parameter'] . "){
         if ($result_testcase->num_rows > 0) {
           while ($testcase = $result_testcase->fetch_assoc()) {
             echo "<tr>
-                            <td>{$testcase['input']}</td>
-                            <td>{$testcase['output']}</td>
+                            <td>" . htmlspecialchars($testcase['input']) . "</td>
+                            <td>" . htmlspecialchars($testcase['output']) . "</td>
                             </tr>";
           }
         } else {
@@ -98,11 +98,8 @@ function " . $soal['function_name'] . "(" . $soal['parameter'] . "){
       // Menutup koneksi
       $koneksi->close();
       ?>
-
     </table>
-
   </div>
-  
 </div>
 <div class="row">
   <div class="col">
@@ -110,3 +107,15 @@ function " . $soal['function_name'] . "(" . $soal['parameter'] . "){
     <iframe src="" name="execute" width="100%" frameborder="1" scrolling="no" onload="resizeIframe(this)"></iframe>
   </div>
 </div>
+
+<script>
+function disableButton(form) {
+  const button = form.querySelector('#runCodeButton');
+  button.disabled = true;
+  button.textContent = 'Loading...';
+  setTimeout(() => {
+    button.disabled = false;
+    button.textContent = 'Run Code';
+  }, 3000);
+}
+</script>

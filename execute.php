@@ -121,21 +121,19 @@ include "' . $filecode . '";
             $testcase_benar += 1;
             echo "<div class='border border-success mb-2 p-1'>Test berhasil! Input: " . $data_testcase["input"] . " Output: " . $output . " Output diharapkan: " . $data_testcase["output"] . "</div>";
         } else {
-            echo "<div class='border border-danger mb-2 p-1'>Test Gaga! Input: " . $data_testcase["input"] . " Output: " . $output . " Output diharapkan: " . $data_testcase["output"] . "</div>";
+            echo "<div class='border border-danger mb-2 p-1'><strong>Test Gagal! Input: " . $data_testcase["input"] . " Output: " . $output . " Output diharapkan: " . $data_testcase["output"] . "</strong></div>";
         }
     }
     ?>
 
-    <form action="simpan_jawaban.php" method="post"
-        onsubmit="<?php if ($testcase_benar < $jumlah_testcase) {
-            $test_result = "gagal";
-            echo "return confirm('Hasil test masih ada kesalahan! Tetap kirim jawaban?')";
-        }
-        else {
-            $test_result = "lulus";
-        } ?>">
+    <form action="simpan_jawaban.php" method="post" onsubmit="<?php if ($testcase_benar < $jumlah_testcase) {
+        $test_result = "gagal";
+        echo "return confirm('Hasil test masih ada kesalahan! Tetap kirim jawaban?')";
+    } else {
+        $test_result = "lulus";
+    } ?>">
         <textarea name="hasil" id="" style="display: none;"><?= $user_code; ?></textarea>
-        <input type="hidden" name="test_result" id="" value="<?php echo $test_result;?>">
+        <input type="hidden" name="test_result" id="" value="<?php echo $test_result; ?>">
         <input type="hidden" name="id_siswa" id="" value="<?= $_SESSION['siswa']; ?>">
         <input type="hidden" name="id_soal" id="" value="<?= $id_soal; ?>">
         <input type="hidden" name="id_ujian" id="" value="<?= $soal["id_ujian"]; ?>">
