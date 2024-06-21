@@ -1,15 +1,34 @@
-    <?php
-        //ambil id_ujian
-        $id_ujian = addslashes($_GET['id_ujian']);
-        //ambil judul ujian
-        $qry_ujian=mysqli_query($koneksi, "SELECT id_ujian, nama_ujian FROM ujian where id_ujian='$id_ujian' AND status ='aktif'");
-        //pecah array
-        $data_ujian=mysqli_fetch_assoc($qry_ujian);
-        echo "<h2>" . $data_ujian['nama_ujian'] . "</h2>";
-    ?>
-    <p><a href="home.php">Kembali</a></p>
-    <h4>List Soal</h4>
-    <table id="myTable" class="table table-striped table-bordered" style="width:100%">
+<?php
+include "koneksi.php"; // Pastikan ini adalah file koneksi Anda
+
+// Ambil dan validasi id_ujian
+if (isset($_GET['id_ujian']) && is_numeric($_GET['id_ujian'])) {
+    $id_ujian = intval($_GET['id_ujian']);
+} else {
+    // Jika id_ujian tidak valid, redirect atau tampilkan pesan error
+    header("Location: home.php");
+    exit();
+}
+
+// Prepared statement untuk mengambil judul ujian
+$stmt = $koneksi->prepare("SELECT id_ujian, nama_ujian FROM ujian WHERE id_ujian = ? AND status = 'aktif'");
+$stmt->bind_param("i", $id_ujian);
+$stmt->execute();
+$result = $stmt->get_result();
+$data_ujian = $result->fetch_assoc();
+
+if (!$data_ujian) {
+    // Jika tidak ada ujian aktif dengan id_ujian yang diberikan
+    echo "<p>Ujian tidak ditemukan atau tidak aktif.</p>";
+    exit();
+}
+
+echo "<h2>" . htmlspecialchars($data_ujian['nama_ujian']) . "</h2>";
+?>
+
+<p><a href="home.php">Kembali</a></p>
+<h4>List Soal</h4>
+<table id="myTable" class="table table-striped table-bordered" style="width:100%">
     <thead>
         <tr>
             <th>No</th>
@@ -19,57 +38,50 @@
         </tr>
     </thead>
     <tbody>
-    <?php
-    //ambil data soal berdasarkan id_ujian dan status aktif
-    $qry_soal = mysqli_query($koneksi, "SELECT * FROM soal where id_ujian='$id_ujian' AND status='aktif'");
-    //pecah menjadi array dan looping
-    $no = 0;
-    while($data_soal=mysqli_fetch_assoc($qry_soal)){
-        $qry_nilai = mysqli_query($koneksi,"SELECT * FROM hasil WHERE id_soal = '$data_soal[id_soal]'
-        AND id_siswa = '$_SESSION[siswa]'");
-        $data_nilai = mysqli_fetch_assoc($qry_nilai);
-        $jmlh_nilai = mysqli_num_rows($qry_nilai);
-        $no++;
-    ?>
-    
-        <tr>
-            <td><?= $no;?></td>
-            <td><?= $data_soal['judul'];?></td>
-            <td>
-                <?php
-                //cek apakah soal sudah dikerjakan
-                $cek_jawaban=mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM hasil
-                WHERE id_siswa='$data_siswa[id_siswa]' AND id_soal='$data_soal[id_soal]'"));
-                
-                //cek_jawaban menghasilkan angka 1
-                if($cek_jawaban==1){
-                    echo "Sudah dikerjakan";
-                }
-                else
-                //jika cek_jawaban menghasilkan angka 0
-                {
-                    echo "Belum dikerjakan";
-                }
-                ?>
-            </td>
-            <td>
-                <?php
-                if($cek_jawaban==1){
-                    echo "<a href='home.php?page=lihat_jawaban&id_ujian=$data_ujian[id_ujian]&id_soal=$data_soal[id_soal]'>Lihat Jawaban</a>";
-                }
-                else
-                //jika cek_jawaban menghasilkan angka 0
-                {
-                    echo "<a href='home.php?page=kerjakan&id_ujian=$data_ujian[id_ujian]&id_soal=$data_soal[id_soal]'>Kerjakan</a>";
-                }
-                
-                ?>
-            
-            </td>
-        </tr>
-    <?php
-    //akhir looping soal
-    }
-    ?>
+        <?php
+        // Prepared statement untuk mengambil soal berdasarkan id_ujian dan status aktif
+        $stmt = $koneksi->prepare("SELECT * FROM soal WHERE id_ujian = ? AND status = 'aktif'");
+        $stmt->bind_param("i", $id_ujian);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $no = 0;
+        while ($data_soal = $result->fetch_assoc()) {
+            $no++;
+            // Prepared statement untuk mengecek hasil
+            $stmt_nilai = $koneksi->prepare("SELECT * FROM hasil WHERE id_soal = ? AND id_siswa = ?");
+            $stmt_nilai->bind_param("ii", $data_soal['id_soal'], $_SESSION['siswa']);
+            $stmt_nilai->execute();
+            $result_nilai = $stmt_nilai->get_result();
+            $cek_jawaban = $result_nilai->num_rows;
+            ?>
+            <tr>
+                <td><?= $no; ?></td>
+                <td><?= htmlspecialchars($data_soal['judul']); ?></td>
+                <td>
+                    <?= ($cek_jawaban == 1) ? "Sudah dikerjakan" : "Belum dikerjakan"; ?>
+                </td>
+                <td>
+                    <?php if ($cek_jawaban == 1) { ?>
+                        <a
+                            href='home.php?page=lihat_jawaban&id_ujian=<?= $data_ujian['id_ujian']; ?>&id_soal=<?= $data_soal['id_soal']; ?>'>Lihat
+                            Jawaban</a>
+                    <?php } else { ?>
+                        <a
+                            href='home.php?page=kerjakan&id_ujian=<?= $data_ujian['id_ujian']; ?>&id_soal=<?= $data_soal['id_soal']; ?>'>Kerjakan</a>
+                    <?php } ?>
+                </td>
+            </tr>
+            <?php
+            // Menutup prepared statement untuk nilai
+            $stmt_nilai->close();
+            //akhir looping soal
+        }
+        ?>
     </tbody>
-    </table>
+</table>
+
+<?php
+// Menutup prepared statement untuk ujian dan soal
+$stmt->close();
+?>
