@@ -4,22 +4,25 @@ include "koneksi.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | Tes PHP</title>
-    <link rel="stylesheet" href="assets/dist/css/bootstrap.min.css">
-    <style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | Tes PHP</title>
+  <link rel="stylesheet" href="assets/dist/css/bootstrap.min.css">
+  <style>
     /* CSS untuk menengahkan heading */
     .center-heading {
       text-align: center;
     }
+
     /* CSS untuk menengahkan secara vertikal dan horizontal */
     .center-container {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh; /* Menggunakan 100% tinggi viewport */
+      height: 100vh;
+      /* Menggunakan 100% tinggi viewport */
     }
 
     footer {
@@ -32,45 +35,54 @@ include "koneksi.php";
     }
   </style>
 </head>
+
 <body>
-<div class="container">
+  <div class="container">
     <div class="row center-container">
       <div class="col-md-6">
         <h2 class="mt-5 center-heading">Selamat Datang di Aplikasi Tes PHP</h2>
         <p class="center-heading">Silahkan Login untuk menggunakan aplikasi ini.</p>
         <form action="" method="post">
-        <?php
-        //jika tombol login ditekan
-        if(isset($_POST['login']))
-        {
-            $nis=addslashes($_POST['nis']); //input nis
-            $password=addslashes(md5($_POST['password'])); //input password
+          <?php
+          //jika tombol login ditekan
+          if (isset($_POST['login'])) {
+            $nis = $_POST['nis'];
+            $password = md5($_POST['password']);
 
-            //query pencarian data berdasarkan nis dan password
-            $qry=mysqli_query($koneksi, "SELECT * FROM siswa WHERE nis='$nis' and password='$password' LIMIT 1");
+            // Prepared statement untuk query pencarian data berdasarkan nis dan password
+            $stmt = mysqli_prepare($koneksi, "SELECT * FROM siswa WHERE nis=? and password=? LIMIT 1");
+            if ($stmt) {
+              // Mengikat parameter ke statement
+              mysqli_stmt_bind_param($stmt, "ss", $nis, $password);
 
-            //pecah menjadi data array
-            $data=mysqli_fetch_assoc($qry);
+              // Mengeksekusi statement
+              mysqli_stmt_execute($stmt);
 
-            //hitung jumlah data
-            $count=mysqli_num_rows($qry);
-            
-            //Cek jika jumlah data adalah 1
-            if ($count == 1)
-            {
+              // Mengambil hasil query
+              $result = mysqli_stmt_get_result($stmt);
+
+              // Menghitung jumlah data
+              $count = mysqli_num_rows($result);
+
+              if ($count == 1) {
+                $data = mysqli_fetch_assoc($result);
                 //buatkan session bernama siswa dengan nilai id_siswa
-                $_SESSION["siswa"] = $data["id_siswa"]; 
-                
+                $_SESSION["siswa"] = $data["id_siswa"];
+
                 //Redirect ke halaman home.php
                 header("location: home.php");
-            }
-            else
-            {
+              } else {
                 //jika data tidak ditemukan
                 echo "<p class='btn btn-danger' style='width:100%'>NIS atau Password salah. Silahkan coba lagi!</p>";
+              }
+
+              // Menutup statement
+              mysqli_stmt_close($stmt);
+            } else {
+              echo "Error: " . mysqli_error($koneksi);
             }
-        }
-        ?>
+          }
+          ?>
           <div class="mb-3">
             <label for="username" class="form-label">NIS</label>
             <input type="text" class="form-control" id="username" name="nis" required>
@@ -90,4 +102,5 @@ include "koneksi.php";
     </div>
   </footer>
 </body>
+
 </html>
