@@ -1,6 +1,4 @@
 <?php
-include "koneksi.php"; // Pastikan ini adalah file koneksi Anda
-
 // Ambil dan validasi id_ujian
 if (isset($_GET['id_ujian']) && is_numeric($_GET['id_ujian'])) {
     $id_ujian = intval($_GET['id_ujian']);
@@ -34,6 +32,7 @@ echo "<h2>" . htmlspecialchars($data_ujian['nama_ujian']) . "</h2>";
             <th>No</th>
             <th>Judul Soal</th>
             <th>Pengerjaan</th>
+            <th>Hasil</th>
             <th></th>
         </tr>
     </thead>
@@ -53,6 +52,7 @@ echo "<h2>" . htmlspecialchars($data_ujian['nama_ujian']) . "</h2>";
             $stmt_nilai->bind_param("ii", $data_soal['id_soal'], $_SESSION['siswa']);
             $stmt_nilai->execute();
             $result_nilai = $stmt_nilai->get_result();
+            $data_hasil = $result_nilai->fetch_assoc();
             $cek_jawaban = $result_nilai->num_rows;
             ?>
             <tr>
@@ -60,6 +60,9 @@ echo "<h2>" . htmlspecialchars($data_ujian['nama_ujian']) . "</h2>";
                 <td><?= htmlspecialchars($data_soal['judul']); ?></td>
                 <td>
                     <?= ($cek_jawaban == 1) ? "Sudah dikerjakan" : "Belum dikerjakan"; ?>
+                </td>
+                <td>
+                    <?= ($cek_jawaban == 1) ? $data_hasil["test_result"] : "Belum dikerjakan";?>
                 </td>
                 <td>
                     <?php if ($cek_jawaban == 1) { ?>
