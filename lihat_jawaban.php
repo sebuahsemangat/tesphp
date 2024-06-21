@@ -1,10 +1,17 @@
 <h2>Lihat Jawaban</h2>
-<p><a href="home.php?page=soal&id_ujian=<?= $_GET['id_ujian'];?>">Kembali</a></p>
-<?php
-// Ambil id_soal dari URL (aman karena menggunakan parameter yang diterima)
-$id_soal = $_GET['id_soal'];
+<p><a href="home.php?page=soal&id_ujian=<?= htmlspecialchars($_GET['id_ujian']); ?>">Kembali</a></p>
 
-// Ambil id_siswa dari session (aman karena tidak mengandalkan input dari pengguna)
+<?php
+// Validasi dan sanitasi input dari URL
+$id_soal = filter_input(INPUT_GET, 'id_soal', FILTER_VALIDATE_INT);
+$id_ujian = filter_input(INPUT_GET, 'id_ujian', FILTER_VALIDATE_INT);
+
+// Pastikan id_soal dan id_ujian adalah integer
+if ($id_soal === false || $id_ujian === false) {
+  die("ID Soal atau ID Ujian tidak valid.");
+}
+
+// Ambil id_siswa dari session
 $id_siswa = $_SESSION['siswa'];
 
 // Query untuk mengambil data dari tabel hasil sesuai dengan id_soal dan id_siswa
@@ -24,6 +31,6 @@ $result_soal = $stmt_soal->get_result();
 $row_soal = $result_soal->fetch_assoc();
 ?>
 <div class="mb-3 p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">
-  <p><?= $row_soal["soal"]; ?></p>
+  <p><?= htmlspecialchars($row_soal["soal"]); ?></p>
 </div>
 <textarea id="code" name="code" class="CodeMirror"><?php echo $row['jawaban']; ?></textarea>
