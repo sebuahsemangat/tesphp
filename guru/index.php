@@ -4,8 +4,7 @@ if (isset($_SESSION['username'])) {
     header("Location: home.php"); // Redirect ke halaman home jika sudah login
     exit;
 }
-include "../koneksi.php"; // Pastikan koneksi.php berisi koneksi yang aman menggunakan MySQLi atau PDO
-
+include "../koneksi.php"; 
 // Fungsi untuk membersihkan input
 function cleanInput($data) {
     return htmlspecialchars(stripslashes(trim($data)));
@@ -52,26 +51,31 @@ function cleanInput($data) {
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // Mendapatkan data dari form dan membersihkan input
                     $username = cleanInput($_POST['username']);
-                    $password = md5(cleanInput($_POST['password'])); // Menggunakan md5 untuk hashing password
+                    $password = cleanInput($_POST['password']);
 
                     // Menggunakan prepared statements untuk menghindari SQL Injection
-                    $stmt = $koneksi->prepare("SELECT id_guru FROM guru WHERE username = ? AND password = ?");
-                    $stmt->bind_param("ss", $username, $password);
+                    $stmt = $koneksi->prepare("SELECT id_guru, password FROM guru WHERE username = ?");
+                    $stmt->bind_param("s", $username);
                     $stmt->execute();
                     $stmt->store_result();
 
                     // Memeriksa apakah query mengembalikan baris data
                     if ($stmt->num_rows > 0) {
-                        $stmt->bind_result($id_guru);
+                        $stmt->bind_result($id_guru, $hashed_password);
                         $stmt->fetch();
 
-                        // Simpan username dan id_guru ke dalam session
-                        $_SESSION['username'] = $username;
-                        $_SESSION['id_guru'] = $id_guru;
+                        // Verifikasi password
+                        if (password_verify($password, $hashed_password)) {
+                            // Simpan username dan id_guru ke dalam session
+                            $_SESSION['username'] = $username;
+                            $_SESSION['id_guru'] = $id_guru;
 
-                        // Redirect ke halaman home
-                        header("Location: home.php");
-                        exit;
+                            // Redirect ke halaman home
+                            header("Location: home.php");
+                            exit;
+                        } else {
+                            echo "Username atau password salah";
+                        }
                     } else {
                         echo "Username atau password salah";
                     }
