@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 01, 2024 at 05:15 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Generation Time: Jul 01, 2024 at 11:12 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,16 +31,18 @@ CREATE TABLE `guru` (
   `id_guru` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `nama` varchar(50) NOT NULL
+  `nama` varchar(50) NOT NULL,
+  `level` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `guru`
 --
 
-INSERT INTO `guru` (`id_guru`, `username`, `password`, `nama`) VALUES
-(1, 'apep', '3449cf29b6c2f4bb7892d5c7694ea81f', 'Apep Wahyudin'),
-(2, 'anisa', '40cc8f68f52757aff1ad39a006bfbf11', 'Anisa Ruhul Azizah');
+INSERT INTO `guru` (`id_guru`, `username`, `password`, `nama`, `level`) VALUES
+(1, 'apep', '$2y$10$VxEIwCbAq50askLjkJGQrO4knvRGl3VTyxdkp93fPITXsdAx/ocWq', 'Apep Wahyudin', 'guru'),
+(2, 'anisa', '$2y$10$jWezqKTaNnYAfPJ2DA7SNu4aHACe.xpGPabksKq9S.A7oYAMSuStu', 'Anisa Ruhul Azizah', 'guru'),
+(3, 'aku', '$2y$10$z9OquZflu4phLJEpO86pO.JIRkd5Wb3SPjT9hdzadZjf0yiRRVW6W', 'Admin Ganteng', 'admin');
 
 -- --------------------------------------------------------
 
@@ -117,7 +119,8 @@ CREATE TABLE `kelas` (
 INSERT INTO `kelas` (`id_kelas`, `nama_kelas`, `status`, `id_guru`) VALUES
 (1, 'X-R1', 'aktif', 1),
 (2, 'X-R2', 'aktif', 1),
-(3, 'X-R3', 'aktif', 1);
+(3, 'X-R3', 'aktif', 1),
+(4, 'X-R4', 'aktif', 1);
 
 -- --------------------------------------------------------
 
@@ -424,7 +427,7 @@ ALTER TABLE `ujian_kelas`
 -- AUTO_INCREMENT for table `guru`
 --
 ALTER TABLE `guru`
-  MODIFY `id_guru` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_guru` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `hasil`
@@ -442,7 +445,7 @@ ALTER TABLE `jawaban`
 -- AUTO_INCREMENT for table `kelas`
 --
 ALTER TABLE `kelas`
-  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `siswa`
