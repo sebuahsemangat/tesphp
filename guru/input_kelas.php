@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 // Mengambil data guru untuk pilihan pada select
-$guru_query = "SELECT id_guru, nama FROM guru";
+$guru_query = "SELECT id_guru, nama FROM guru where level='guru'";
 $guru_result = $koneksi->query($guru_query);
 
 ?>
