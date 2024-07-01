@@ -118,8 +118,10 @@ include "../koneksi.php";
                 <?php
                 if ($_SESSION['level'] == 'admin') {
                     $hal_default = "guru.php";
+                    $kelas = "kelas_admin.php";
                 } else {
                     $hal_default = "ujian.php";
+                    $kelas = "kelas.php";
                 }
                 if (isset($_GET['page']) && $_GET['page'] != '') {
                     $page = addslashes($_GET['page']);
@@ -131,7 +133,7 @@ include "../koneksi.php";
                             include "siswa.php";
                             break;
                         case "kelas":
-                            include "kelas.php";
+                            include $kelas;
                             break;
                         case "soal":
                             include "soal.php";
@@ -151,6 +153,9 @@ include "../koneksi.php";
                         //admin only
                         case "input_guru":
                             include "input_guru.php";
+                            break;
+                        case "input_kelas":
+                            include "input_kelas.php";
                             break;
                     }
                 } else {

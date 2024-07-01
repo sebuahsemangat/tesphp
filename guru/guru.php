@@ -1,4 +1,8 @@
 <?php
+if($_SESSION['level']=="guru") {
+    echo "You don't have access to this page!";
+    exit();
+}
 function cleanInput($data) {
     return htmlspecialchars(stripslashes(trim($data)));
 }
