@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 19, 2024 at 03:21 AM
+-- Generation Time: Jul 01, 2024 at 05:15 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -65,7 +65,14 @@ INSERT INTO `hasil` (`id`, `id_soal`, `id_ujian`, `id_siswa`, `jawaban`, `test_r
 (13, 12, 13, 1, '&lt;?php\r\nfunction jumlah_array($array){\r\n  return array_sum($array);\r\n}\r\n      ', 'lulus'),
 (14, 13, 13, 1, '&lt;?php\r\nfunction palindrome($teks){\r\n  $cek = strrev($teks);\r\n    if($cek === $teks) {\r\n        return true;\r\n    }\r\n    else {\r\n        return false;\r\n    }\r\n}\r\n      ', 'lulus'),
 (16, 14, 13, 1, '&lt;?php\r\nfunction array_sorting($array){\r\nsort($array);\r\n\r\n$arrlength = count($array);\r\nfor($x = 0; $x &lt; $arrlength; $x++) {\r\n  echo $array[$x];\r\n}\r\n}\r\n      ', 'lulus'),
-(17, 15, 13, 1, '&lt;?php\r\nfunction array_avg($nilai){\r\n  $total = array_sum($nilai);\r\n  $jumlah = count($nilai);\r\n    return round($total/$jumlah,0);\r\n}\r\n      ', 'lulus');
+(17, 15, 13, 1, '&lt;?php\r\nfunction array_avg($nilai){\r\n  $total = array_sum($nilai);\r\n  $jumlah = count($nilai);\r\n    return round($total/$jumlah,0);\r\n}\r\n      ', 'lulus'),
+(18, 11, 13, 1, '&lt;?php\r\nfunction segitiga($alas, $tinggi){\r\n  return 0.5 * $alas * $tinggi;\r\n}\r\n      ', 'lulus'),
+(19, 11, 13, 4, '&lt;?php\r\nfunction segitiga($alas, $tinggi){\r\n  return 0.5 * $alas * $tinggi;\r\n}\r\n      ', 'lulus'),
+(20, 17, 13, 3, '&lt;?php\r\nfunction kabisat($tahun){\r\n  $cek = $tahun % 4;\r\n    if($cek == 0){\r\n        return true;\r\n    }\r\n    else {\r\n        return false;\r\n    }\r\n}\r\n      ', 'lulus'),
+(21, 11, 13, 3, '&lt;?php\r\nfunction segitiga($alas, $tinggi){\r\n return $alas * $tinggi / 2;\r\n}\r\n      ', 'lulus'),
+(22, 12, 13, 3, '&lt;?php\r\nfunction jumlah_array($array){\r\n  return 0;\r\n}\r\n      ', 'gagal'),
+(23, 15, 13, 3, '&lt;?php\r\nfunction array_avg($nilai){\r\n  $total = array_sum($nilai);\r\n    $data = count($nilai);\r\n    return round($total / $data);\r\n}\r\n      ', 'lulus'),
+(24, 13, 13, 3, '&lt;?php\r\nfunction palindrome($teks){\r\n  //Masukkan kode di sini\r\n}\r\n      ', 'gagal');
 
 -- --------------------------------------------------------
 
@@ -268,7 +275,8 @@ INSERT INTO `soal` (`id_soal`, `judul`, `soal`, `waktu`, `status`, `id_ujian`, `
 (12, 'Menjumlahkan Array', '<p>Diberikan sebuah array numerik. Hitung jumlah nilai semua array ketika ditambahkan!</p>', 0, 'aktif', 13, '$array', 'jumlah_array', ''),
 (13, 'Palindrome Check', 'Palindrome adalah sebuah teks yang jika urutannya dibalik, maka hasilnya sama seperti teks aslinya. Buat sebuah fungsi untuk mengecek apakah sebuah teks adalah sebuah palindrome atau bukan. Return true jika palindrome dan return false jika bukan palindrome.', 0, 'aktif', 13, '$teks', 'palindrome', ''),
 (14, 'Array Sorting', 'Buat sebuah fungsi untuk menyusun array dari terkecil ke terbesar', 0, 'aktif', 13, '$array', 'array_sorting', ''),
-(15, 'Menghitung Rata-rata Nilai', '<p>Diberikan data nilai dalam bentuk array numerik. Hitung rata-rata nilai dari data nilai yang diberikan. Bulatkan rata-rata nilai <strong>tanpa angka di belakang koma</strong>.</p>', 0, 'aktif', 13, '$nilai', 'array_avg', '');
+(15, 'Menghitung Rata-rata Nilai', '<p>Diberikan data nilai dalam bentuk array numerik. Hitung rata-rata nilai dari data nilai yang diberikan. Bulatkan rata-rata nilai <strong>tanpa angka di belakang koma</strong>.</p>', 0, 'aktif', 13, '$nilai', 'array_avg', ''),
+(17, 'Tahun Kabisat', '<p>Tahun kabisat adalah tahun yang habis dibagi 4. Misalnya: 2020, 2024, 2028, dst. Buat fungsi untuk menentukan apakah sebuah tahun adalah tahun kabisat <i><strong>(return true) </strong></i>atau bukan <i><strong>(return false)</strong></i></p>', 0, 'aktif', 13, '$tahun', 'kabisat', '');
 
 -- --------------------------------------------------------
 
@@ -297,7 +305,12 @@ INSERT INTO `testcase` (`id_testcase`, `input`, `output`, `id_soal`) VALUES
 (7, '\"aku\"', 'false', 13),
 (8, '[4,5,2,8]', '2458', 14),
 (9, '[80,85,91,93]', '87', 15),
-(10, '[67,78,86,94]', '81', 15);
+(10, '[67,78,86,94]', '81', 15),
+(14, '2024', 'true', 17),
+(15, '2023', 'false', 17),
+(16, '2021', 'false', 17),
+(17, '2020', 'true', 17),
+(18, '2019', 'false', 17);
 
 -- --------------------------------------------------------
 
@@ -317,7 +330,8 @@ CREATE TABLE `ujian` (
 --
 
 INSERT INTO `ujian` (`id_ujian`, `nama_ujian`, `status`, `id_guru`) VALUES
-(13, 'Ujian Tengah Semester', 'aktif', 1);
+(13, 'Ujian Tengah Semester', 'aktif', 1),
+(14, 'Ulangan Materi Operator', 'aktif', 1);
 
 -- --------------------------------------------------------
 
@@ -338,7 +352,9 @@ CREATE TABLE `ujian_kelas` (
 INSERT INTO `ujian_kelas` (`id_ujian_kelas`, `id_ujian`, `id_kelas`) VALUES
 (18, 13, 1),
 (19, 13, 2),
-(20, 13, 3);
+(20, 13, 3),
+(21, 14, 1),
+(22, 14, 2);
 
 --
 -- Indexes for dumped tables
@@ -414,7 +430,7 @@ ALTER TABLE `guru`
 -- AUTO_INCREMENT for table `hasil`
 --
 ALTER TABLE `hasil`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `jawaban`
@@ -438,25 +454,25 @@ ALTER TABLE `siswa`
 -- AUTO_INCREMENT for table `soal`
 --
 ALTER TABLE `soal`
-  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `testcase`
 --
 ALTER TABLE `testcase`
-  MODIFY `id_testcase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_testcase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `ujian`
 --
 ALTER TABLE `ujian`
-  MODIFY `id_ujian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_ujian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `ujian_kelas`
 --
 ALTER TABLE `ujian_kelas`
-  MODIFY `id_ujian_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_ujian_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
