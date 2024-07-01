@@ -1,4 +1,8 @@
 <?php
+if($_SESSION['level']=="admin") {
+    echo "You don't have access to this page!";
+    exit();
+}
 // Memeriksa apakah data dikirim melalui metode POST
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['post'])) {
     // Menginisialisasi variabel dari data yang diterima

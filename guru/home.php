@@ -12,7 +12,7 @@ include "../koneksi.php";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Guru | Tes PHP</title>
+    <title>Home <?= $_SESSION['level']; ?> | Tes PHP</title>
     <style>
         /* CSS tambahan sesuai kebutuhan */
         .navbar {
@@ -87,8 +87,7 @@ include "../koneksi.php";
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <a class="navbar-brand" href="#">Logo</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
@@ -114,14 +113,19 @@ include "../koneksi.php";
     <div class="container mt-5 mb-5">
         <div class="row">
             <div class="col-md-12 p-50">
-                <h2>Halaman Guru</h2>
+                <h2>Halaman <?= $_SESSION['level']; ?></h2>
                 <hr>
                 <?php
+                if ($_SESSION['level'] == 'admin') {
+                    $hal_default = "guru.php";
+                } else {
+                    $hal_default = "ujian.php";
+                }
                 if (isset($_GET['page']) && $_GET['page'] != '') {
                     $page = addslashes($_GET['page']);
                     switch ($page) {
                         default:
-                            include "ujian.php";
+                            include $hal_default;
                             break;
                         case "siswa":
                             include "siswa.php";
@@ -144,10 +148,13 @@ include "../koneksi.php";
                         case "nilai":
                             include "nilai.php";
                             break;
+                        //admin only
+                        case "input_guru":
+                            include "input_guru.php";
+                            break;
                     }
                 } else {
-                    // Jika kunci 'page' tidak diatur atau kosong, sertakan file "ujian.php" secara default
-                    include "ujian.php";
+                    include $hal_default;
                 }
                 ?>
             </div>

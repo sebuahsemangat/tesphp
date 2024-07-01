@@ -1,3 +1,9 @@
+<?php
+if($_SESSION['level']=="admin") {
+    echo "You don't have access to this page!";
+    exit();
+}
+?>
 <a href="home.php?page=input_ujian">Input Ujian</a>
 <table id="myTable" class="table table-striped table-bordered" style="width:100%">
     <thead>

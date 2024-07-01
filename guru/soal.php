@@ -1,4 +1,8 @@
     <?php
+    if($_SESSION['level']=="admin") {
+        echo "You don't have access to this page!";
+        exit();
+    }
     //ambil id_ujian
     $id_ujian = addslashes($_GET['id_ujian']);
     //ambil judul ujian

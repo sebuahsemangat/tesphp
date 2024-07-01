@@ -54,14 +54,14 @@ function cleanInput($data) {
                     $password = cleanInput($_POST['password']);
 
                     // Menggunakan prepared statements untuk menghindari SQL Injection
-                    $stmt = $koneksi->prepare("SELECT id_guru, password FROM guru WHERE username = ?");
+                    $stmt = $koneksi->prepare("SELECT id_guru, password, level FROM guru WHERE username = ?");
                     $stmt->bind_param("s", $username);
                     $stmt->execute();
                     $stmt->store_result();
 
                     // Memeriksa apakah query mengembalikan baris data
                     if ($stmt->num_rows > 0) {
-                        $stmt->bind_result($id_guru, $hashed_password);
+                        $stmt->bind_result($id_guru, $hashed_password, $level);
                         $stmt->fetch();
 
                         // Verifikasi password
@@ -69,6 +69,7 @@ function cleanInput($data) {
                             // Simpan username dan id_guru ke dalam session
                             $_SESSION['username'] = $username;
                             $_SESSION['id_guru'] = $id_guru;
+                            $_SESSION['level'] = $level;
 
                             // Redirect ke halaman home
                             header("Location: home.php");
