@@ -95,12 +95,28 @@ include "../koneksi.php";
                 <li class="nav-item active">
                     <a class="nav-link" href="home.php">Home</a>
                 </li>
+                <?php
+                if($_SESSION['level']=='admin'){
+                    ?>
+                <li class="nav-item active">
+                    <a class="nav-link" href="home.php?page=guru">Data Guru</a>
+                </li>
+            <?php
+            }
+            ?>
                 <li class="nav-item active">
                     <a class="nav-link" href="home.php?page=kelas">Data Kelas</a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="home.php?page=ujian">Data Ujian</a>
-                </li>
+                <?php
+                if($_SESSION['level']=='guru')
+                {
+                    ?>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="home.php?page=ujian">Data Ujian</a>
+                    </li>
+                <?php
+                }
+                ?>
                 <li class="nav-item name">
                     <a class="nav-link" href="#"><?= $_SESSION["username"]; ?></a>
                 </li>
