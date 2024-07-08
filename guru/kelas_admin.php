@@ -7,9 +7,11 @@ if($_SESSION['level']=="guru") {
 <p><a href="home.php?page=input_kelas" class="btn btn-primary">Tambah Kelas</a></p>
 <?php
 $query = "
-SELECT kelas.id_kelas, kelas.nama_kelas, guru.nama 
+SELECT kelas.id_kelas, kelas.nama_kelas, guru.nama, COUNT(siswa.id_siswa) as jumlah_siswa 
 FROM kelas 
 JOIN guru ON kelas.id_guru = guru.id_guru
+LEFT JOIN siswa ON kelas.id_kelas = siswa.id_kelas
+GROUP BY kelas.id_kelas, kelas.nama_kelas, guru.nama
 ";
 
 // Menyiapkan statement
@@ -18,7 +20,7 @@ if ($stmt = mysqli_prepare($koneksi, $query)) {
 mysqli_stmt_execute($stmt);
 
 // Mengikat hasil ke variabel
-mysqli_stmt_bind_result($stmt, $id_kelas, $nama_kelas, $nama_guru);
+mysqli_stmt_bind_result($stmt, $id_kelas, $nama_kelas, $nama_guru, $jumlah_siswa);
 ?>
 <table id="myTable" class="table table-striped table-bordered">
 <thead>
@@ -26,6 +28,7 @@ mysqli_stmt_bind_result($stmt, $id_kelas, $nama_kelas, $nama_guru);
         <th>No</th>
         <th>Nama Kelas</th>
         <th>Pengajar</th>
+        <th>Jumlah Siswa</th>
         <th>Data Siswa</th>
     </tr>
 </thead>
@@ -41,6 +44,7 @@ while (mysqli_stmt_fetch($stmt)) {
         <td><?= $no;?></td>
         <td><?= htmlspecialchars($nama_kelas);?></td>
         <td><?= htmlspecialchars($nama_guru);?></td>
+        <td><?= htmlspecialchars($jumlah_siswa);?></td>
         <td><a href="home.php?page=siswa&id_kelas=<?= htmlspecialchars($id_kelas);?>">Data Siswa</a></td>
     </tr>
     <?php
