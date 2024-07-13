@@ -1,8 +1,9 @@
 <?php
-if($_SESSION['level']=="admin") {
+if ($_SESSION['level'] == "admin") {
     echo "You don't have access to this page!";
     exit();
 }
+
 // Memeriksa apakah data dikirim melalui metode POST
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['post'])) {
     // Menginisialisasi variabel dari data yang diterima
@@ -47,6 +48,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['post'])) {
         // Menutup pernyataan testcase
         mysqli_stmt_close($query_testcase);
 
+        // Menyiapkan query untuk memasukkan data ke dalam tabel s_testcase
+        $query_s_testcase = mysqli_prepare($koneksi, "INSERT INTO s_testcase (id_soal, input, output) VALUES (?, ?, ?)");
+
+        // Mengambil input dan output rahasia dari form
+        $input_s = mysqli_real_escape_string($koneksi, $_POST['input_s']);
+        $output_s = mysqli_real_escape_string($koneksi, $_POST['output_s']);
+
+        // Mengikat parameter ke pernyataan SQL
+        mysqli_stmt_bind_param($query_s_testcase, "iss", $id_soal, $input_s, $output_s);
+
+        // Mengeksekusi pernyataan SQL untuk menyimpan data ke tabel s_testcase
+        mysqli_stmt_execute($query_s_testcase);
+        // Menutup pernyataan s_testcase
+        mysqli_stmt_close($query_s_testcase);
     } else {
         echo "Error: " . mysqli_error($koneksi);
     }
@@ -62,8 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['post'])) {
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Judul Soal</label>
         <!-- Input untuk memasukkan nama soal -->
-        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Judul soal" name="judul_soal"
-            required>
+        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Judul soal" name="judul_soal" required>
     </div>
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Deskripsi Soal</label>
@@ -113,6 +127,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['post'])) {
                 <div class="col">
                     Output: <input type="text" name="output[]" id="" class="form-control">
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Secret Sample Test</label>
+        <div class="row" style="border:0px; box-shadow: 0px 0px 0px;">
+            <div class="col">
+                Input: <input type="text" name="input_s" id="" class="form-control">
+            </div>
+            <div class="col">
+                Output: <input type="text" name="output_s" id="" class="form-control">
             </div>
         </div>
     </div>
