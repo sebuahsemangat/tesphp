@@ -62,7 +62,7 @@ echo "<h2>" . htmlspecialchars($data_ujian['nama_ujian']) . "</h2>";
                     <?= ($cek_jawaban == 1) ? "Sudah dikerjakan" : "Belum dikerjakan"; ?>
                 </td>
                 <td>
-                    <?= ($cek_jawaban == 1) ? $data_hasil["test_result"] : "Belum dikerjakan";?>
+                    <?= ($cek_jawaban == 1) ? ucfirst($data_hasil["test_result"]) : "Belum dikerjakan";?>
                 </td>
                 <td>
                     <?php if ($cek_jawaban == 1) { ?>
