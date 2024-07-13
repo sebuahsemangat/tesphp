@@ -199,6 +199,7 @@ include "' . $filecode . '";
         <input type="hidden" name="id_siswa" id="" value="<?= $_SESSION['siswa']; ?>">
         <input type="hidden" name="id_soal" id="" value="<?= $id_soal; ?>">
         <input type="hidden" name="id_ujian" id="" value="<?= $soal["id_ujian"]; ?>">
+        <input type="hidden" name="id_s_testcase" id="" value="<?= $data_s_testcase["id_s_testcase"];?>">
         <input type="submit" class="btn btn-lg btn-success mt-3" value="Kirim Jawaban">
     </form>
     <?php
