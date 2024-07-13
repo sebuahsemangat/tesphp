@@ -31,6 +31,6 @@ $result_soal = $stmt_soal->get_result();
 $row_soal = $result_soal->fetch_assoc();
 ?>
 <div class="mb-3 p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">
-  <p><?= htmlspecialchars($row_soal["soal"]); ?></p>
+  <p><?= $row_soal["soal"]; ?></p>
 </div>
 <textarea id="code" name="code" class="CodeMirror"><?php echo $row['jawaban']; ?></textarea>
