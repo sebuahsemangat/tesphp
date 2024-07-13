@@ -55,7 +55,69 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     // Membuat file dan menulis isi kode ke dalamnya
     file_put_contents($code_path, $user_code);
+    
+    //mencari secret testcase
+    $query_s_testcase = mysqli_query($koneksi, "SELECT * FROM s_testcase where id_soal='$id_soal'");
+    $data_s_testcase = mysqli_fetch_assoc($query_s_testcase);
 
+    // nama file untuk secret test code
+    $s_test_file = "/s_testcode_" . $_SESSION['siswa'] . "_" . $id_soal . "_" . $data_s_testcase["id_s_testcase"] . ".php";
+    $s_test_path = $folder . $s_test_file;
+
+    // membuat file s_test_code dan menulis kode di dalamnya
+    $s_test_code = '<?php
+include "' . $filecode . '";
+' . 'echo ' . $soal["function_name"] . '(' . $data_s_testcase["input"] . ');';
+        file_put_contents($s_test_path, $s_test_code);
+
+        // Menyiapkan perintah untuk menjalankan script dengan batasan waktu
+        $command = "php " . escapeshellarg($s_test_path);
+        $descriptorspec = [
+            0 => ["pipe", "r"], // stdin
+            1 => ["pipe", "w"], // stdout
+            2 => ["pipe", "w"]  // stderr
+        ];
+
+        // Membuka proses
+        $process = proc_open($command, $descriptorspec, $pipes);
+        if (is_resource($process)) {
+            // Menutup stdin
+            fclose($pipes[0]);
+
+            // Menetapkan batas waktu untuk mengeksekusi skrip
+            $timeout = 3; // dalam detik
+            $start_time = time();
+            $output = '';
+            while (!feof($pipes[1])) {
+                $output .= fgets($pipes[1], 4096);
+                if ((time() - $start_time) > $timeout) {
+                    // Jika melebihi batas waktu, hentikan proses
+                    proc_terminate($process);
+                    $output = "Timeout";
+                    break;
+                }
+            }
+            fclose($pipes[1]);
+            fclose($pipes[2]);
+
+            // Mendapatkan status keluar
+            $return_value = proc_close($process);
+        } else {
+            $output = "Error executing test code.";
+        }
+
+        // Antisipasi untuk output berupa boolean
+        if ($output == "1" && $data_s_testcase["output"] == "true") {
+            $output = "true";
+        } else if ($output == "" && $data_s_testcase["output"] == "false") {
+            $output = "false";
+        }
+
+        if (trim($output) != $data_s_testcase["output"]) {
+            echo "<div class='border border-danger mb-2 p-1'>Jawaban Salah! Perbaiki jawaban anda! Output: <strong>" . $output . "</strong></div>";
+        }
+        else {
+            
     // Mencari data dari tabel testcase
     $select_testcase = mysqli_query($koneksi, "SELECT * FROM testcase where id_soal='$id_soal'");
     $jumlah_testcase = mysqli_num_rows($select_testcase);
@@ -140,5 +202,6 @@ include "' . $filecode . '";
         <input type="submit" class="btn btn-lg btn-success mt-3" value="Kirim Jawaban">
     </form>
     <?php
+}
 }
 ?>
