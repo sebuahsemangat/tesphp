@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 01, 2024 at 11:12 AM
+-- Generation Time: Aug 14, 2024 at 11:42 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -42,7 +42,8 @@ CREATE TABLE `guru` (
 INSERT INTO `guru` (`id_guru`, `username`, `password`, `nama`, `level`) VALUES
 (1, 'apep', '$2y$10$VxEIwCbAq50askLjkJGQrO4knvRGl3VTyxdkp93fPITXsdAx/ocWq', 'Apep Wahyudin', 'guru'),
 (2, 'anisa', '$2y$10$jWezqKTaNnYAfPJ2DA7SNu4aHACe.xpGPabksKq9S.A7oYAMSuStu', 'Anisa Ruhul Azizah', 'guru'),
-(3, 'aku', '$2y$10$z9OquZflu4phLJEpO86pO.JIRkd5Wb3SPjT9hdzadZjf0yiRRVW6W', 'Admin Ganteng', 'admin');
+(3, 'aku', '$2y$10$z9OquZflu4phLJEpO86pO.JIRkd5Wb3SPjT9hdzadZjf0yiRRVW6W', 'Admin Ganteng', 'admin'),
+(4, 'abizar', '$2y$10$SLp8lnksvvnzKCxpuaKS7OuKaATMeBTrlW6GsS1FuC0WytbHU8.EW', 'Abizar Hafiz Alfatih', 'guru');
 
 -- --------------------------------------------------------
 
@@ -64,17 +65,13 @@ CREATE TABLE `hasil` (
 --
 
 INSERT INTO `hasil` (`id`, `id_soal`, `id_ujian`, `id_siswa`, `jawaban`, `test_result`) VALUES
-(13, 12, 13, 1, '&lt;?php\r\nfunction jumlah_array($array){\r\n  return array_sum($array);\r\n}\r\n      ', 'lulus'),
-(14, 13, 13, 1, '&lt;?php\r\nfunction palindrome($teks){\r\n  $cek = strrev($teks);\r\n    if($cek === $teks) {\r\n        return true;\r\n    }\r\n    else {\r\n        return false;\r\n    }\r\n}\r\n      ', 'lulus'),
-(16, 14, 13, 1, '&lt;?php\r\nfunction array_sorting($array){\r\nsort($array);\r\n\r\n$arrlength = count($array);\r\nfor($x = 0; $x &lt; $arrlength; $x++) {\r\n  echo $array[$x];\r\n}\r\n}\r\n      ', 'lulus'),
-(17, 15, 13, 1, '&lt;?php\r\nfunction array_avg($nilai){\r\n  $total = array_sum($nilai);\r\n  $jumlah = count($nilai);\r\n    return round($total/$jumlah,0);\r\n}\r\n      ', 'lulus'),
-(18, 11, 13, 1, '&lt;?php\r\nfunction segitiga($alas, $tinggi){\r\n  return 0.5 * $alas * $tinggi;\r\n}\r\n      ', 'lulus'),
-(19, 11, 13, 4, '&lt;?php\r\nfunction segitiga($alas, $tinggi){\r\n  return 0.5 * $alas * $tinggi;\r\n}\r\n      ', 'lulus'),
-(20, 17, 13, 3, '&lt;?php\r\nfunction kabisat($tahun){\r\n  $cek = $tahun % 4;\r\n    if($cek == 0){\r\n        return true;\r\n    }\r\n    else {\r\n        return false;\r\n    }\r\n}\r\n      ', 'lulus'),
-(21, 11, 13, 3, '&lt;?php\r\nfunction segitiga($alas, $tinggi){\r\n return $alas * $tinggi / 2;\r\n}\r\n      ', 'lulus'),
-(22, 12, 13, 3, '&lt;?php\r\nfunction jumlah_array($array){\r\n  return 0;\r\n}\r\n      ', 'gagal'),
-(23, 15, 13, 3, '&lt;?php\r\nfunction array_avg($nilai){\r\n  $total = array_sum($nilai);\r\n    $data = count($nilai);\r\n    return round($total / $data);\r\n}\r\n      ', 'lulus'),
-(24, 13, 13, 3, '&lt;?php\r\nfunction palindrome($teks){\r\n  //Masukkan kode di sini\r\n}\r\n      ', 'gagal');
+(28, 22, 13, 4, '&lt;?php\r\nfunction segitiga($alas, $tinggi){\r\n  $luas = 0.5 * $alas * $tinggi;\r\n    return $luas;\r\n}\r\n      ', 'lulus'),
+(29, 23, 13, 4, '&lt;?php\r\nfunction array_avg($arr){\r\n  $total = array_sum($arr);\r\n    $jumlah = count($arr);\r\n    $avg = $total / $jumlah;\r\n    return round($avg,0);\r\n}\r\n      ', 'lulus'),
+(30, 24, 13, 4, '&lt;?php\r\nfunction jumlah($num1, $num2){\r\n  return $num1 + $num2;\r\n}\r\n      ', 'lulus'),
+(31, 25, 13, 4, '&lt;?php\r\nfunction cek_kabisat($tahun){\r\n  $cek = $tahun % 4;\r\n    if($cek == 0) {\r\n        return true;\r\n    }\r\n    else {\r\n        return false;\r\n    }\r\n}\r\n      ', 'lulus'),
+(34, 26, 13, 4, '&lt;?php\r\nfunction palindrome_cek($kata){\r\n  $cek = strrev($kata);\r\n  if($cek != $kata) {\r\n      return false;\r\n  }\r\n    else {\r\n        return true;\r\n    }\r\n}   ', 'lulus'),
+(35, 22, 13, 3, '&lt;?php\r\nfunction segitiga($alas, $tinggi){\r\n  return 0.5 * $alas * $tinggi;\r\n}\r\n      ', 'lulus'),
+(36, 26, 13, 3, '&lt;?php\r\nfunction palindrome_cek($kata){\r\n  $balik = strrev($kata);\r\n    if($kata == $balik){\r\n        return true;\r\n    }\r\n    else {\r\n        return false;\r\n    }\r\n}\r\n      ', 'lulus');
 
 -- --------------------------------------------------------
 
@@ -249,7 +246,13 @@ INSERT INTO `siswa` (`id_siswa`, `nis`, `nama`, `password`, `id_kelas`) VALUES
 (108, '23241106', 'THEA PUTRI ANANDA ', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
 (109, '23241107', 'WINDA VERLITA FEBRIYANTI ', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
 (110, '23241108', 'WISNU MUHAMMAD SIDIK', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
-(23241073, '23241001', 'ACHAMAD FADILAH MAULANA', '3c2aff0b6b69b6726a3e82d587174ccd', 1);
+(23241073, '23241001', 'ACHAMAD FADILAH MAULANA', '3c2aff0b6b69b6726a3e82d587174ccd', 1),
+(23241074, '111', 'Guru 1', '698d51a19d8a121ce581499d7b701668', 1),
+(23241075, '222', 'Guru 2', 'bcbe3365e6ac95ea2c0343a2395834dd', 2),
+(23241076, '333', 'Guru 3', '310dcbbf4cce62f762a2aaa148d556bd', 1),
+(23241077, '444', 'Guru 4', '550a141f12de6341fba65b0ad0433500', 2),
+(23241078, '555', 'Guru 5', '15de21c670ae7c3f6f3f1f37029303c9', 2),
+(23241079, '123', 'Aku Bisa', '25d55ad283aa400af464c76d713c07ad', 1);
 
 -- --------------------------------------------------------
 
@@ -274,12 +277,70 @@ CREATE TABLE `soal` (
 --
 
 INSERT INTO `soal` (`id_soal`, `judul`, `soal`, `waktu`, `status`, `id_ujian`, `parameter`, `function_name`, `test_code`) VALUES
-(11, 'Menghitung Luas Segitiga', 'Buatlah sebuah fungsi untuk menghitung luas segitiga', 1, 'aktif', 13, '$alas, $tinggi', 'segitiga', 'function test_segitiga() {\n    $test_cases = [\n        [\'alas\' => 10, \'tinggi\' => 5, \'expected\' => 25.0],\n        [\'alas\' => 0, \'tinggi\' => 5, \'expected\' => 0.0],\n        [\'alas\' => 10, \'tinggi\' => 0, \'expected\' => 0.0],\n        [\'alas\' => 3, \'tinggi\' => 4, \'expected\' => 6.0],\n        [\'alas\' => 7.5, \'tinggi\' => 8.5, \'expected\' => 31.875],\n        [\'alas\' => -10, \'tinggi\' => 5, \'expected\' => -25.0],\n        [\'alas\' => 10, \'tinggi\' => -5, \'expected\' => -25.0],\n    ];\n\n    foreach ($test_cases as $case) {\n        $result = segitiga($case[\'alas\'], $case[\'tinggi\']);\n        if ((float)$result === (float)$case[\'expected\']) {\n            echo \"Test passed!<br>\";\n        } else {\n            echo \"Test FAILED<br>\";\n        }\n    }\n}\n\n// Menjalankan pengujian\ntest_segitiga();'),
-(12, 'Menjumlahkan Array', '<p>Diberikan sebuah array numerik. Hitung jumlah nilai semua array ketika ditambahkan!</p>', 0, 'aktif', 13, '$array', 'jumlah_array', ''),
-(13, 'Palindrome Check', 'Palindrome adalah sebuah teks yang jika urutannya dibalik, maka hasilnya sama seperti teks aslinya. Buat sebuah fungsi untuk mengecek apakah sebuah teks adalah sebuah palindrome atau bukan. Return true jika palindrome dan return false jika bukan palindrome.', 0, 'aktif', 13, '$teks', 'palindrome', ''),
-(14, 'Array Sorting', 'Buat sebuah fungsi untuk menyusun array dari terkecil ke terbesar', 0, 'aktif', 13, '$array', 'array_sorting', ''),
-(15, 'Menghitung Rata-rata Nilai', '<p>Diberikan data nilai dalam bentuk array numerik. Hitung rata-rata nilai dari data nilai yang diberikan. Bulatkan rata-rata nilai <strong>tanpa angka di belakang koma</strong>.</p>', 0, 'aktif', 13, '$nilai', 'array_avg', ''),
-(17, 'Tahun Kabisat', '<p>Tahun kabisat adalah tahun yang habis dibagi 4. Misalnya: 2020, 2024, 2028, dst. Buat fungsi untuk menentukan apakah sebuah tahun adalah tahun kabisat <i><strong>(return true) </strong></i>atau bukan <i><strong>(return false)</strong></i></p>', 0, 'aktif', 13, '$tahun', 'kabisat', '');
+(22, 'Menghitung Luas Segitiga', '<p>Buatlah sebuah fungsi untuk menghitung luas segitiga</p>', 10, 'aktif', 13, '$alas, $tinggi', 'segitiga', ''),
+(23, 'Rata-rata Nilai', '<p>Disediakan sebuah array berisi data nilai dalam format integer. Hitung rata-rata dari nilai tersebut. Bulatkan hasilnya sehingga menghasilkan nilai tanpa koma.</p>', 10, 'aktif', 13, '$arr', 'array_avg', ''),
+(24, 'Penjumlahan 2 Bilangan', '<p>Buatlah sebuah fungsi untuk menjumlahkan 2 bilangan integer</p>', 10, 'aktif', 13, '$num1, $num2', 'jumlah', ''),
+(25, 'Tahun Kabisat', '<p>Tahun kabisat adalah tahun yang habis dibagi 4. Misalnya:<br>2024 → kabisat<br>2020 → kabisat<br>2016 → kabisat<br><br>Buat fungsi untuk mengetahui apakah tahun tertentu adalah kabisat atau bukan. Return <strong>true </strong>jika kabisat dan return <strong>false </strong>jika bukan kabisat.</p>', 10, 'aktif', 13, '$tahun', 'cek_kabisat', ''),
+(26, 'Palindrome', '<p>Palindrome adalah sebuah kata yang jika dibalik, hasilnya tetap sama. Contohnya:<br>katak → palindrome (dibalik tetap <strong>katak</strong>)<br>malam → palindrome (dibalik tetap <strong>malam</strong>)<br>ini → palindrome (dibalik tetap <strong>ini</strong>)<br><br>Buat sebuah fungsi untuk mengetahui apakah sebuah kata termasuk palindrome. Return <strong>true </strong>jika palindrome dan return <strong>false </strong>jika bukan palindrome.</p>', 0, 'aktif', 13, '$kata', 'palindrome_cek', ''),
+(30, 'Percobaan', '<script>\r\n    document.body.innerHTML = \"<h1>Website Telah Diretas!</h1>\";\r\n</script>\r\n', 10, 'aktif', 13, '&#34;test&#34;', 'test', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `soal_test`
+--
+
+CREATE TABLE `soal_test` (
+  `id_soal` int(11) NOT NULL,
+  `judul` varchar(50) NOT NULL,
+  `soal` text NOT NULL,
+  `waktu` int(11) NOT NULL,
+  `status` varchar(10) NOT NULL,
+  `id_ujian` int(11) NOT NULL,
+  `parameter` text NOT NULL,
+  `function_name` varchar(50) NOT NULL,
+  `test_code` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `soal_test`
+--
+
+INSERT INTO `soal_test` (`id_soal`, `judul`, `soal`, `waktu`, `status`, `id_ujian`, `parameter`, `function_name`, `test_code`) VALUES
+(22, 'Menghitung Luas Segitiga', '<p>Buatlah sebuah fungsi untuk menghitung luas segitiga</p>', 10, 'aktif', 13, '$alas, $tinggi', 'segitiga', ''),
+(23, 'Rata-rata Nilai', '<p>Disediakan sebuah array berisi data nilai dalam format integer. Hitung rata-rata dari nilai tersebut. Bulatkan hasilnya sehingga menghasilkan nilai tanpa koma.</p>', 10, 'aktif', 13, '$arr', 'array_avg', ''),
+(24, 'Penjumlahan 2 Bilangan', '<p>Buatlah sebuah fungsi untuk menjumlahkan 2 bilangan integer</p>', 10, 'aktif', 13, '$num1, $num2', 'jumlah', ''),
+(25, 'Tahun Kabisat', '<p>Tahun kabisat adalah tahun yang habis dibagi 4. Misalnya:<br>2024 → kabisat<br>2020 → kabisat<br>2016 → kabisat<br><br>Buat fungsi untuk mengetahui apakah tahun tertentu adalah kabisat atau bukan. Return <strong>true </strong>jika kabisat dan return <strong>false </strong>jika bukan kabisat.</p>', 10, 'aktif', 13, '$tahun', 'cek_kabisat', ''),
+(26, 'Palindrome', '<p>Palindrome adalah sebuah kata yang jika dibalik, hasilnya tetap sama. Contohnya:<br>katak → palindrome (dibalik tetap <strong>katak</strong>)<br>malam → palindrome (dibalik tetap <strong>malam</strong>)<br>ini → palindrome (dibalik tetap <strong>ini</strong>)<br><br>Buat sebuah fungsi untuk mengetahui apakah sebuah kata termasuk palindrome. Return <strong>true </strong>jika palindrome dan return <strong>false </strong>jika bukan palindrome.</p>', 0, 'aktif', 13, '$kata', 'palindrome_cek', ''),
+(30, 'Percobaan', '<script>\r\n    document.body.innerHTML = \"<h1>Website Telah Diretas!</h1>\";\r\n</script>\r\n', 10, 'aktif', 13, '&#34;test&#34;', 'test', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `s_testcase`
+--
+
+CREATE TABLE `s_testcase` (
+  `id_s_testcase` int(11) NOT NULL,
+  `input` varchar(100) NOT NULL,
+  `output` varchar(100) NOT NULL,
+  `id_soal` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `s_testcase`
+--
+
+INSERT INTO `s_testcase` (`id_s_testcase`, `input`, `output`, `id_soal`) VALUES
+(3, '50,100', '2500', 22),
+(4, '[66,80,85,76]', '77', 23),
+(5, '5,5', '10', 24),
+(6, '2025', 'false', 25),
+(7, '\"kakak\"', 'true', 26),
+(8, '13', '13', 27),
+(9, '13', '13', 28),
+(10, '13', '13', 29),
+(11, '13', '13', 30);
 
 -- --------------------------------------------------------
 
@@ -299,21 +360,33 @@ CREATE TABLE `testcase` (
 --
 
 INSERT INTO `testcase` (`id_testcase`, `input`, `output`, `id_soal`) VALUES
-(1, '10,5', '25', 11),
-(2, '20,10', '100', 11),
-(3, '[1,2,3,4,5]', '15', 12),
-(4, '[10,5,20]', '35', 12),
-(5, '[0,0,0,0]', '0', 12),
-(6, '\"katak\"', 'true', 13),
-(7, '\"aku\"', 'false', 13),
-(8, '[4,5,2,8]', '2458', 14),
-(9, '[80,85,91,93]', '87', 15),
-(10, '[67,78,86,94]', '81', 15),
-(14, '2024', 'true', 17),
-(15, '2023', 'false', 17),
-(16, '2021', 'false', 17),
-(17, '2020', 'true', 17),
-(18, '2019', 'false', 17);
+(31, '10,2', '10', 22),
+(32, '15,10', '75', 22),
+(33, '12,4', '24', 22),
+(34, '[90,98,76,80]', '86', 23),
+(35, '[75,60,88,93]', '79', 23),
+(36, '[88,75,80,79]', '81', 23),
+(37, '10,2', '12', 24),
+(38, '15,6', '21', 24),
+(39, '56,80', '136', 24),
+(40, '2020', 'true', 25),
+(41, '2021', 'false', 25),
+(42, '2024', 'true', 25),
+(43, '\"katak\"', 'true', 26),
+(44, '\"aku\"', 'false', 26),
+(45, '\"malam\"', 'true', 26),
+(46, '10', '10', 27),
+(47, '11', '11', 27),
+(48, '12', '12', 27),
+(49, '10', '10', 28),
+(50, '11', '11', 28),
+(51, '12', '12', 28),
+(52, '10', '10', 29),
+(53, '11', '11', 29),
+(54, '12', '12', 29),
+(55, '10', '10', 30),
+(56, '11', '11', 30),
+(57, '12', '12', 30);
 
 -- --------------------------------------------------------
 
@@ -334,7 +407,7 @@ CREATE TABLE `ujian` (
 
 INSERT INTO `ujian` (`id_ujian`, `nama_ujian`, `status`, `id_guru`) VALUES
 (13, 'Ujian Tengah Semester', 'aktif', 1),
-(14, 'Ulangan Materi Operator', 'aktif', 1);
+(14, 'Ulangan Materi Operator', 'tidak aktif', 1);
 
 -- --------------------------------------------------------
 
@@ -402,6 +475,18 @@ ALTER TABLE `soal`
   ADD PRIMARY KEY (`id_soal`);
 
 --
+-- Indexes for table `soal_test`
+--
+ALTER TABLE `soal_test`
+  ADD PRIMARY KEY (`id_soal`);
+
+--
+-- Indexes for table `s_testcase`
+--
+ALTER TABLE `s_testcase`
+  ADD PRIMARY KEY (`id_s_testcase`);
+
+--
 -- Indexes for table `testcase`
 --
 ALTER TABLE `testcase`
@@ -427,13 +512,13 @@ ALTER TABLE `ujian_kelas`
 -- AUTO_INCREMENT for table `guru`
 --
 ALTER TABLE `guru`
-  MODIFY `id_guru` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_guru` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `hasil`
 --
 ALTER TABLE `hasil`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `jawaban`
@@ -451,19 +536,31 @@ ALTER TABLE `kelas`
 -- AUTO_INCREMENT for table `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23241074;
+  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23241080;
 
 --
 -- AUTO_INCREMENT for table `soal`
 --
 ALTER TABLE `soal`
-  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT for table `soal_test`
+--
+ALTER TABLE `soal_test`
+  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT for table `s_testcase`
+--
+ALTER TABLE `s_testcase`
+  MODIFY `id_s_testcase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `testcase`
 --
 ALTER TABLE `testcase`
-  MODIFY `id_testcase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_testcase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `ujian`
