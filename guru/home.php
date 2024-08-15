@@ -96,21 +96,20 @@ include "../koneksi.php";
                     <a class="nav-link" href="home.php">Home</a>
                 </li>
                 <?php
-                if($_SESSION['level']=='admin'){
-                    ?>
-                <li class="nav-item active">
-                    <a class="nav-link" href="home.php?page=guru">Data Guru</a>
-                </li>
-            <?php
-            }
-            ?>
+                if ($_SESSION['level'] == 'admin') {
+                ?>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="home.php?page=guru">Data Guru</a>
+                    </li>
+                <?php
+                }
+                ?>
                 <li class="nav-item active">
                     <a class="nav-link" href="home.php?page=kelas">Data Kelas</a>
                 </li>
                 <?php
-                if($_SESSION['level']=='guru')
-                {
-                    ?>
+                if ($_SESSION['level'] == 'guru') {
+                ?>
                     <li class="nav-item active">
                         <a class="nav-link" href="home.php?page=ujian">Data Ujian</a>
                     </li>
@@ -166,12 +165,15 @@ include "../koneksi.php";
                         case "nilai":
                             include "nilai.php";
                             break;
-                        //admin only
+                            //admin only
                         case "input_guru":
                             include "input_guru.php";
                             break;
                         case "input_kelas":
                             include "input_kelas.php";
+                            break;
+                        case "input_siswa":
+                            include "input_siswa.php";
                             break;
                     }
                 } else {
