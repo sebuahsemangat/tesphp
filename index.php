@@ -46,8 +46,9 @@ include "koneksi.php";
           <?php
           //jika tombol login ditekan
           if (isset($_POST['login'])) {
-            $nis = $_POST['nis'];
-            $password = md5($_POST['password']);
+            $nis = filter_input(INPUT_POST, 'nis', FILTER_SANITIZE_NUMBER_INT);
+            $password_filtered = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+            $password = md5($password_filtered);
 
             // Prepared statement untuk query pencarian data berdasarkan nis dan password
             $stmt = mysqli_prepare($koneksi, "SELECT * FROM siswa WHERE nis=? and password=? LIMIT 1");
@@ -73,7 +74,7 @@ include "koneksi.php";
                 header("location: home.php");
               } else {
                 //jika data tidak ditemukan
-                echo "<p class='btn btn-danger' style='width:100%'>NIS atau Password salah. Silahkan coba lagi!</p>";
+                echo "<p class='alert alert-danger' style='width:100%'>NIS atau Password salah. Silahkan coba lagi!</p>";
               }
 
               // Menutup statement
@@ -85,11 +86,11 @@ include "koneksi.php";
           ?>
           <div class="mb-3">
             <label for="username" class="form-label">NIS</label>
-            <input type="text" class="form-control" id="username" name="nis" required>
+            <input value="<?php if(isset($_POST['login'])){echo $_POST['nis'];} ?>" type="text" class="form-control" id="username" name="nis" required>
           </div>
           <div class="mb-3">
             <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password" required>
+            <input value="<?php if(isset($_POST['password'])){echo $_POST['nis'];} ?>" type="password" class="form-control" id="password" name="password" required>
           </div>
           <button type="submit" class="btn btn-primary" name="login">Login</button>
         </form>
