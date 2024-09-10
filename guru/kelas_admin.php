@@ -45,7 +45,10 @@ while (mysqli_stmt_fetch($stmt)) {
         <td><?= htmlspecialchars($nama_kelas);?></td>
         <td><?= htmlspecialchars($nama_guru);?></td>
         <td><?= htmlspecialchars($jumlah_siswa);?></td>
-        <td><a href="home.php?page=siswa&id_kelas=<?= htmlspecialchars($id_kelas);?>">Data Siswa</a></td>
+        <td>
+            <a href="home.php?page=siswa&id_kelas=<?= htmlspecialchars($id_kelas);?>">Data Siswa</a> |
+            <a href="home.php?page=input_siswa&id_kelas=<?= htmlspecialchars($id_kelas);?>">Input Data</a>
+        </td>
     </tr>
     <?php
     $no++;
