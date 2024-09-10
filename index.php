@@ -4,7 +4,7 @@ include "koneksi.php";
 
 // Pembatasan percobaan login
 if (!isset($_SESSION['login_attempts'])) {
-    $_SESSION['login_attempts'] = 0;
+  $_SESSION['login_attempts'] = 0;
 }
 
 // Maksimum percobaan login
@@ -15,45 +15,53 @@ $lockout_time = 300; // 5 menit
 
 // Cek apakah pengguna terkunci
 if (isset($_SESSION['lockout_time']) && time() - $_SESSION['lockout_time'] < $lockout_time) {
-    $remaining_time = $lockout_time - (time() - $_SESSION['lockout_time']);
-    die("Akun Anda terkunci. Silakan coba lagi setelah " . ceil($remaining_time / 60) . " menit.");
+  $remaining_time = $lockout_time - (time() - $_SESSION['lockout_time']);
+  die("Akun Anda terkunci. Silakan coba lagi setelah " . ceil($remaining_time / 60) . " menit.");
 }
 
 if (isset($_POST['login'])) {
-    // CAPTCHA sederhana
-    if ($_POST['captcha'] != $_SESSION['captcha_code']) {
-        echo "<p class='alert alert-danger' style='width:100%'>Captcha salah. Silakan coba lagi!</p>";
-    } else {
-        $nis = filter_input(INPUT_POST, 'nis', FILTER_SANITIZE_NUMBER_INT);
-        $password_filtered = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
-        $password = md5($password_filtered);
+  // CAPTCHA sederhana
+  if ($_POST['captcha'] != $_SESSION['captcha_code']) {
+    echo "<p class='alert alert-danger' style='width:100%'>Captcha salah. Silakan coba lagi!</p>";
+  } else {
+    $nis = filter_input(INPUT_POST, 'nis', FILTER_SANITIZE_NUMBER_INT);
+    $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
 
-        $stmt = mysqli_prepare($koneksi, "SELECT * FROM siswa WHERE nis=? and password=? LIMIT 1");
-        if ($stmt) {
-            mysqli_stmt_bind_param($stmt, "ss", $nis, $password);
-            mysqli_stmt_execute($stmt);
-            $result = mysqli_stmt_get_result($stmt);
-            $count = mysqli_num_rows($result);
+    $stmt = mysqli_prepare($koneksi, "SELECT * FROM siswa WHERE nis=? LIMIT 1");
+    if ($stmt) {
+      mysqli_stmt_bind_param($stmt, "s", $nis);
+      mysqli_stmt_execute($stmt);
+      $result = mysqli_stmt_get_result($stmt);
+      $count = mysqli_num_rows($result);
 
-            if ($count == 1) {
-                $data = mysqli_fetch_assoc($result);
-                $_SESSION["siswa"] = $data["id_siswa"];
-                $_SESSION['login_attempts'] = 0; // Reset percobaan login
-                header("location: home.php");
-            } else {
-                $_SESSION['login_attempts']++;
-                if ($_SESSION['login_attempts'] >= $max_attempts) {
-                    $_SESSION['lockout_time'] = time();
-                    die("Terlalu banyak percobaan login. Akun Anda terkunci selama 5 menit.");
-                } else {
-                    echo "<p class='alert alert-danger' style='width:100%'>NIS atau Password salah. Silakan coba lagi!</p>";
-                }
-            }
-            mysqli_stmt_close($stmt);
+      if ($count == 1) {
+        $data = mysqli_fetch_assoc($result);
+        // Verifikasi password yang diinput dengan hash yang ada di database
+        if (password_verify($password, $data['password'])) {
+          $_SESSION["siswa"] = $data["id_siswa"];
+          $_SESSION['login_attempts'] = 0; // Reset percobaan login
+          header("location: home.php");
+          exit();
         } else {
-            echo "Error: " . mysqli_error($koneksi);
+          // Jika password salah
+          $_SESSION['login_attempts']++;
+          if ($_SESSION['login_attempts'] >= $max_attempts) {
+            $_SESSION['lockout_time'] = time();
+            die("Terlalu banyak percobaan login. Akun Anda terkunci selama 5 menit.");
+          } else {
+            echo "<p class='alert alert-danger' style='width:100%'>NIS atau Password salah. Silakan coba lagi!</p>";
+          }
         }
+      } else {
+        // Jika NIS tidak ditemukan
+        $_SESSION['login_attempts']++;
+        echo "<p class='alert alert-danger' style='width:100%'>NIS atau Password salah. Silakan coba lagi!</p>";
+      }
+      mysqli_stmt_close($stmt);
+    } else {
+      echo "Error: " . mysqli_error($koneksi);
     }
+  }
 }
 
 // Membuat CAPTCHA sederhana
@@ -104,11 +112,15 @@ $_SESSION['captcha_code'] = $captcha_code;
         <form action="" method="post">
           <div class="mb-3">
             <label for="username" class="form-label">NIS</label>
-            <input value="<?php if(isset($_POST['login'])){echo $_POST['nis'];} ?>" type="text" class="form-control" id="username" name="nis" required>
+            <input value="<?php if (isset($_POST['login'])) {
+                            echo $_POST['nis'];
+                          } ?>" type="text" class="form-control" id="username" name="nis" required>
           </div>
           <div class="mb-3">
             <label for="password" class="form-label">Password</label>
-            <input value="<?php if(isset($_POST['password'])){echo $_POST['nis'];} ?>" type="password" class="form-control" id="password" name="password" required>
+            <input value="<?php if (isset($_POST['password'])) {
+                            echo $_POST['nis'];
+                          } ?>" type="password" class="form-control" id="password" name="password" required>
           </div>
           <div class="mb-3">
             <label for="captcha" class="form-label">Masukkan kode berikut: <strong><?php echo $captcha_code; ?></strong></label>
