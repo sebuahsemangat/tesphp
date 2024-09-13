@@ -164,7 +164,7 @@ if (!isset($_SESSION['siswa'])) {
                     <a class="nav-link" href="home.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="home.php?page=ganti_password">
                         <?= $data_siswa["nama"]; ?>
                     </a>
                 </li>
@@ -193,6 +193,9 @@ if (!isset($_SESSION['siswa'])) {
                             break;
                         case "lihat_jawaban":
                             include "lihat_jawaban.php";
+                            break;
+                        case "ganti_password":
+                            include "ganti_password.php";
                             break;
                     }
                 } else {
