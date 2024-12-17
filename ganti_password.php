@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else if ($newPassword != $confirmNewPassword) {
         echo "Konfirmasi password salah!";
     } else if (!preg_match('/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/', $newPassword)) {
-        echo "Password baru harus minimal 8 karakter, memiliki satu huruf besar, satu angka, dan satu simbol.";
+        echo "<p class='alert alert-danger'>Password baru harus minimal 8 karakter, memiliki satu huruf besar, satu angka, dan satu simbol.</p>";
     } else {
         $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
         $stmt_update = $koneksi->prepare("UPDATE siswa SET password = ? WHERE id_siswa = ?");
@@ -30,8 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             echo "Terjadi kesalahan saat mengganti password. Coba lagi.";
         }
+        $stmt_update->close();
     }
-    $stmt_update->close();
+    
 }
 
 $koneksi->close();

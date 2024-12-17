@@ -24,7 +24,7 @@ if($_SESSION['level']=="admin") {
         while ($data_ujian = mysqli_fetch_assoc($qry_ujian)) {
             ?>
             <tr>
-                <td><?= $data_ujian['nama_ujian']; ?></td>
+                <td><a href="home.php?page=nilai_ujian&id_ujian=<?= $data_ujian["id_ujian"];?>"><?= $data_ujian['nama_ujian']; ?></a></td>
                 <td>
                     <?php
                     $query_kelas = mysqli_query($koneksi, "SELECT ujian_kelas.id_ujian_kelas, kelas.nama_kelas, kelas.id_kelas
@@ -34,7 +34,7 @@ if($_SESSION['level']=="admin") {
                                     ORDER BY ujian_kelas.id_kelas ASC");
                     while ($data_kelas = mysqli_fetch_assoc($query_kelas)) {
                         ?>
-                        <a class="btn btn-primary mx-1" href="home.php?page=nilai&id_ujian=<?= $data_ujian["id_ujian"];?>&id_kelas=<?= $data_kelas["id_kelas"];?>"><?= $data_kelas["nama_kelas"];?></a>
+                        <a class="mx-1 mb-2" href="home.php?page=nilai&id_ujian=<?= $data_ujian["id_ujian"];?>&id_kelas=<?= $data_kelas["id_kelas"];?>"><?= $data_kelas["nama_kelas"];?></a>
                         <?php
                     }
                     ?>
@@ -43,10 +43,14 @@ if($_SESSION['level']=="admin") {
                     <?php
                     if ($data_ujian['status'] == 'aktif') {
                         $class = 'btn-success';
+                        $action = 'deactive';
                     } else {
                         $class = 'btn-warning';
+                        $action = 'active';
                     }
-                    echo "<span class='btn {$class}'>" . ucwords($data_ujian['status']) . "</span>"; ?>
+                    echo "<a 
+                    href='ubah_status_ujian.php?action=$action&id_ujian=$data_ujian[id_ujian]' class='btn {$class}'>" 
+                    . ucwords($data_ujian['status']) . "</a>"; ?>
                 </td>
                 <td>
                     <?php

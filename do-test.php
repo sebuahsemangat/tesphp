@@ -36,11 +36,11 @@ if ($id_soal) {
 }
 ?>
 
-<a href="#">Kembali</a>
+<a href="home.php?page=soal&id_ujian=<?php echo $soal['id_ujian'];?>">Kembali</a>
 <h4><?php echo htmlspecialchars($soal['judul']); ?></h4>
 
 <div class="mb-3 p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">
-  <p><?php echo htmlspecialchars($soal['soal']); ?></p>
+  <p><?php echo $soal['soal']; ?></p>
 </div>
 <div class="row align-items-start">
   <div class="col-md-7">

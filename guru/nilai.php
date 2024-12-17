@@ -46,6 +46,10 @@
     <tbody>
         <?php
         $no = 1;
+        if($jumlah_soal < 1){ //jika tidak ada soal dalam ujian
+            echo "<p class='alert alert-info'>Ujian ini belum memiliki soal</p>";
+        }
+        else {
         while ($row_siswa = $result_siswa->fetch_assoc()) {
             $id_siswa = $row_siswa['id_siswa'];
 
@@ -58,9 +62,13 @@
             $row_jawaban_benar = $result_jawaban_benar->fetch_assoc();
             $jawaban_benar = $row_jawaban_benar['jawaban_benar'];
             $stmt_jawaban_benar->close();
-
+            
+            
+            
             // Hitung nilai
+            
             $nilai = ($jawaban_benar / $jumlah_soal) * 100;
+            
             ?>
             <tr>
                 <td><?php echo $no++; ?></td>
@@ -71,6 +79,7 @@
             </tr>
             <?php
         }
+    }
         $stmt_siswa->close();
         $koneksi->close();
         ?>

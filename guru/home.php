@@ -47,7 +47,7 @@ include "../koneksi.php";
             border-radius: 5px;
         }
 
-        .row {
+        .row-main {
             border: solid 1px #CCC;
             border-radius: 10px;
             box-shadow: 5px 5px 5px #DDD;
@@ -126,7 +126,7 @@ include "../koneksi.php";
         </div>
     </nav>
     <div class="container mt-5 mb-5">
-        <div class="row">
+        <div class="row row-main">
             <div class="col-md-12 p-50">
                 <h2>Halaman <?= $_SESSION['level']; ?></h2>
                 <hr>
@@ -164,6 +164,9 @@ include "../koneksi.php";
                             break;
                         case "nilai":
                             include "nilai.php";
+                            break;
+                        case "nilai_ujian":
+                            include "nilai_ujian.php";
                             break;
                             //admin only
                         case "input_guru":

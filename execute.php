@@ -132,7 +132,11 @@ echo ' . $soal["function_name"] . '(' . $data_s_testcase["input"] . ');';
     }
 
     if (trim($output) != $data_s_testcase["output"]) {
-        echo "<div class='border border-danger mb-2 p-1'>Jawaban Salah! Perbaiki jawaban anda! Output: <strong>" . $output . "</strong></div>";
+        echo "<div class='border border-danger mb-2 p-1'>
+        <strong>Jawaban Salah! Perbaiki jawaban anda!</strong>
+        <hr>
+        Output: " . $output . "
+        </div>";
     } else {
         // Mencari data dari tabel testcase
         $select_testcase = mysqli_query($koneksi, "SELECT * FROM testcase where id_soal='$id_soal'");
