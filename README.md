@@ -93,3 +93,9 @@ Pada penggunaannya, siswa akan mendapatkan soal pemrograman dan diharuskan untuk
         <li>Contoh Output: 50 Angka ini merupakan hasil perkalian 10 dan 5 yang diambil dari rumus persegi panjang (panjang * lebar)</li>
     </ul>
 </p>
+
+<h1>PENTING!</h1>
+<ol>
+    <li>Berikan Star/Bintang pada repository ini</li>
+    <li>Follow saya di Instagram dan X @sebuahsemangat</li>  
+</ol>
