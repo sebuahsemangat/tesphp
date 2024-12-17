@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 14, 2024 at 11:42 AM
+-- Generation Time: Dec 17, 2024 at 07:52 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -42,8 +42,9 @@ CREATE TABLE `guru` (
 INSERT INTO `guru` (`id_guru`, `username`, `password`, `nama`, `level`) VALUES
 (1, 'apep', '$2y$10$VxEIwCbAq50askLjkJGQrO4knvRGl3VTyxdkp93fPITXsdAx/ocWq', 'Apep Wahyudin', 'guru'),
 (2, 'anisa', '$2y$10$jWezqKTaNnYAfPJ2DA7SNu4aHACe.xpGPabksKq9S.A7oYAMSuStu', 'Anisa Ruhul Azizah', 'guru'),
-(3, 'aku', '$2y$10$z9OquZflu4phLJEpO86pO.JIRkd5Wb3SPjT9hdzadZjf0yiRRVW6W', 'Admin Ganteng', 'admin'),
-(4, 'abizar', '$2y$10$SLp8lnksvvnzKCxpuaKS7OuKaATMeBTrlW6GsS1FuC0WytbHU8.EW', 'Abizar Hafiz Alfatih', 'guru');
+(3, 'aku', '$2y$10$s5FJghuzyjY70ZXqmb79reYZk4KwjqWnLYCy7v1Jn7pK9FfSVd4Jm', 'Admin Ganteng', 'admin'),
+(4, 'abizar', '$2y$10$SLp8lnksvvnzKCxpuaKS7OuKaATMeBTrlW6GsS1FuC0WytbHU8.EW', 'Abizar Hafiz Alfatih', 'guru'),
+(5, 'guru', '$2y$10$a3R4gCW70ZMej3Ub4iy7x.7MVfdz28.xO2/0deKcEWU.sd5POM7Da', 'Guru', 'guru');
 
 -- --------------------------------------------------------
 
@@ -65,13 +66,11 @@ CREATE TABLE `hasil` (
 --
 
 INSERT INTO `hasil` (`id`, `id_soal`, `id_ujian`, `id_siswa`, `jawaban`, `test_result`) VALUES
-(28, 22, 13, 4, '&lt;?php\r\nfunction segitiga($alas, $tinggi){\r\n  $luas = 0.5 * $alas * $tinggi;\r\n    return $luas;\r\n}\r\n      ', 'lulus'),
-(29, 23, 13, 4, '&lt;?php\r\nfunction array_avg($arr){\r\n  $total = array_sum($arr);\r\n    $jumlah = count($arr);\r\n    $avg = $total / $jumlah;\r\n    return round($avg,0);\r\n}\r\n      ', 'lulus'),
-(30, 24, 13, 4, '&lt;?php\r\nfunction jumlah($num1, $num2){\r\n  return $num1 + $num2;\r\n}\r\n      ', 'lulus'),
-(31, 25, 13, 4, '&lt;?php\r\nfunction cek_kabisat($tahun){\r\n  $cek = $tahun % 4;\r\n    if($cek == 0) {\r\n        return true;\r\n    }\r\n    else {\r\n        return false;\r\n    }\r\n}\r\n      ', 'lulus'),
-(34, 26, 13, 4, '&lt;?php\r\nfunction palindrome_cek($kata){\r\n  $cek = strrev($kata);\r\n  if($cek != $kata) {\r\n      return false;\r\n  }\r\n    else {\r\n        return true;\r\n    }\r\n}   ', 'lulus'),
-(35, 22, 13, 3, '&lt;?php\r\nfunction segitiga($alas, $tinggi){\r\n  return 0.5 * $alas * $tinggi;\r\n}\r\n      ', 'lulus'),
-(36, 26, 13, 3, '&lt;?php\r\nfunction palindrome_cek($kata){\r\n  $balik = strrev($kata);\r\n    if($kata == $balik){\r\n        return true;\r\n    }\r\n    else {\r\n        return false;\r\n    }\r\n}\r\n      ', 'lulus');
+(1, 42, 15, 60, '&lt;?php\r\nfunction luas_persegi($sisi){\r\n    echo pow($sisi, 2);\r\n}\r\n      ', 'lulus'),
+(2, 43, 15, 60, '&lt;?php\r\nfunction jalan_toll($jumlah_roda){\r\n  if($jumlah_roda &lt; 4) {\r\n      echo &quot;dilarang masuk&quot;;\r\n  }\r\n    else {\r\n        echo &quot;dilarang masuk&quot;;\r\n    }\r\n}\r\n      ', 'gagal'),
+(3, 34, 16, 67, '&lt;?php\r\nfunction awal($arr){\r\n  return $arr[0];\r\n}\r\n      ', 'lulus'),
+(4, 34, 16, 60, '&lt;?php\r\nfunction awal($arr){\r\n  return $arr[0];\r\n}\r\n      ', 'lulus'),
+(5, 32, 16, 60, '&lt;?php\r\nfunction kembalian($uang, $harga){\r\n  return $uang - $harga;\r\n}\r\n      ', 'lulus');
 
 -- --------------------------------------------------------
 
@@ -85,16 +84,6 @@ CREATE TABLE `jawaban` (
   `jawaban` text NOT NULL,
   `jawaban_bersih` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `jawaban`
---
-
-INSERT INTO `jawaban` (`id_jawaban`, `id_soal`, `jawaban`, `jawaban_bersih`) VALUES
-(11, 7, '<?php\nclass Mobil {\n    public $merek;\n    public $jenis;\n    \n    public function __construct($merek, $jenis){\n        $this->merek = $merek;\n        $this->jenis = $jenis;\n    }\n    \n    public function jalan() {\n        echo \"Mobil \". $this->merek . $this->jenis. \" sedang berjalan\";\n    }\n}\n$mobil1 = new Mobil(\"Toyota\", \"Kijang\");\n$mobil1->jalan();\n?>', 'classMobil{public$merek;public$jenis;publicfunction__construct($merek,$jenis){$this->merek=$merek;$this->jenis=$jenis;}publicfunctionjalan(){echo\"Mobil\".$this->merek.$this->jenis.\"sedangberjalan\";}}$mobil1=newMobil(\"Toyota\",\"Kijang\");$mobil1->jalan();'),
-(12, 7, '<?php\r\nclass Mobil {\r\n    public $merek;\r\n    public $jenis;\r\n    \r\n    public function __construct($merek, $jenis){\r\n        $this->merek = $merek;\r\n        $this->jenis = $jenis;\r\n    }\r\n    \r\n    public function jalan() {\r\n        return \"Mobil \". $this->merek . $this->jenis. \" sedang berjalan\";\r\n    }\r\n}\r\n$mobil1 = new Mobil(\"Toyota\", \"Kijang\");\r\necho $mobil1->jalan();\r\n?>', 'classMobil{public$merek;public$jenis;publicfunction__construct($merek,$jenis){$this->merek=$merek;$this->jenis=$jenis;}publicfunctionjalan(){return\"Mobil\".$this->merek.$this->jenis.\"sedangberjalan\";}}$mobil1=newMobil(\"Toyota\",\"Kijang\");echo$mobil1->jalan();'),
-(13, 8, '<?php\nclass Pembagian {\n    public $angka1;\n    public $angka2;\n    \n    public function __construct($angka1, $angka2){\n        $this->angka1 = $angka1;\n        $this->angka2 = $angka2;\n    }\n    public function bagi(){\n        if($this->angka2 == 0){\n            echo \"Tidak bisa dibagi 0\";\n        }\n        else {\n            echo $this->angka1 / $this->angka2;\n        }\n    }\n}\n$pembagian1 = new Pembagian(10,0);\n$pembagian1 -> bagi();\n?>', 'classPembagian{public$angka1;public$angka2;publicfunction__construct($angka1,$angka2){$this->angka1=$angka1;$this->angka2=$angka2;}publicfunctionbagi(){if($this->angka2==0){echo\"Tidakbisadibagi0\";}else{echo$this->angka1/$this->angka2;}}}$pembagian1=newPembagian(10,0);$pembagian1->bagi();'),
-(14, 8, '<?php\r\nclass Pembagian {\r\n    public $angka1;\r\n    public $angka2;\r\n    \r\n    public function __construct($angka1, $angka2){\r\n        $this->angka1 = $angka1;\r\n        $this->angka2 = $angka2;\r\n    }\r\n    public function bagi(){\r\n        if($this->angka2 == 0){\r\n            echo \"Tidak bisa dibagi 0\";\r\n        }\r\n        else {\r\n            return $this->angka1 / $this->angka2;\r\n        }\r\n    }\r\n}\r\n$pembagian1 = new Pembagian(10,0);\r\necho $pembagian1 -> bagi();\r\n?>', 'classPembagian{public$angka1;public$angka2;publicfunction__construct($angka1,$angka2){$this->angka1=$angka1;$this->angka2=$angka2;}publicfunctionbagi(){if($this->angka2==0){echo\"Tidakbisadibagi0\";}else{return$this->angka1/$this->angka2;}}}$pembagian1=newPembagian(10,0);echo$pembagian1->bagi();');
 
 -- --------------------------------------------------------
 
@@ -117,7 +106,16 @@ INSERT INTO `kelas` (`id_kelas`, `nama_kelas`, `status`, `id_guru`) VALUES
 (1, 'X-R1', 'aktif', 1),
 (2, 'X-R2', 'aktif', 1),
 (3, 'X-R3', 'aktif', 1),
-(4, 'X-R4', 'aktif', 1);
+(4, 'X-R4', 'aktif', 1),
+(5, 'X-R5', 'aktif', 1),
+(6, 'X-R6', 'aktif', 1),
+(7, 'X-R7', 'aktif', 1),
+(8, 'X-R8', 'aktif', 1),
+(9, 'X-R9', 'aktif', 1),
+(10, 'X-R10', 'aktif', 1),
+(11, 'X-ACP', 'aktif', 1),
+(12, 'Kelas Tes', 'aktif', 5),
+(13, 'Kelas Demo', 'aktif', 1);
 
 -- --------------------------------------------------------
 
@@ -138,121 +136,22 @@ CREATE TABLE `siswa` (
 --
 
 INSERT INTO `siswa` (`id_siswa`, `nis`, `nama`, `password`, `id_kelas`) VALUES
-(1, '123456789', 'Apep Wahyudin', '3449cf29b6c2f4bb7892d5c7694ea81f', 1),
-(3, '23241002', 'AHMAD KAMALUDDIN HUSNI MUBARAK', '3c2aff0b6b69b6726a3e82d587174ccd', 1),
-(4, '23241003', 'AILEEN LINTANG PRAMESTI', '3c2aff0b6b69b6726a3e82d587174ccd', 1),
-(5, '23241004', 'ANDRE SUTISNA AGUSTIN ', '3c2aff0b6b69b6726a3e82d587174ccd', 1),
-(6, '23241005', 'ARISKA APRILYANI SUPRIATNA', '3c2aff0b6b69b6726a3e82d587174ccd', 1),
-(7, '23241006', 'AZIS IRSYAD MAULANA ', '3c2aff0b6b69b6726a3e82d587174ccd', 1),
-(8, '23241007', 'DEA NOVIYANTI', '3c2aff0b6b69b6726a3e82d587174ccd', 1),
-(9, '23241008', 'DENDA FEBRIANA ', '3c2aff0b6b69b6726a3e82d587174ccd', 1),
-(10, '23241009', 'DIAN MUTIANI ', '3c2aff0b6b69b6726a3e82d587174ccd', 1),
-(11, '23241010', 'DITO MAHARDIKA RAMADHAN ', '3c2aff0b6b69b6726a3e82d587174ccd', 1),
-(12, '23241011', 'ENOK NURHASANAH', '3c2aff0b6b69b6726a3e82d587174ccd', 1),
-(13, '23241012', 'FATHIR FADZILAH ADZ DZIKRI', '3c2aff0b6b69b6726a3e82d587174ccd', 1),
-(14, '23241013', 'FITRIANI KHOIRUNNISA', '3c2aff0b6b69b6726a3e82d587174ccd', 1),
-(15, '23241014', 'IKHSAN GUSTANI ARIFIN', '3c2aff0b6b69b6726a3e82d587174ccd', 1),
-(16, '23241015', 'ILHAM FAJAR PERMANA', '3c2aff0b6b69b6726a3e82d587174ccd', 1),
-(17, '23241016', 'IRVAN SHARIPUDIN', '3c2aff0b6b69b6726a3e82d587174ccd', 1),
-(18, '23241017', 'JEAL ANGGRAENI', '3c2aff0b6b69b6726a3e82d587174ccd', 1),
-(19, '23241018', 'MOH. IHSAN JULIAN AL-SIDIK', '3c2aff0b6b69b6726a3e82d587174ccd', 1),
-(20, '23241019', 'MUHAMAD IQBAL FIRMANSYAH', '3c2aff0b6b69b6726a3e82d587174ccd', 1),
-(21, '23241020', 'MUHAMMAD FAREL HERMANSYAH ', '3c2aff0b6b69b6726a3e82d587174ccd', 1),
-(22, '23241021', 'MUHAMMAD HADI NUR HIDAYAT', '3c2aff0b6b69b6726a3e82d587174ccd', 1),
-(23, '23241022', 'NABILA ASY SYARA GEANOVA', '3c2aff0b6b69b6726a3e82d587174ccd', 1),
-(24, '23241023', 'NAZILA NUR HAIDA ', '3c2aff0b6b69b6726a3e82d587174ccd', 1),
-(25, '23241024', 'NUR ARBY PUTRA ', '3c2aff0b6b69b6726a3e82d587174ccd', 1),
-(26, '23241025', 'NURHAYATI', '3c2aff0b6b69b6726a3e82d587174ccd', 1),
-(27, '23241026', 'RAISYA ALIFA AYU ANDJANI ', '3c2aff0b6b69b6726a3e82d587174ccd', 1),
-(28, '23241027', 'RANGGA HADI KUSUMAH ', '3c2aff0b6b69b6726a3e82d587174ccd', 1),
-(29, '23241028', 'REYVAN ALFA REZKY KENCANA ', '3c2aff0b6b69b6726a3e82d587174ccd', 1),
-(30, '23241029', 'RHISMA FAUZIAH', '3c2aff0b6b69b6726a3e82d587174ccd', 1),
-(31, '23241030', 'RIZKI MAULANA PUTRA', '3c2aff0b6b69b6726a3e82d587174ccd', 1),
-(32, '23241031', 'SALSABILA CHOSYAH', '3c2aff0b6b69b6726a3e82d587174ccd', 1),
-(33, '23241032', 'SILVY NUR OKTAVIANY', '3c2aff0b6b69b6726a3e82d587174ccd', 1),
-(34, '23241033', 'SRI SUCI GILANG CAHAYA', '3c2aff0b6b69b6726a3e82d587174ccd', 1),
-(35, '23241034', 'SYIFA NURISMAN', '3c2aff0b6b69b6726a3e82d587174ccd', 1),
-(36, '23241035', 'UFAS AMZANI ', '3c2aff0b6b69b6726a3e82d587174ccd', 1),
-(37, '23241036', 'VIVIH TOFIA', '3c2aff0b6b69b6726a3e82d587174ccd', 1),
-(38, '23241037', 'ADIS PRADISTA', '3c2aff0b6b69b6726a3e82d587174ccd', 2),
-(39, '23241038', 'AHMAD REZA', '3c2aff0b6b69b6726a3e82d587174ccd', 2),
-(40, '23241039', 'AISYA NURHOLIVAH', '3c2aff0b6b69b6726a3e82d587174ccd', 2),
-(41, '23241040', 'ARGA NUGRAHA', '3c2aff0b6b69b6726a3e82d587174ccd', 2),
-(42, '23241041', 'ARISYA NURZAHRA', '3c2aff0b6b69b6726a3e82d587174ccd', 2),
-(43, '23241042', 'CENZHA MUHAMAD SAJJAD', '3c2aff0b6b69b6726a3e82d587174ccd', 2),
-(44, '23241043', 'DEA RAHMAWATI', '3c2aff0b6b69b6726a3e82d587174ccd', 2),
-(45, '23241044', 'DENIS AMERALDI ', '3c2aff0b6b69b6726a3e82d587174ccd', 2),
-(46, '23241045', 'DIANDRA CINDY RAMADHANI ', '3c2aff0b6b69b6726a3e82d587174ccd', 2),
-(47, '23241046', 'DIWAN', '3c2aff0b6b69b6726a3e82d587174ccd', 2),
-(48, '23241047', 'ERNI DESTIANI', '3c2aff0b6b69b6726a3e82d587174ccd', 2),
-(49, '23241048', 'FAUZAN NUR RIZKI', '3c2aff0b6b69b6726a3e82d587174ccd', 2),
-(50, '23241049', 'HANA SHOFIANA SHOLIHAH', '3c2aff0b6b69b6726a3e82d587174ccd', 2),
-(51, '23241050', 'IKHSAN MAULANA', '3c2aff0b6b69b6726a3e82d587174ccd', 2),
-(52, '23241051', 'JEHAN APRILIYANTI ', '3c2aff0b6b69b6726a3e82d587174ccd', 2),
-(53, '23241052', 'JUAN FADHILA SUDIA', '3c2aff0b6b69b6726a3e82d587174ccd', 2),
-(54, '23241053', 'MAYA JULIANTI', '3c2aff0b6b69b6726a3e82d587174ccd', 2),
-(55, '23241054', 'MUCHAMMAD HAICHALL AZIZ PRATAM', '3c2aff0b6b69b6726a3e82d587174ccd', 2),
-(56, '23241055', 'MUHAMAD IRPAN PIRDAUS', '3c2aff0b6b69b6726a3e82d587174ccd', 2),
-(57, '23241056', 'MUHAMAD TAZQI HAMDANI', '3c2aff0b6b69b6726a3e82d587174ccd', 2),
-(58, '23241057', 'MUHAMMAD IRFAN LESMANA', '3c2aff0b6b69b6726a3e82d587174ccd', 2),
-(59, '23241058', 'NADIA AGUSTINA', '3c2aff0b6b69b6726a3e82d587174ccd', 2),
-(60, '23241059', 'NINDYA TITIS PURWATY', '3c2aff0b6b69b6726a3e82d587174ccd', 2),
-(61, '23241060', 'NUR DENI SETIAWAN', '3c2aff0b6b69b6726a3e82d587174ccd', 2),
-(62, '23241061', 'NURLAELA', '3c2aff0b6b69b6726a3e82d587174ccd', 2),
-(63, '23241062', 'RAISYA NUR RISMAYANTI', '3c2aff0b6b69b6726a3e82d587174ccd', 2),
-(64, '23241063', 'RANGGA UBAIDILLAH', '3c2aff0b6b69b6726a3e82d587174ccd', 2),
-(65, '23241064', 'REYVAN DIVA PUTRA SUTARDI ', '3c2aff0b6b69b6726a3e82d587174ccd', 2),
-(66, '23241065', 'RIMA ZESIKA', '3c2aff0b6b69b6726a3e82d587174ccd', 2),
-(67, '23241066', 'RIZKI NUR FAUZI ', '3c2aff0b6b69b6726a3e82d587174ccd', 2),
-(68, '23241067', 'SALWA NUR FIRDAUS ', '3c2aff0b6b69b6726a3e82d587174ccd', 2),
-(69, '23241068', 'SINTA AMALIA DESWANTI PUTRI ', '3c2aff0b6b69b6726a3e82d587174ccd', 2),
-(70, '23241069', 'SRI SULASTRI ', '3c2aff0b6b69b6726a3e82d587174ccd', 2),
-(71, '23241070', 'TALIA RAHMAWATI', '3c2aff0b6b69b6726a3e82d587174ccd', 2),
-(72, '23241071', 'WILDA FITRIANI', '3c2aff0b6b69b6726a3e82d587174ccd', 2),
-(73, '23241072', 'WISNU DARMAWAN ', '3c2aff0b6b69b6726a3e82d587174ccd', 2),
-(75, '23241073', 'ADIT DARMA WIGUNA', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
-(76, '23241074', 'AHMAD RIZKY ALGHONIYU ', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
-(77, '23241075', 'AKHIRA AZANING SUKMA', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
-(78, '23241076', 'APIN ADITYA SUHENDI', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
-(79, '23241077', 'ASTI JUNIANTI ', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
-(80, '23241078', 'DADAN JUANDA', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
-(81, '23241079', 'DEDEH LISNAWATI ANGGRAENI', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
-(82, '23241080', 'DERI ZAELANI ', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
-(83, '23241081', 'DINDA SRI ANDRIANI KOMARA', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
-(84, '23241082', 'DWIKI JULIANSYAH SUDRAJAT ', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
-(85, '23241083', 'EVA OKTARIA', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
-(86, '23241084', 'FAJAR FADILAH', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
-(87, '23241085', 'FIKRI OKTA PRATAMA', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
-(88, '23241086', 'HELMA LIAPUTRI ', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
-(89, '23241087', 'ILHAM AHMAD ZAKARIA', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
-(90, '23241088', 'JELITA KRISTIANTI', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
-(91, '23241089', 'KAKA MAULANA', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
-(92, '23241090', 'MAYA NUR FANTA ', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
-(93, '23241091', 'MUCHAMAD RAZIQIN BUDI SAPUTRA', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
-(94, '23241092', 'MUHAMAD AGUS PRASETYO ', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
-(95, '23241093', 'MUHAMAD RANGGA MAULANA', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
-(96, '23241094', 'MUHAMMAD RAKAN AL IMTIYAZ', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
-(97, '23241095', 'NADYA KAPORINA ', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
-(98, '23241096', 'NISA DINA FADILA', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
-(99, '23241097', 'PASHA FADILAH', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
-(100, '23241098', 'PEBRIANTI ANJANI PUTRI', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
-(101, '23241099', 'RASYAD FARRAS PRADIPA ', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
-(102, '23241100', 'RISKA DINI ROSIANA', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
-(103, '23241101', 'RIZKY MUHAMMAD SIDIQ', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
-(104, '23241102', 'SANYA DWI NOVIA ', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
-(105, '23241103', 'SINTIA FITRIANI', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
-(106, '23241104', 'SITI ZAQIAH', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
-(107, '23241105', 'SRI WULAN WAHYUNI', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
-(108, '23241106', 'THEA PUTRI ANANDA ', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
-(109, '23241107', 'WINDA VERLITA FEBRIYANTI ', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
-(110, '23241108', 'WISNU MUHAMMAD SIDIK', '3c2aff0b6b69b6726a3e82d587174ccd', 3),
-(23241073, '23241001', 'ACHAMAD FADILAH MAULANA', '3c2aff0b6b69b6726a3e82d587174ccd', 1),
-(23241074, '111', 'Guru 1', '698d51a19d8a121ce581499d7b701668', 1),
-(23241075, '222', 'Guru 2', 'bcbe3365e6ac95ea2c0343a2395834dd', 2),
-(23241076, '333', 'Guru 3', '310dcbbf4cce62f762a2aaa148d556bd', 1),
-(23241077, '444', 'Guru 4', '550a141f12de6341fba65b0ad0433500', 2),
-(23241078, '555', 'Guru 5', '15de21c670ae7c3f6f3f1f37029303c9', 2),
-(23241079, '123', 'Aku Bisa', '25d55ad283aa400af464c76d713c07ad', 1);
+(22, '85439276', 'Andi Setiawan', '$2y$10$7UDuy3jDdDc7Uyb//pb8kO84tccN/228HtM.jAELmvCNcCwEqt6tC', 12),
+(23, '92315784', 'Rina Suryani', '$2y$10$7UDuy3jDdDc7Uyb//pb8kO84tccN/228HtM.jAELmvCNcCwEqt6tC', 12),
+(24, '73645198', 'Agus Pranoto', '$2y$10$7UDuy3jDdDc7Uyb//pb8kO84tccN/228HtM.jAELmvCNcCwEqt6tC', 12),
+(25, '123', 'Apep', '$2y$10$7UDuy3jDdDc7Uyb//pb8kO84tccN/228HtM.jAELmvCNcCwEqt6tC', 1),
+(26, '54321', 'Abizar Hafiz Alfatih', '$2y$10$HzIT0hlQ5dgXVWviZbVrt.yYHR2OhwV5wVDiymHTK1P0vmNgKsmOe', 12),
+(27, '789', 'Siswa Test', '$2y$10$7UbOw249OEVOc2xzPVqaFeGa5mPth5TDWvunfd5BGJ0JDz/FyZ/4q', 12),
+(58, '111', 'Siswa Test', '$2y$10$sPfZVEPTkmeqTK7LRjeMo.nCDobLHoo/ros.J5Edp95pI5FY9/9Uq', 12),
+(59, '222', 'Siswa Test', '$2y$10$sPfZVEPTkmeqTK7LRjeMo.nCDobLHoo/ros.J5Edp95pI5FY9/9Uq', 12),
+(60, '333', 'Febri Pratama', '$2y$10$sPfZVEPTkmeqTK7LRjeMo.nCDobLHoo/ros.J5Edp95pI5FY9/9Uq', 3),
+(61, '444', 'Andika Putra Pratama', '$2y$10$sPfZVEPTkmeqTK7LRjeMo.nCDobLHoo/ros.J5Edp95pI5FY9/9Uq', 4),
+(62, '555', 'Ripaldi', '$2y$10$sPfZVEPTkmeqTK7LRjeMo.nCDobLHoo/ros.J5Edp95pI5FY9/9Uq', 5),
+(63, '666', 'X-RPL 6', '$2y$10$sPfZVEPTkmeqTK7LRjeMo.nCDobLHoo/ros.J5Edp95pI5FY9/9Uq', 6),
+(64, '777', 'X-RPL 7', '$2y$10$sPfZVEPTkmeqTK7LRjeMo.nCDobLHoo/ros.J5Edp95pI5FY9/9Uq', 13),
+(65, '888', 'M Syahril', '$2y$10$sPfZVEPTkmeqTK7LRjeMo.nCDobLHoo/ros.J5Edp95pI5FY9/9Uq', 8),
+(66, '999', 'M Irvan Yusuf', '$2y$10$sPfZVEPTkmeqTK7LRjeMo.nCDobLHoo/ros.J5Edp95pI5FY9/9Uq', 9),
+(67, '101', 'Rizal', '$2y$10$sPfZVEPTkmeqTK7LRjeMo.nCDobLHoo/ros.J5Edp95pI5FY9/9Uq', 10);
 
 -- --------------------------------------------------------
 
@@ -282,7 +181,19 @@ INSERT INTO `soal` (`id_soal`, `judul`, `soal`, `waktu`, `status`, `id_ujian`, `
 (24, 'Penjumlahan 2 Bilangan', '<p>Buatlah sebuah fungsi untuk menjumlahkan 2 bilangan integer</p>', 10, 'aktif', 13, '$num1, $num2', 'jumlah', ''),
 (25, 'Tahun Kabisat', '<p>Tahun kabisat adalah tahun yang habis dibagi 4. Misalnya:<br>2024 → kabisat<br>2020 → kabisat<br>2016 → kabisat<br><br>Buat fungsi untuk mengetahui apakah tahun tertentu adalah kabisat atau bukan. Return <strong>true </strong>jika kabisat dan return <strong>false </strong>jika bukan kabisat.</p>', 10, 'aktif', 13, '$tahun', 'cek_kabisat', ''),
 (26, 'Palindrome', '<p>Palindrome adalah sebuah kata yang jika dibalik, hasilnya tetap sama. Contohnya:<br>katak → palindrome (dibalik tetap <strong>katak</strong>)<br>malam → palindrome (dibalik tetap <strong>malam</strong>)<br>ini → palindrome (dibalik tetap <strong>ini</strong>)<br><br>Buat sebuah fungsi untuk mengetahui apakah sebuah kata termasuk palindrome. Return <strong>true </strong>jika palindrome dan return <strong>false </strong>jika bukan palindrome.</p>', 0, 'aktif', 13, '$kata', 'palindrome_cek', ''),
-(30, 'Percobaan', '<script>\r\n    document.body.innerHTML = \"<h1>Website Telah Diretas!</h1>\";\r\n</script>\r\n', 10, 'aktif', 13, '&#34;test&#34;', 'test', '');
+(30, 'Percobaan', '<script>\r\n    document.body.innerHTML = \"<h1>Website Telah Diretas!</h1>\";\r\n</script>\r\n', 10, 'aktif', 13, '&#34;test&#34;', 'test', ''),
+(32, 'Menghitung Kembalian', '<p>Buatlah sebuah program sederhana untuk menghitung kembalian yang didapat seorang pembeli.</p><p>Variabel yang digunakan adalah: <strong>$harga</strong> dan <strong>$uang</strong></p>', 0, 'aktif', 16, '$uang, $harga', 'kembalian', ''),
+(33, 'Berapa Luas Tanah Abdul?', '<p>Abdul memiliki beberapa bidang tanah berbentuk persegi panjang. Ia ingin mengetahui luas dari setiap tanah yang dia miliki. Bantu Abdul dengan membuat program untuk menghitung luas tanahnya.</p><p>Variabel yang digunakan adalah: <strong>$panjang</strong> dan <strong>$lebar</strong></p>', 0, 'aktif', 16, '$panjang, $lebar', 'luas_tanah', ''),
+(34, 'Cara Berhitung Programmer', '<p>Buatlah sebuah program untuk menampilkan angka paling awal dari setiap array. Variabel yang digunakan: <strong>$arr</strong></p>', 0, 'aktif', 16, '$arr', 'awal', ''),
+(35, 'Pembagian Nggak Selalu Pas', '<p>Buatlah sebuah program sederhana untuk menampilkan sisa hasil pembagian antara bilangan pertama dengan bilangan kedua. Variabel yang digunakan adalah: <strong>$bil1</strong> dan <strong>$bil2</strong></p>', 0, 'aktif', 16, '$bil1, $bil2', 'sisa', ''),
+(36, 'Harga Barang Makin Mahal', '<p>Ketika seseorang membeli barang, maka harga barang tersebut akan ditambah dengan pajak. Buatlah sebuah program untuk menghitung harga total yang harus dibayarkan setelah ditambah pajak. Pajak yang dimaksud bernilai tetap (bukan persentase).</p><p>Variabel yang digunakan: <strong>$harga</strong> dan <strong>$pajak</strong></p>', 0, 'aktif', 16, '$harga, $pajak', 'total', ''),
+(37, 'Ganjil Genap', '<p>Bilangan genap adalah bilangan yang <strong>habis dibagi 2</strong>. Sedangkan bilangan ganjil adalah bilangan yang <strong>tidak habis dibagi 2</strong>. Buatlah sebuah program sederhana untuk menentukan sebuah bilangan adalah ganjil atau genap.</p><ul><li>Tampilkan <strong>genap </strong>jika bilangan genap</li><li><p>Tampilkan <strong>ganjil </strong>jika bilangan ganjil</p><p>Variabel yang digunakan adalah <strong>$bilangan</strong></p></li></ul>', 0, 'aktif', 16, '$bilangan', 'ganjilgenap', ''),
+(38, 'Menentukan Kelulusan Siswa', '<p>Seorang siswa dinyatakan lulus jika nilainya lebih dari atau sama dengan 75. Buat program untuk menentukan kelulusan siswa tersebut</p><ul><li>Tampilkan <strong>lulus </strong>jika siswa lulus</li><li>Tampilkan <strong>tidak lulus</strong> jika siswa tidak lulus</li></ul><p>Variabel yang digunakan adalah <strong>$nilai</strong></p>', 0, 'aktif', 16, '$nilai', 'kelulusan', ''),
+(39, 'Tahun Kabisat', '<p>Tahun kabisat adalah tahun yang <strong>habis dibagi 4</strong>. Tahun ini ditandai dengan jumlah hari pada bulan Februari yang berjumlah 29 hari. Contohnya, 2020 adalah tahun kabisat karena <strong>2020 dibagi 4 hasilnya adalah 505</strong> (pas, tidak ada sisa). Sedangkan 2021 bukan tahun kabisat karena <strong>2021 dibagi 4 hasilnya adalah 505 sisa 1</strong>. Buatlah sebuah program sederhana untuk menentukan sebuah tahun adalah kabisat atau bukan kabisat.</p><ul><li>Tampilkan <strong>kabisat </strong>jika tahun tersebut adalah kabisat</li><li>Tampilkan <strong>bukan kabisat</strong> jika tahun tersebut bukan kabisat</li></ul><p>Variabel yang digunakan adalah <strong>$tahun</strong></p>', 0, 'aktif', 16, '$tahun', 'kabisat', ''),
+(40, 'Tidak Semua Bilangan itu Positif', '<p>Bilangan positif adalah bilangan yang lebih dari 0 (1,2,3,4, dst). Bilangan negatif adalah bilangan yang kurang dari 0 (-1,-2,-3,-4, dst). Sedangkan 0 adalah bilangan yang sama dengan 0. Buatlah sebuah program sederhana untuk menentukan sebuah bilangan adalah bilangan positif, negatif, atau 0.</p><ul><li>Tampilkan <strong>positif </strong>jika bilangan adalah positif</li><li>Tampilkan <strong>negatif </strong>jika bilangan adalah negatif</li><li>Tampilkan <strong>nol </strong>jika bilangan adalah nol</li></ul><p>Variabel yang digunakan adalah <strong>$bilangan</strong></p>', 0, 'aktif', 16, '$bilangan', 'posneg', ''),
+(41, 'Uangmu cukup?', '<p>Seorang pembeli akan mendapatkan kembalian jika uangnya lebih dari harga barang. Buat program sederhana untuk menentukan pembeli tersebut mendapat kembalian atau tidak.</p><ul><li>Tampilkan <strong>mendapat kembalian</strong> jika pembeli dapat kembalian</li><li>Tampilkan <strong>tidak mendapat kembalian</strong> jika pembeli tidak dapat kembalian</li></ul><p>Variabel yang digunakan adalah <strong>$uang</strong> dan <strong>$harga</strong></p>', 0, 'aktif', 16, '$uang, $harga', 'cek_kembalian', ''),
+(42, 'Soal 1', '<p>Buatlah kode PHP untuk menghitung luas sebuah persegi</p>\r\n<p>Variabel yang digunakan adalah: <strong>$sisi</strong></p>', 0, 'aktif', 15, '$sisi', 'luas_persegi', ''),
+(43, 'Soal 2', '<p>Jalan tol hanya bisa dilalui oleh kendaraan roda 4 atau lebih. Buatlah sebuah kode program untuk menentukan sebuah kendaraan bisa masuk toll atau tidak berdasarkan jumlah rodanya.</p><p>Tampilkan <strong>boleh masuk </strong>jika kendaraan memiliki lebih dari 4 roda.</p><p>Tampilkan <strong>dilarang masuk </strong>jika kendaraan memiliki kurang dari 4 roda.</p>\r\n\r\n<p>Varibel yang digunakan: <strong>$jumlah_roda</strong></p>', 0, 'aktif', 15, '$jumlah_roda', 'jalan_toll', '');
 
 -- --------------------------------------------------------
 
@@ -340,7 +251,20 @@ INSERT INTO `s_testcase` (`id_s_testcase`, `input`, `output`, `id_soal`) VALUES
 (8, '13', '13', 27),
 (9, '13', '13', 28),
 (10, '13', '13', 29),
-(11, '13', '13', 30);
+(11, '13', '13', 30),
+(12, '12', '12', 31),
+(13, '50000, 43000', '7000', 32),
+(14, '7, 9', '63', 33),
+(15, '[4,5,6,7]', '4', 34),
+(16, '7, 3', '1', 35),
+(17, '5000, 500', '5500', 36),
+(18, '25', 'ganjil', 37),
+(19, '90', 'lulus', 38),
+(20, '2022', 'bukan kabisat', 39),
+(21, '5', 'positif', 40),
+(22, '5000, 3500', 'mendapat kembalian', 41),
+(23, '5', '25', 42),
+(24, '2', 'dilarang masuk', 43);
 
 -- --------------------------------------------------------
 
@@ -386,7 +310,46 @@ INSERT INTO `testcase` (`id_testcase`, `input`, `output`, `id_soal`) VALUES
 (54, '12', '12', 29),
 (55, '10', '10', 30),
 (56, '11', '11', 30),
-(57, '12', '12', 30);
+(57, '12', '12', 30),
+(58, '12', '12', 31),
+(59, '12', '12', 31),
+(60, '12', '12', 31),
+(61, '10000, 7000', '3000', 32),
+(62, '5000, 2500', '2500', 32),
+(63, '20000, 19000', '1000', 32),
+(64, '9, 5', '45', 33),
+(65, '10, 6', '60', 33),
+(66, '7, 4', '28', 33),
+(67, '[9,8,5,4,2]', '9', 34),
+(68, '[70,98,76,80]', '70', 34),
+(69, '[6,8,4,2,3]', '6', 34),
+(70, '10, 2', '0', 35),
+(71, '9, 6', '3', 35),
+(72, '6, 4', '2', 35),
+(73, '10000, 1100', '11100', 36),
+(74, '25000, 3000', '28000', 36),
+(75, '30000, 3300', '33300', 36),
+(76, '5', 'ganjil', 37),
+(77, '6', 'genap', 37),
+(78, '7', 'ganjil', 37),
+(79, '74', 'tidak lulus', 38),
+(80, '75', 'lulus', 38),
+(81, '76', 'lulus', 38),
+(82, '2020', 'kabisat', 39),
+(83, '2021', 'bukan kabisat', 39),
+(84, '2024', 'kabisat', 39),
+(85, '-1', 'negatif', 40),
+(86, '0', 'nol', 40),
+(87, '1', 'positif', 40),
+(88, '1000, 600', 'mendapat kembalian', 41),
+(89, '2000, 2000', 'tidak mendapat kembalian', 41),
+(90, '100, 1000', 'tidak mendapat kembalian', 41),
+(91, '12', '144', 42),
+(92, '9', '81', 42),
+(93, '7', '49', 42),
+(94, '4', 'boleh masuk', 43),
+(95, '3', 'dilarang masuk', 43),
+(96, '5', 'boleh masuk', 43);
 
 -- --------------------------------------------------------
 
@@ -406,8 +369,10 @@ CREATE TABLE `ujian` (
 --
 
 INSERT INTO `ujian` (`id_ujian`, `nama_ujian`, `status`, `id_guru`) VALUES
-(13, 'Ujian Tengah Semester', 'aktif', 1),
-(14, 'Ulangan Materi Operator', 'tidak aktif', 1);
+(13, 'Ujian Tengah Semester', 'tidak aktif', 1),
+(14, 'Ulangan Materi Operator', 'tidak aktif', 1),
+(15, 'Sosialisasi Lomba Coding', 'aktif', 1),
+(16, 'Lomba Coding PORAK Semester Ganjil 2024', 'aktif', 1);
 
 -- --------------------------------------------------------
 
@@ -430,7 +395,30 @@ INSERT INTO `ujian_kelas` (`id_ujian_kelas`, `id_ujian`, `id_kelas`) VALUES
 (19, 13, 2),
 (20, 13, 3),
 (21, 14, 1),
-(22, 14, 2);
+(22, 14, 2),
+(23, 15, 1),
+(24, 15, 2),
+(25, 15, 3),
+(26, 15, 4),
+(27, 15, 5),
+(28, 15, 6),
+(29, 15, 7),
+(30, 15, 8),
+(31, 15, 9),
+(32, 15, 10),
+(33, 15, 11),
+(34, 16, 1),
+(35, 16, 2),
+(36, 16, 3),
+(37, 16, 4),
+(38, 16, 5),
+(39, 16, 6),
+(40, 16, 7),
+(41, 16, 8),
+(42, 16, 9),
+(43, 16, 10),
+(44, 16, 11),
+(45, 15, 13);
 
 --
 -- Indexes for dumped tables
@@ -512,13 +500,13 @@ ALTER TABLE `ujian_kelas`
 -- AUTO_INCREMENT for table `guru`
 --
 ALTER TABLE `guru`
-  MODIFY `id_guru` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_guru` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `hasil`
 --
 ALTER TABLE `hasil`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `jawaban`
@@ -530,19 +518,19 @@ ALTER TABLE `jawaban`
 -- AUTO_INCREMENT for table `kelas`
 --
 ALTER TABLE `kelas`
-  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23241080;
+  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT for table `soal`
 --
 ALTER TABLE `soal`
-  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `soal_test`
@@ -554,25 +542,25 @@ ALTER TABLE `soal_test`
 -- AUTO_INCREMENT for table `s_testcase`
 --
 ALTER TABLE `s_testcase`
-  MODIFY `id_s_testcase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_s_testcase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `testcase`
 --
 ALTER TABLE `testcase`
-  MODIFY `id_testcase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id_testcase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 
 --
 -- AUTO_INCREMENT for table `ujian`
 --
 ALTER TABLE `ujian`
-  MODIFY `id_ujian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_ujian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `ujian_kelas`
 --
 ALTER TABLE `ujian_kelas`
-  MODIFY `id_ujian_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_ujian_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
