@@ -6,7 +6,7 @@ Pada penggunaannya, siswa akan mendapatkan soal pemrograman dan diharuskan untuk
 <h1>Instalasi</h1>
 <ol>
     <li>Clone repository ini</li>
-    <li>Copy project ke folde htdocs jika menggunakan XAMPP atau ke folder www jika menggunakan laragon</li>
+    <li>Copy project ke folder htdocs jika menggunakan XAMPP atau ke folder www jika menggunakan laragon</li>
     <li>Jalankan Apache dan Mysql di XAMPP atau Klik Start All di Laragon</li>
     <li>Buat sebuah database bernama tesphp di phpmyadmin</li>
     <li>Import database tesphp.sql</li>
@@ -65,7 +65,8 @@ Pada penggunaannya, siswa akan mendapatkan soal pemrograman dan diharuskan untuk
         <ul>
             <li>Jika input berupa integer atau float maka input bisa ditulis tanpa format. Contoh --> 25 (integer) 2.5 (float)</li>
             <li>Jika input berupa string, maka input ditulis di antara tanda petik dua ("). Contoh --> "apep"</li>
-            <li>Jika input berupa boolean, maka input bisa ditulis langsung tanpa format menggunakan huruf kecil. Contoh --> true, false</li>
+            <li>Jika input berupa boolean, maka input bisa ditulis langsung tanpa format menggunakan huruf kecil. Contoh --> true</li>
+            <li>Jika parameter lebih dari satu, maka input juga menyesuaikan. Penulisan input lebih dari satu dipisah dengan koma dan spasi. Contoh --> 20, 5</li>
         </ul>
     </li>
     <li>Isi semua output dengan format sebagai berikut:
@@ -76,5 +77,13 @@ Pada penggunaannya, siswa akan mendapatkan soal pemrograman dan diharuskan untuk
     </li>
     <li>Isi bagian Secret Sample Test seperti penginputan Input dan Output di atas. Notes: Secret Sample Test tidak akan ditampilkan kepada siswa</li>
 </ol>
-
-
+<p>
+    <h3>Contoh Soal</h3>
+    Buatlah sebuah kode program untuk menghitung luas persegi panjang.
+    <ul>
+        <li>Contoh Nama Fungsi: luas_persegi_panjang</li>
+        <li>Contoh Parameter: $panjang, $lebar</li>
+        <li>Contoh Input: 10, 5</li>
+        <li>Contoh Output: 50 Angka ini merupakan hasil perkalian 10 dan 5 yang diambil dari rumus persegi panjang (panjang * lebar)</li>
+    </ul>
+</p>
