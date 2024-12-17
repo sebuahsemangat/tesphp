@@ -85,7 +85,7 @@ $koneksi->close();
         <label for="file" class="form-label">File Excel</label>
         <input type="file" class="form-control" id="file" name="file" required>
         <small id="passwordHelpBlock" class="form-text text-muted">
-            <a href="#">Download Format di Sini</a>
+            <a href="siswa.xlsx" target="_blank">Download Format di Sini</a>
         </small>
     </div>
     <div class="mb-3">
