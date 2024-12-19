@@ -117,6 +117,10 @@ str_replace(".py","",$filecode) . "." . $soal["function_name"] . '(' . $data_s_t
                 break;
             }
         }
+
+        // mencari pesan error
+        $error = stream_get_contents($pipes[2]);
+
         fclose($pipes[1]);
         fclose($pipes[2]);
 
@@ -133,11 +137,11 @@ str_replace(".py","",$filecode) . "." . $soal["function_name"] . '(' . $data_s_t
         $output = "false";
     }
 
-    if (trim($output) != $data_s_testcase["output"]) {
+    if (trim($output) != $data_s_testcase["output"] || !empty($error)) { //jika ada error maka tampilkan pesan errornya
         echo "<div class='border border-danger mb-2 p-1'>
         <strong>Jawaban Salah! Perbaiki jawaban anda!</strong>
         <hr>
-        Output: " . $output . "
+        Output: " . $output . nl2br($error) ."
         </div>";
     } else {
         // Mencari data dari tabel testcase
