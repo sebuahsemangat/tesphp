@@ -54,7 +54,7 @@ echo "<h2>" . htmlspecialchars($data_ujian['nama_ujian']) . "</h2>";
             $result_nilai = $stmt_nilai->get_result();
             $data_hasil = $result_nilai->fetch_assoc();
             $cek_jawaban = $result_nilai->num_rows;
-            ?>
+        ?>
             <tr>
                 <td><?= $no; ?></td>
                 <td><?= htmlspecialchars($data_soal['judul']); ?></td>
@@ -62,7 +62,7 @@ echo "<h2>" . htmlspecialchars($data_ujian['nama_ujian']) . "</h2>";
                     <?= ($cek_jawaban == 1) ? "Sudah dikerjakan" : "Belum dikerjakan"; ?>
                 </td>
                 <td>
-                    <?= ($cek_jawaban == 1) ? ucfirst($data_hasil["test_result"]) : "Belum dikerjakan";?>
+                    <?= ($cek_jawaban == 1) ? ucfirst($data_hasil["test_result"]) : "Belum dikerjakan"; ?>
                 </td>
                 <td>
                     <?php if ($cek_jawaban == 1) { ?>
@@ -70,12 +70,12 @@ echo "<h2>" . htmlspecialchars($data_ujian['nama_ujian']) . "</h2>";
                             href='home.php?page=lihat_jawaban&id_ujian=<?= $data_ujian['id_ujian']; ?>&id_soal=<?= $data_soal['id_soal']; ?>'>Lihat
                             Jawaban</a>
                     <?php } else { ?>
-                        <a
-                            href='home.php?page=kerjakan&id_ujian=<?= $data_ujian['id_ujian']; ?>&id_soal=<?= $data_soal['id_soal']; ?>'>Kerjakan</a>
+                        <a href='home.php?page=kerjakan&id_ujian=<?= $data_ujian['id_ujian']; ?>&id_soal=<?= $data_soal['id_soal']; ?>'><i class="fa-brands fa-php"></i></a>
+                        <a href='home.php?page=kerjakan_py&id_ujian=<?= $data_ujian['id_ujian']; ?>&id_soal=<?= $data_soal['id_soal']; ?>'><i class="fa-brands fa-python"></i></a>
                     <?php } ?>
                 </td>
             </tr>
-            <?php
+        <?php
             // Menutup prepared statement untuk nilai
             $stmt_nilai->close();
             //akhir looping soal

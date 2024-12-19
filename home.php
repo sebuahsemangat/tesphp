@@ -69,8 +69,8 @@ if (!isset($_SESSION['siswa'])) {
     <?php
     if (isset($_GET['page']) && $_GET['page'] != '') {
 
-        if ($_GET['page'] == 'kerjakan' || $_GET['page'] == 'lihat_jawaban') {
-            ?>
+        if ($_GET['page'] == 'kerjakan' || $_GET['page'] == 'lihat_jawaban' || $_GET['page'] == 'kerjakan_py') {
+    ?>
             <style>
                 .bd-placeholder-img {
                     font-size: 1.125rem;
@@ -139,15 +139,17 @@ if (!isset($_SESSION['siswa'])) {
             <script src="codemirror/mode/css/css.js"></script>
             <script src="codemirror/mode/clike/clike.js"></script>
             <script src="codemirror/mode/php/php.js"></script>
+            <script src="codemirror/mode/python/python.js"></script>
             <style>
                 .CodeMirror {
                     border: solid 1px black;
                 }
             </style>
-            <?php
+    <?php
         }
     }
     ?>
+    <script src="https://kit.fontawesome.com/6565789de8.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -191,6 +193,9 @@ if (!isset($_SESSION['siswa'])) {
                         case "kerjakan":
                             include "do-test.php";
                             break;
+                        case "kerjakan_py":
+                            include "do-test_py.php";
+                            break;
                         case "lihat_jawaban":
                             include "lihat_jawaban.php";
                             break;
@@ -222,28 +227,20 @@ if (!isset($_SESSION['siswa'])) {
     <script>
         let table = new DataTable('#myTable');
     </script>
-
+    <?php if ($page == "kerjakan_py") {
+        $textarea_mode = "python"; //mode python untuk codemirror
+    } else {
+        $textarea_mode = "application/x-httpd-php";
+    } ?>
     <script>
         var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
             lineNumbers: true,
             matchBrackets: true,
-            mode: "application/x-httpd-php",
+            mode: "<?php echo $textarea_mode; ?>",
             indentUnit: 4,
 
         });
-        // editor.on("beforeChange", function (_, change) {
-        //     if (change.origin == "paste") change.cancel()
-        // });
-    </script>
-    <script>
-        var editor = CodeMirror.fromTextArea(document.getElementById("code2"), {
-            lineNumbers: true,
-            matchBrackets: true,
-            mode: "application/x-httpd-php",
-            indentUnit: 4,
-
-        });
-        editor.on("beforeChange", function (_, change) {
+        editor.on("beforeChange", function(_, change) {
             if (change.origin == "paste") change.cancel()
         });
     </script>
@@ -254,8 +251,8 @@ if (!isset($_SESSION['siswa'])) {
     </script>
     <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
     <!-- <?php
-    if (isset($_GET['page']) && $_GET['page'] != '' && $_GET['page'] == 'kerjakan') {
-        ?>
+            if (isset($_GET['page']) && $_GET['page'] != '' && $_GET['page'] == 'kerjakan') {
+            ?>
     <script>
         // Fungsi untuk melakukan redirect saat tab baru dibuka atau jendela baru dibuka, atau saat jendela diminimalkan
         function redirectToLogout() {
@@ -275,7 +272,7 @@ if (!isset($_SESSION['siswa'])) {
         });
     </script>
     <?php
-    }
+            }
     ?>
             -->
 </body>
