@@ -35,7 +35,7 @@ Pada penggunaannya, siswa akan mendapatkan soal pemrograman dan diharuskan untuk
 
 <h1>Login Admin</h1>
 <ol>
-    <li>Buka aplikasi di browser (Chrome recommended): localhost/tesphp</li>
+    <li>Buka aplikasi di browser (Chrome recommended): localhost/tesphp/guru</li>
     <li>Login dengan akun demo: Username-->aku Password-->123</li>
 </ol>
 
