@@ -124,6 +124,11 @@ echo ' . $soal["function_name"] . '(' . $data_s_testcase["input"] . ');';
         $output = "Error executing test code.";
     }
 
+    //hapus file code siswa
+    // unlink($code_path);
+
+    //hapus file secret testcase
+    unlink($s_test_path);
     // Antisipasi untuk output berupa boolean
     if ($output == "1" && $data_s_testcase["output"] == "true") {
         $output = "true";
@@ -205,6 +210,9 @@ echo ' . $soal["function_name"] . '(' . $data_testcase["input"] . ');';
             } else {
                 echo "<div class='border border-danger mb-2 p-1'><strong>Test Gagal! Input: " . $data_testcase["input"] . " Output: " . $output . " Output diharapkan: " . $data_testcase["output"] . "</strong></div>";
             }
+
+            //hapus file test case
+            unlink($test_path);
         }
         ?>
 
@@ -223,6 +231,8 @@ echo ' . $soal["function_name"] . '(' . $data_testcase["input"] . ');';
             <input type="submit" class="btn btn-lg btn-success mt-3" value="Kirim Jawaban">
         </form>
         <?php
+        //hapus code siswa
+        unlink($code_path);
     }
 }
 ?>

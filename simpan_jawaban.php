@@ -10,30 +10,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $hasil = htmlspecialchars($_POST['hasil'], ENT_QUOTES, 'UTF-8');
     $test_result = filter_input(INPUT_POST, 'test_result', FILTER_SANITIZE_STRING);
 
-    // Nama file code siswa
-    $nama_file_code_siswa = "codesiswa_" . $id_siswa . "_" . $id_soal . ".php";
-    $hapus_code_siswa = unlink("code/" . $nama_file_code_siswa);
 
-    //hapus secret testcase
-    $s_test_file = "/s_testcode_" . $id_siswa . "_" . $id_soal . "_" . $id_s_testcase . ".php";
-    unlink("code/" . $s_test_file);
-
-
-    if ($hapus_code_siswa) {
+    
         // Menyiapkan statement untuk mengambil data dari testcase
         $stmt_testcase = $koneksi->prepare("SELECT id_testcase FROM testcase WHERE id_soal = ?");
         $stmt_testcase->bind_param("i", $id_soal);
         $stmt_testcase->execute();
         $result_testcase = $stmt_testcase->get_result();
-
-        while ($data_testcase = $result_testcase->fetch_assoc()) {
-            $nama_file_testcase = "testcode_" . $id_siswa . "_" . $id_soal . "_" . $data_testcase["id_testcase"] . ".php";
-            $hapus_testcode = unlink("code/" . $nama_file_testcase);
-            if (!$hapus_testcode) {
-                echo "Gagal menghapus file testcase: " . $nama_file_testcase;
-                exit();
-            }
-        }
 
         // Menyiapkan statement untuk menyimpan jawaban
         $stmt_jawaban = $koneksi->prepare("INSERT INTO hasil (id_soal, id_ujian, id_siswa, jawaban, test_result) VALUES (?, ?, ?, ?, ?)");
@@ -48,7 +31,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             echo "Gagal menyimpan jawaban";
         }
-    } else {
-        echo "Gagal menghapus file";
-    }
+    
 }
