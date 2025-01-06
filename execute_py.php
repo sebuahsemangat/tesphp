@@ -129,7 +129,7 @@ str_replace(".py","",$filecode) . "." . $soal["function_name"] . '(' . $data_s_t
     } else {
         $output = "Error executing test code.";
     }
-
+    unlink($s_test_path);
     // Antisipasi untuk output berupa boolean
     if ($output == "1" && $data_s_testcase["output"] == "true") {
         $output = "true";
@@ -143,6 +143,7 @@ str_replace(".py","",$filecode) . "." . $soal["function_name"] . '(' . $data_s_t
         <hr>
         Output: " . $output . nl2br($error) ."
         </div>";
+        unlink($code_path);
     } else {
         // Mencari data dari tabel testcase
         $select_testcase = mysqli_query($koneksi, "SELECT * FROM testcase where id_soal='$id_soal'");
@@ -212,10 +213,12 @@ str_replace(".py","",$filecode). "." . $soal["function_name"] . '(' . $data_test
             } else {
                 echo "<div class='border border-danger mb-2 p-1'><strong>Test Gagal! Input: " . $data_testcase["input"] . " Output: " . $output . " Output diharapkan: " . $data_testcase["output"] . "</strong></div>";
             }
+            //hapus file test case
+            unlink($test_path);
         }
         ?>
 
-        <form action="simpan_jawaban_py.php" method="post" onsubmit="<?php if ($testcase_benar < $jumlah_testcase) {
+        <form action="simpan_jawaban.php" method="post" onsubmit="<?php if ($testcase_benar < $jumlah_testcase) {
             $test_result = "gagal";
             echo "return confirm('Hasil test masih ada kesalahan! Tetap kirim jawaban?')";
         } else {
@@ -230,6 +233,8 @@ str_replace(".py","",$filecode). "." . $soal["function_name"] . '(' . $data_test
             <input type="submit" class="btn btn-lg btn-success mt-3" value="Kirim Jawaban">
         </form>
         <?php
+        //hapus code siswa
+        unlink($code_path);
     }
 }
 ?>
