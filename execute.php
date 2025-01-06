@@ -142,7 +142,10 @@ echo ' . $soal["function_name"] . '(' . $data_s_testcase["input"] . ');';
         <hr>
         Output: " . $output . "
         </div>";
+        unlink($code_path);
     } else {
+        // Membuat file dan menulis isi kode ke dalamnya
+        file_put_contents($code_path, $user_code);
         // Mencari data dari tabel testcase
         $select_testcase = mysqli_query($koneksi, "SELECT * FROM testcase where id_soal='$id_soal'");
         $jumlah_testcase = mysqli_num_rows($select_testcase);
