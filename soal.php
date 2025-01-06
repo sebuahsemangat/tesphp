@@ -28,7 +28,6 @@ echo "<h2> <a href='home.php'><i class='fa-solid fa-backward'></i></a>   " . htm
         <tr>
             <th>No</th>
             <th>Judul Soal</th>
-            <th>Pengerjaan</th>
             <th>Hasil</th>
             <th></th>
         </tr>
@@ -55,9 +54,6 @@ echo "<h2> <a href='home.php'><i class='fa-solid fa-backward'></i></a>   " . htm
             <tr>
                 <td><?= $no; ?></td>
                 <td><?= htmlspecialchars($data_soal['judul']); ?></td>
-                <td>
-                    <?= ($cek_jawaban == 1) ? "Sudah dikerjakan" : "Belum dikerjakan"; ?>
-                </td>
                 <td>
                     <?= ($cek_jawaban == 1) ? ucfirst($data_hasil["test_result"]) : "Belum dikerjakan"; ?>
                 </td>
