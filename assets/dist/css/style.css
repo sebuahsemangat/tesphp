@@ -1,0 +1,46 @@
+/* CSS tambahan sesuai kebutuhan */
+.navbar {
+background: rgb(9,9,121);
+background: -moz-linear-gradient(135deg, rgba(9,9,121,1) 0%, rgba(0,212,255,1) 94%);
+background: -webkit-linear-gradient(135deg, rgba(9,9,121,1) 0%, rgba(0,212,255,1) 94%);
+background: linear-gradient(135deg, rgba(9,9,121,1) 0%, rgba(0,212,255,1) 94%);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#090979",endColorstr="#00d4ff",GradientType=1);
+}
+.navbar-brand {
+font-family: 'Fira Code', Tahoma, Geneva, Verdana, sans-serif;
+font-weight: 900;
+font-size: 1.7em;
+}
+
+.navbar-nav,
+.navbar-brand {
+padding-left: 20px;
+padding-right: 20px;
+}
+
+.navbar-nav .nav-item {
+margin-right: 10px;
+}
+
+.navbar-nav .nav-link {
+color: #fff;
+/* Warna tulisan putih */
+}
+
+
+
+/* .row {
+border: solid 1px #CCC;
+border-radius: 10px;
+box-shadow: 5px 5px 5px #DDD;
+padding-bottom: 10px;
+} */
+
+.footer {
+bottom: 0;
+width: 100%;
+background-color: #f8f9fa;
+font-family: 'Fira Code', Tahoma, Geneva, Verdana, sans-serif;
+text-align: center;
+padding: 10px 0;
+}

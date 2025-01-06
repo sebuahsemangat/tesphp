@@ -14,8 +14,6 @@ if (!isset($_SESSION['siswa'])) {
 }
 ?>
 
-<h2>Selamat Datang <?= htmlspecialchars($data_siswa["nama"], ENT_QUOTES, 'UTF-8'); ?></h2>
-
 <table id="myTable" class="table table-striped table-bordered" style="width:100%">
     <thead>
         <tr>
