@@ -57,3 +57,16 @@ padding-bottom: 10px;
 flex-shrink: 0;
 color: #fff;
 }
+
+.lang-icon {
+    font-size: 1.7em;
+}
+.btn-primary {
+    border: 0;
+    background: rgb(9,9,121);
+    background: -moz-linear-gradient(135deg, rgba(9,9,121,1) 0%, rgba(111,0,255,1) 94%);
+    background: -webkit-linear-gradient(135deg, rgba(9,9,121,1) 0%, rgba(111,0,255,1) 94%);
+    background: linear-gradient(135deg, rgba(9,9,121,1) 0%, rgba(111,0,255,1) 94%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#090979",endColorstr="#6f00ff",GradientType=1);
+   
+}

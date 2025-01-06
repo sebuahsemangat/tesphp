@@ -20,7 +20,6 @@ if (!isset($_SESSION['siswa'])) {
             <th>Nama Ujian</th>
             <th>Jumlah Soal</th>
             <th>Nilai Akhir</th>
-            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -65,10 +64,9 @@ if (!isset($_SESSION['siswa'])) {
                 // Menampilkan data ujian dan nilai
         ?>
                 <tr>
-                    <td><?= htmlspecialchars($data_ujian['nama_ujian'], ENT_QUOTES, 'UTF-8'); ?></td>
+                    <td><a href='home.php?page=soal&id_ujian=<?= htmlspecialchars($data_ujian['id_ujian'], ENT_QUOTES, 'UTF-8'); ?>'><?= htmlspecialchars($data_ujian['nama_ujian'], ENT_QUOTES, 'UTF-8'); ?></a></td>
                     <td><?= htmlspecialchars($data_ujian['jumlah_soal'], ENT_QUOTES, 'UTF-8'); ?></td>
                     <td><?= htmlspecialchars(number_format($nilai, 0), ENT_QUOTES, 'UTF-8'); ?></td>
-                    <td><a href='home.php?page=soal&id_ujian=<?= htmlspecialchars($data_ujian['id_ujian'], ENT_QUOTES, 'UTF-8'); ?>'>Kerjakan</a></td>
                 </tr>
         <?php
                 $stmt_jawaban_benar->close();

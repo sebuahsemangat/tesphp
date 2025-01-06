@@ -21,11 +21,8 @@ if (!$data_ujian) {
     exit();
 }
 
-echo "<h2>" . htmlspecialchars($data_ujian['nama_ujian']) . "</h2>";
+echo "<h2> <a href='home.php'><i class='fa-solid fa-backward'></i></a>   " . htmlspecialchars($data_ujian['nama_ujian']) . "</h2>";
 ?>
-
-<p><a href="home.php">Kembali</a></p>
-<h4>List Soal</h4>
 <table id="myTable" class="table table-striped table-bordered" style="width:100%">
     <thead>
         <tr>
@@ -70,8 +67,8 @@ echo "<h2>" . htmlspecialchars($data_ujian['nama_ujian']) . "</h2>";
                             href='home.php?page=lihat_jawaban&id_ujian=<?= $data_ujian['id_ujian']; ?>&id_soal=<?= $data_soal['id_soal']; ?>'>Lihat
                             Jawaban</a>
                     <?php } else { ?>
-                        <a href='home.php?page=kerjakan&id_ujian=<?= $data_ujian['id_ujian']; ?>&id_soal=<?= $data_soal['id_soal']; ?>'><i class="fa-brands fa-php"></i></a>
-                        <a href='home.php?page=kerjakan_py&id_ujian=<?= $data_ujian['id_ujian']; ?>&id_soal=<?= $data_soal['id_soal']; ?>'><i class="fa-brands fa-python"></i></a>
+                        <a class="lang-icon" href='home.php?page=kerjakan&id_ujian=<?= $data_ujian['id_ujian']; ?>&id_soal=<?= $data_soal['id_soal']; ?>'><i class="fa-brands fa-php"></i></a>
+                        <a class="lang-icon" href='home.php?page=kerjakan_py&id_ujian=<?= $data_ujian['id_ujian']; ?>&id_soal=<?= $data_soal['id_soal']; ?>'><i class="fa-brands fa-python"></i></a>
                     <?php } ?>
                 </td>
             </tr>
