@@ -19,7 +19,7 @@ if (!isset($_SESSION['siswa'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home | Tes PHP</title>
+    <title>Home | Akode;</title>
     <link rel="stylesheet" href="assets/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.0/css/dataTables.dataTables.min.css">
     <link rel="stylesheet" href="assets/dist/css/style.css">

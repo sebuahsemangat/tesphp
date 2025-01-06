@@ -18,6 +18,18 @@ body {
     margin-right: auto;
     margin-left: auto;
 }
+/* CSS untuk menengahkan secara vertikal dan horizontal */
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* Menggunakan 100% tinggi viewport */
+}
+/* CSS untuk menengahkan heading */
+.center-heading {
+    text-align: center;
+}
 .navbar {
     background: rgb(9,9,121);
     background: -moz-linear-gradient(135deg, rgba(9,9,121,1) 0%, rgba(111,0,255,1) 94%);
