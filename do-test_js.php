@@ -44,12 +44,17 @@ if ($id_soal) {
 <div class="row align-items-start">
   <div class="col-md-7">
     <strong>Kode Anda</strong>
-    <form method="post" action="execute_py.php" target="execute" class="mb-2" onsubmit="disableButton(this)">
+    <form method="post" action="execute_js.php" target="execute" class="mb-2" onsubmit="disableButton(this)">
       <input type="hidden" name="id_soal" id="" value="<?php echo htmlspecialchars($soal['id_soal']); ?>">
       <textarea id="code" name="code" class="CodeMirror"><?php
                                                           echo htmlspecialchars("
-def " . $soal['function_name'] . "(" . str_replace('$', '', $soal['parameter']) . "):
+function " . $soal['function_name'] . "(" . str_replace('$', '', $soal['parameter']) . "){
     //Masukkan kode di sini
+}
+
+
+//Jangan hapus baris ini:
+module.exports = " . $soal['function_name'] .";
 ");
                                                           ?>
       </textarea>
