@@ -12,7 +12,7 @@ include "../koneksi.php";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home <?= $_SESSION['level']; ?> | Tes PHP</title>
+    <title>Home <?= ucfirst($_SESSION['level']); ?> | Akode;</title>
     <style>
         /* CSS tambahan sesuai kebutuhan */
         .navbar {
@@ -78,7 +78,8 @@ include "../koneksi.php";
             border: solid 1px black;
         }
     </style>
-    <link rel="stylesheet" href="../assets/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/dist/css/style.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.0/css/dataTables.dataTables.min.css">
 
 </head>
@@ -86,12 +87,19 @@ include "../koneksi.php";
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="#">Logo</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav">
+        <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand" href="home.php">Ak()de;<sup style="font-size: 1rem; background-color:white; color:#000; padding: 2px; border-radius:5px;"><?= ucfirst($_SESSION['level']); ?></sup></a>
+
+            <!-- Navbar Toggler -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Content -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
                 <li class="nav-item active">
                     <a class="nav-link" href="home.php">Home</a>
                 </li>
@@ -116,20 +124,28 @@ include "../koneksi.php";
                 <?php
                 }
                 ?>
-                <li class="nav-item name">
-                    <a class="nav-link" href="#"><?= $_SESSION["username"]; ?></a>
-                </li>
-                <li class="nav-item logout">
-                    <a class="nav-link" href="logout.php">Logout</a>
-                </li>
-            </ul>
+                    <!-- Profile Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <strong><?= $_SESSION["username"]; ?></strong> <i class="fas fa-user-circle fa-lg"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="home.php?page=ganti_password"><i class="fa-solid fa-key"></i> Ganti Password</a></li>
+                            <li>
+                                <hr>
+                            </li>
+                            <li><a class="dropdown-item logout-menu" href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
+   
     <div class="container mt-5 mb-5">
         <div class="row row-main">
             <div class="col-md-12 p-50">
-                <h2>Halaman <?= $_SESSION['level']; ?></h2>
-                <hr>
                 <?php
                 if ($_SESSION['level'] == 'admin') {
                     $hal_default = "guru.php";
@@ -189,17 +205,18 @@ include "../koneksi.php";
 
     <!-- Footer -->
     <div class="footer">
-        <p>Website Ujian Pemrograman PHP | Dikembangkan oleh Apep Wahyudin</p>
+        <p>&copy; <?php echo date('Y'); ?> <strong>Akode;</strong> - Developed by <strong>Apep Wahyudin</strong></p>
     </div>
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
     <script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.js"></script>
     <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.dataTables.js"></script>
     <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.print.min.js"></script>
+    <script src="https://kit.fontawesome.com/6565789de8.js" crossorigin="anonymous"></script>
     <!-- Inisialisasi DataTables -->
     <script>
         new DataTable('#myTable', {
