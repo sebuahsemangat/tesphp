@@ -21,7 +21,15 @@ function cleanInput($data) {
         /* CSS untuk menengahkan heading */
         .center-heading {
             text-align: center;
+            
         }
+        .heading-name {
+            font-family: 'Fira Code', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: bolder;
+            font-size: 3rem;
+            color: rgb(9,9,121);
+        }
+
         /* CSS untuk menengahkan secara vertikal dan horizontal */
         .center-container {
             display: flex;
@@ -30,13 +38,19 @@ function cleanInput($data) {
             height: 100vh;
             /* Menggunakan 100% tinggi viewport */
         }
+
         footer {
             text-align: center;
             position: fixed;
             bottom: 0;
             width: 100%;
-            background-color: #f8f9fa;
+            background-color: #333333;
+            font-family: 'Fira Code', Tahoma, Geneva, Verdana, sans-serif;
             padding: 10px 0;
+            padding-top: 1.7em;
+            padding-bottom: 10px;
+            flex-shrink: 0;
+            color: #fff;
         }
     </style>
 </head>
@@ -104,7 +118,7 @@ function cleanInput($data) {
     </div>
     <footer>
         <div class="container">
-            <p>Created by Apep Wahyudin</p>
+            <p>&copy; <?php echo date('Y'); ?> <strong>Akode;</strong> - Developed by <strong>Apep Wahyudin</strong></p>
         </div>
     </footer>
 </body>
