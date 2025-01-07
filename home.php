@@ -21,91 +21,28 @@ if (!isset($_SESSION['siswa'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home | Akode;</title>
     <link rel="stylesheet" href="assets/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.0/css/dataTables.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="assets/dist/css/style.css">
-    <?php
-    if (isset($_GET['page']) && $_GET['page'] != '') {
+    <!-- Custom styles for this template -->
+    <link href="assets/starter-template.css" rel="stylesheet">
 
-        if ($_GET['page'] == 'kerjakan' || $_GET['page'] == 'lihat_jawaban' || $_GET['page'] == 'kerjakan_py') {
-    ?>
-            <style>
-                .bd-placeholder-img {
-                    font-size: 1.125rem;
-                    text-anchor: middle;
-                    -webkit-user-select: none;
-                    -moz-user-select: none;
-                    user-select: none;
-                }
-
-                @media (min-width: 768px) {
-                    .bd-placeholder-img-lg {
-                        font-size: 3.5rem;
-                    }
-                }
-
-                .b-example-divider {
-                    height: 3rem;
-                    background-color: rgba(0, 0, 0, .1);
-                    border: solid rgba(0, 0, 0, .15);
-                    border-width: 1px 0;
-                    box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-                }
-
-                .b-example-vr {
-                    flex-shrink: 0;
-                    width: 1.5rem;
-                    height: 100vh;
-                }
-
-                .bi {
-                    vertical-align: -.125em;
-                    fill: currentColor;
-                }
-
-                .nav-scroller {
-                    position: relative;
-                    z-index: 2;
-                    height: 2.75rem;
-                    overflow-y: hidden;
-                }
-
-                .nav-scroller .nav {
-                    display: flex;
-                    flex-wrap: nowrap;
-                    padding-bottom: 1rem;
-                    margin-top: -1px;
-                    overflow-x: auto;
-                    text-align: center;
-                    white-space: nowrap;
-                    -webkit-overflow-scrolling: touch;
-                }
-            </style>
-
-
-            <!-- Custom styles for this template -->
-            <link href="assets/starter-template.css" rel="stylesheet">
-
-            <link rel="stylesheet" href="codemirror/lib/codemirror.css">
-            <link rel="stylesheet" href="codemirror/theme/monokai.css">
-            <script src="codemirror/lib/codemirror.js"></script>
-            <script src="codemirror/addon/edit/matchbrackets.js"></script>
-            <script src="codemirror/addon/edit/closebrackets.js"></script>
-            <script src="codemirror/mode/htmlmixed/htmlmixed.js"></script>
-            <script src="codemirror/mode/xml/xml.js"></script>
-            <script src="codemirror/mode/javascript/javascript.js"></script>
-            <script src="codemirror/mode/css/css.js"></script>
-            <script src="codemirror/mode/clike/clike.js"></script>
-            <script src="codemirror/mode/php/php.js"></script>
-            <script src="codemirror/mode/python/python.js"></script>
-            <style>
-                .CodeMirror {
-                    border: solid 1px black;
-                }
-            </style>
-    <?php
+    <link rel="stylesheet" href="codemirror/lib/codemirror.css">
+    <link rel="stylesheet" href="codemirror/theme/monokai.css">
+    <script src="codemirror/lib/codemirror.js"></script>
+    <script src="codemirror/addon/edit/matchbrackets.js"></script>
+    <script src="codemirror/addon/edit/closebrackets.js"></script>
+    <script src="codemirror/mode/htmlmixed/htmlmixed.js"></script>
+    <script src="codemirror/mode/xml/xml.js"></script>
+    <script src="codemirror/mode/javascript/javascript.js"></script>
+    <script src="codemirror/mode/css/css.js"></script>
+    <script src="codemirror/mode/clike/clike.js"></script>
+    <script src="codemirror/mode/php/php.js"></script>
+    <script src="codemirror/mode/python/python.js"></script>
+    <style>
+        .CodeMirror {
+            border: solid 1px black;
         }
-    }
-    ?>
+    </style>
     <script src="https://kit.fontawesome.com/6565789de8.js" crossorigin="anonymous"></script>
 </head>
 
@@ -159,9 +96,15 @@ if (!isset($_SESSION['siswa'])) {
                             break;
                         case 'kerjakan':
                             include 'do-test.php';
+                            $textarea_mode = "application/x-httpd-php";
                             break;
                         case 'kerjakan_py':
                             include 'do-test_py.php';
+                            $textarea_mode = "python";
+                            break;
+                        case 'kerjakan_js':
+                            include 'do-test_js.php';
+                            $textarea_mode = "javascript";
                             break;
                         case 'lihat_jawaban':
                             include 'lihat_jawaban.php';
@@ -186,21 +129,25 @@ if (!isset($_SESSION['siswa'])) {
     </div>
 
     <!-- Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.datatables.net/2.0.0/js/dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
     <!-- Inisialisasi DataTables -->
     <script>
-        let table = new DataTable('#myTable', {
-            autoWidth: true,
+        $(document).ready(function() {
+            $('#myTable').DataTable({
+                "paging": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.13.5/i18n/Indonesian.json" // Bahasa Indonesia
+                }
+            });
         });
     </script>
-    <?php if (isset($page) && $page == 'kerjakan_py') {
-        $textarea_mode = 'python'; //mode python untuk codemirror
-    } else {
-        $textarea_mode = 'application/x-httpd-php';
-    } ?>
+
     <script>
         var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
             lineNumbers: true,

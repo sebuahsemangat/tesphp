@@ -55,7 +55,19 @@ echo "<h2> <a href='home.php'><i class='fa-solid fa-backward'></i></a>   " . htm
                 <td><?= $no; ?></td>
                 <td><?= htmlspecialchars($data_soal['judul']); ?></td>
                 <td>
-                    <?= ($cek_jawaban == 1) ? ucfirst($data_hasil["test_result"]) : "Belum dikerjakan"; ?>
+                    <?php
+                        if($cek_jawaban == 1){
+                            if($data_hasil["test_result"]=="lulus"){
+                                echo "<span style='color:green'><i class='fa-solid fa-circle-check'></i> Lulus</span>";
+                            }
+                            else {
+                                echo "<span style='color:#cc0000'><i class='fa-solid fa-circle-exclamation'></i> Gagal</span>";
+                            }
+                        }
+                        else {
+                            echo "<i class='fa-solid fa-hourglass-start'></i> Belum Dikerjakan";
+                        }
+                    ?>
                 </td>
                 <td>
                     <?php if ($cek_jawaban == 1) { ?>
@@ -65,6 +77,7 @@ echo "<h2> <a href='home.php'><i class='fa-solid fa-backward'></i></a>   " . htm
                     <?php } else { ?>
                         <a class="lang-icon" href='home.php?page=kerjakan&id_ujian=<?= $data_ujian['id_ujian']; ?>&id_soal=<?= $data_soal['id_soal']; ?>'><i class="fa-brands fa-php"></i></a>
                         <a class="lang-icon" href='home.php?page=kerjakan_py&id_ujian=<?= $data_ujian['id_ujian']; ?>&id_soal=<?= $data_soal['id_soal']; ?>'><i class="fa-brands fa-python"></i></a>
+                        <a class="lang-icon" href='home.php?page=kerjakan_js&id_ujian=<?= $data_ujian['id_ujian']; ?>&id_soal=<?= $data_soal['id_soal']; ?>'><i class="fa-brands fa-js"></i></a>
                     <?php } ?>
                 </td>
             </tr>
